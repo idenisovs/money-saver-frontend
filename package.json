@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:dev": "ng build money-saver --progress=true --outputPath=../backend/Source/web",
+    "build:dev:watch": "npm run build:dev -- --watch",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
