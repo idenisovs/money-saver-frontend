@@ -16,9 +16,6 @@ export class UserService {
 
   getAuth() {
     return this.http.get('/api/auth').subscribe((response: User|null) => {
-      console.log('dispatch action')
-      console.log('user:');
-      console.log(response);
       this.store.dispatch(receivedUserAuthentication({ user: response }));
     })
   }
