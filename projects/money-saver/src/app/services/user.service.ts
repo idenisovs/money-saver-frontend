@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import User from './User';
-import { receivedUserAuthentication } from './user.actions';
+import User from '../state/User';
+import { receivedUserAuthentication } from '../state/user.actions';
 
 @Injectable({
   providedIn: 'root'

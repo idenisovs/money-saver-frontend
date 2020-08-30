@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import User from './User';
+import UserState from './UserState';
 
 export const receivedUserAuthentication = createAction(
   'received user authentication',
-  props<{user: User|null }>()
+  props<UserState>()
 );
