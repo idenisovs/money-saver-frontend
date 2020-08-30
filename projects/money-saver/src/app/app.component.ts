@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './services/user.service';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import User from './state/User';
+import { UserService } from './services/user.service';
 import UserState from './state/UserState';
 
 @Component({
@@ -12,7 +10,7 @@ import UserState from './state/UserState';
 })
 export class AppComponent implements OnInit {
   title = 'money-saver';
-  user: Observable<User>;
+  user: UserState;
 
   constructor(
     private users: UserService,
@@ -20,7 +18,9 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.user = this.store.select(state => state.user.user);
+    this.store.select(state => state.user).subscribe((user: UserState) => {
+      this.user = user;
+    });
 
     this.users.getAuth();
   }

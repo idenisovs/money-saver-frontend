@@ -1,10 +1,5 @@
 <div class="container pt-4">
-  <div class="card">
-    <div class="card-header bg-primary text-white">
-      User authentication
-    </div>
-    <div class="card-body">
-      {{user|async|json}}
-    </div>
-  </div>
+  <app-spinner *ngIf="user.requestInProgress">
+    Loading user authentication data...
+  </app-spinner>
 </div>
