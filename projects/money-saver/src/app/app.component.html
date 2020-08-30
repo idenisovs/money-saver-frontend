@@ -1,7 +1,10 @@
 <div class="container pt-4">
   <div class="card">
+    <div class="card-header bg-primary text-white">
+      User authentication
+    </div>
     <div class="card-body">
-      Hello World
+      {{ user | async | json }}
     </div>
   </div>
 </div>
