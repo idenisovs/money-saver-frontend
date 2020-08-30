@@ -1,7 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import UserState from './UserState';
+import User from './User';
+
+export const runningUserAuthRequest = createAction('running user auth request');
 
 export const receivedUserAuthentication = createAction(
   'received user authentication',
-  props<UserState>()
+  props<{ user: User }>()
 );

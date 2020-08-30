@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import User from '../state/User';
-import { receivedUserAuthentication } from '../state/user.actions';
+import { receivedUserAuthentication, runningUserAuthRequest } from '../state/user.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,16 @@ import { receivedUserAuthentication } from '../state/user.actions';
 export class UserService {
   constructor(
     private http: HttpClient,
-    private store: Store<User|null>
+    private store: Store
   ) {
   }
 
   getAuth() {
-    return this.http.get('/api/auth').subscribe((response: User|null) => {
-      this.store.dispatch(receivedUserAuthentication({ user: response }));
-    })
+    this.store.dispatch(runningUserAuthRequest());
+
+    return this.http.get('/api/auth')
+      .subscribe((response: User|null) => {
+        this.store.dispatch(receivedUserAuthentication({ user: response }));
+      });
   }
 }
