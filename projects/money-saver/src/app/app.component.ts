@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './services/user.service';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import User from './state/User';
 import UserState from './state/UserState';
 
@@ -21,13 +20,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('init')
+    this.user = this.store.select(state => state.user.user);
 
-    this.user = this.store.select((state => state.user.user)).pipe(tap(() => {
-      console.log('xxxxxx');
-    }));
-
-    console.log('Take auth')
     this.users.getAuth();
   }
 }
