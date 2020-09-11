@@ -1,3 +1,5 @@
 <div *ngFor="let message of messages | async">
-  {{message.text}}
+  <ngb-alert type="danger" [dismissible]="true" (close)="dismiss(message)">
+    {{message.text}}
+  </ngb-alert>
 </div>
