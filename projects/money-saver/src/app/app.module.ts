@@ -5,10 +5,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { MessagesModule } from './components/messages/messages.module';
 
-import { userReducer } from './state/user.reducer';
+import { AppComponent } from './app.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+
+import reducers from './state/reducers';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    StoreModule.forRoot({ user: userReducer }, {})
+    StoreModule.forRoot(reducers, {}),
+    MessagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

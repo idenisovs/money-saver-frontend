@@ -21,7 +21,6 @@ const reducer = createReducer(
   })
 );
 
-
 export function userReducer(state: UserState, action: Action) {
   return reducer(state, action);
 }
