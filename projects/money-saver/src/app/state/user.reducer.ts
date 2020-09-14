@@ -1,10 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { receivedUserAuthentication, runningUserAuthRequest } from './user.actions';
-import UserState from './UserState';
+import UserState from './user.state';
 
 const initialState: UserState = {
   user: null,
-  requestInProgress: false
+  requestInProgress: false,
+  initialRequestDone: false
 };
 
 const reducer = createReducer(
@@ -16,6 +17,7 @@ const reducer = createReducer(
   on(receivedUserAuthentication, (state: UserState, action) => {
     return {
       requestInProgress: false,
+      initialRequestDone: true,
       user: action.user
     };
   })

@@ -3,4 +3,5 @@ import User from './User';
 export default interface UserState {
   user: User|null;
   requestInProgress: boolean;
+  initialRequestDone: boolean;
 }
