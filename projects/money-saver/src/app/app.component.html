@@ -1,6 +1,9 @@
 <div class="container pt-4">
   <app-messages></app-messages>
-  <app-spinner *ngIf="user.requestInProgress">
+
+  <app-spinner *ngIf="requestInProgress">
     Loading user authentication data...
   </app-spinner>
+
+  <app-login-page *ngIf="displayLoginPage"></app-login-page>
 </div>

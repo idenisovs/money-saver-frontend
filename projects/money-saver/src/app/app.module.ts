@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 
 import reducers from './state/reducers';
+import { LoginPageModule } from './login-page/login-page.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import reducers from './state/reducers';
     HttpClientModule,
     NgbModule,
     StoreModule.forRoot(reducers, {}),
-    MessagesModule
+    MessagesModule,
+    LoginPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,7 +10,8 @@ import UserState from './state/UserState';
 })
 export class AppComponent implements OnInit {
   title = 'money-saver';
-  user: UserState;
+  displayLoginPage = true;
+  requestInProgress = true;
 
   constructor(
     private users: UserService,
@@ -18,8 +19,11 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.select(state => state.user).subscribe((user: UserState) => {
-      this.user = user;
+    this.store.select(state => state.user).subscribe((userState: UserState) => {
+      const { user, requestInProgress } = userState;
+
+      this.displayLoginPage = !user;
+      this.requestInProgress = requestInProgress;
     });
 
     this.users.getAuth();
