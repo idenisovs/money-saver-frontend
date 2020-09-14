@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserService } from './services/user.service';
-import UserState from './state/UserState';
+import UserState from './state/user.state';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +10,9 @@ import UserState from './state/UserState';
 })
 export class AppComponent implements OnInit {
   title = 'money-saver';
-  displayLoginPage = true;
-  requestInProgress = true;
+
+  displayAuthSpinner = true;
+  displayLoginPage = false;
 
   constructor(
     private users: UserService,
@@ -19,13 +20,15 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.select(state => state.user).subscribe((userState: UserState) => {
-      const { user, requestInProgress } = userState;
-
-      this.displayLoginPage = !user;
-      this.requestInProgress = requestInProgress;
-    });
+    this.store.select(state => state.user).subscribe(this.updateUserState.bind(this));
 
     this.users.getAuth();
+  }
+
+  private updateUserState(state: UserState) {
+    const { user, requestInProgress, initialRequestDone } = state;
+
+    this.displayLoginPage = initialRequestDone && !user;
+    this.displayAuthSpinner = requestInProgress && !this.displayAuthSpinner;
   }
 }
