@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserService } from './services/user.service';
 import UserState from './state/user.state';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private users: UserService,
-    private store: Store<{ user: UserState }>
+    private store: Store<{ user: UserState }>,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -25,10 +27,14 @@ export class AppComponent implements OnInit {
     this.users.getAuth();
   }
 
-  private updateUserState(state: UserState) {
+  private async updateUserState(state: UserState) {
     const { user, requestInProgress, initialRequestDone } = state;
 
     this.displayLoginPage = initialRequestDone && !user;
-    this.displayAuthSpinner = requestInProgress && !this.displayAuthSpinner;
+    this.displayAuthSpinner = requestInProgress && !this.displayLoginPage
+
+    if (this.displayLoginPage) {
+      await this.router.navigate(['/login']);
+    }
   }
 }
