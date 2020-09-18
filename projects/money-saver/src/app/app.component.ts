@@ -16,9 +16,9 @@ export class AppComponent implements OnInit {
   displayLoginPage = false;
 
   constructor(
+    private router: Router,
     private auth: AuthService,
-    private store: Store<{ user: UserState }>,
-    private router: Router
+    private store: Store<{ user: UserState }>
   ) {}
 
   ngOnInit() {

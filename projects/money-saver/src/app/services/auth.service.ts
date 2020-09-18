@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import User from '../state/User';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
 import { receivedUserAuthentication, runningUserAuthRequest } from '../state/user.actions';
 import { StoredService } from './stored.service';
 import Authentication from './authentication';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { postMessage } from '../components/messages/messages.actions';
 import Message from '../components/messages/message';
+import User from '../state/User';
 
 @Injectable({
   providedIn: 'root'

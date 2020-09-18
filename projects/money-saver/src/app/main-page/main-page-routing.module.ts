@@ -12,10 +12,6 @@ const routes: Routes = [
       {
         path: '',
         component: DashboardViewComponent
-      },
-      {
-        path: 'dashboard',
-        component: DashboardViewComponent
       }
     ]
   }
