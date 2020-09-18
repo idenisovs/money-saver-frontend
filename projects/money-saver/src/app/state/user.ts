@@ -1,3 +1,7 @@
 export default interface User {
-  name: string;
+  id: number;
+  login: string;
+  email: string;
+  language: string;
+  timezone: number;
 }

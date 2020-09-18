@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
 import UserState from './state/user.state';
 import { Router } from '@angular/router';
 
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   displayLoginPage = false;
 
   constructor(
-    private users: UserService,
+    private auth: AuthService,
     private store: Store<{ user: UserState }>,
     private router: Router
   ) {}
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.store.select(state => state.user).subscribe(this.updateUserState.bind(this));
 
-    this.users.getAuth();
+    this.auth.getAuth();
   }
 
   private async updateUserState(state: UserState) {
@@ -35,6 +35,8 @@ export class AppComponent implements OnInit {
 
     if (this.displayLoginPage) {
       await this.router.navigate(['/login']);
+    } else {
+      await this.router.navigate(['/']);
     }
   }
 }
