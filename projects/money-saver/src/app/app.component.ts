@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.store.select(state => state.user).subscribe(this.updateUserState.bind(this));
 
-    this.auth.getAuth();
+    this.auth.get();
   }
 
   private async updateUserState(state: UserState) {

@@ -13,7 +13,7 @@ import User from '../state/user';
   providedIn: 'root'
 })
 export class AuthService extends StoredService {
-  getAuth() {
+  get() {
     this.store.dispatch(runningUserAuthRequest());
 
     return this.http.get('/api/auth')
@@ -43,7 +43,6 @@ export class AuthService extends StoredService {
         })
       )
       .subscribe((user: User|null) => {
-        console.log(user);
         this.store.dispatch(receivedUserAuthentication({ user }));
       });
   }
