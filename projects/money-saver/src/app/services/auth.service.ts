@@ -7,7 +7,7 @@ import { StoredService } from './stored.service';
 import Authentication from './authentication';
 import { postMessage } from '../components/messages/messages.actions';
 import Message from '../components/messages/message';
-import User from '../state/User';
+import User from '../state/user';
 
 @Injectable({
   providedIn: 'root'

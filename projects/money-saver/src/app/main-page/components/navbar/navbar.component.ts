@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import UserState from '../../../state/user.state';
-import User from '../../../state/User';
+import User from '../../../state/user';
 
 @Component({
   selector: 'app-navbar',
