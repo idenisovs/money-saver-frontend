@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   title = 'money-saver';
 
   displayAuthSpinner = true;
-  displayLoginPage = false;
 
   constructor(
     private router: Router,
@@ -30,13 +29,14 @@ export class AppComponent implements OnInit {
   private async updateUserState(state: UserState) {
     const { user, requestInProgress, initialRequestDone } = state;
 
-    this.displayLoginPage = initialRequestDone && !user;
-    this.displayAuthSpinner = requestInProgress && !this.displayLoginPage
+    const displayLoginPage = initialRequestDone && !user;
 
-    if (this.displayLoginPage) {
+    if (displayLoginPage) {
       await this.router.navigate(['/login']);
     } else {
       await this.router.navigate(['/']);
     }
+
+    this.displayAuthSpinner = requestInProgress && !displayLoginPage
   }
 }

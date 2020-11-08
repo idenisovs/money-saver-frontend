@@ -1,10 +1,10 @@
-<div class="container my-4" *ngIf="displayAuthSpinner; else mainApp">
+<div class="container my-4" *ngIf="displayAuthSpinner; else app">
   <app-spinner>
     Checking user authentication...
   </app-spinner>
 </div>
 
-<ng-template #mainApp>
+<ng-template #app>
   <router-outlet></router-outlet>
 </ng-template>
 
