@@ -3,5 +3,148 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "money-saver": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/money-saver",
+      "sourceRoot": "projects/money-saver/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/money-saver",
+            "index": "projects/money-saver/src/index.html",
+            "main": "projects/money-saver/src/main.ts",
+            "polyfills": "projects/money-saver/src/polyfills.ts",
+            "tsConfig": "projects/money-saver/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/money-saver/src/favicon.ico",
+              "projects/money-saver/src/assets"
+            ],
+            "styles": [
+              "projects/money-saver/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/money-saver/src/environments/environment.ts",
+                  "with": "projects/money-saver/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "money-saver:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "money-saver:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "money-saver:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/money-saver/src/test.ts",
+            "polyfills": "projects/money-saver/src/polyfills.ts",
+            "tsConfig": "projects/money-saver/tsconfig.spec.json",
+            "karmaConfig": "projects/money-saver/karma.conf.js",
+            "assets": [
+              "projects/money-saver/src/favicon.ico",
+              "projects/money-saver/src/assets"
+            ],
+            "styles": [
+              "projects/money-saver/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/money-saver/tsconfig.app.json",
+              "projects/money-saver/tsconfig.spec.json",
+              "projects/money-saver/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/money-saver/e2e/protractor.conf.js",
+            "devServerTarget": "money-saver:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "money-saver:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "money-saver"
 }
