@@ -1,12 +1,15 @@
-<div class="container py-2" *ngIf="requestInProgress">
+<div class="container py-2" *ngIf="requestInProgress; else app">
   <app-spinner>
     Loading application...
   </app-spinner>
 </div>
 
-<app-main-page *ngIf="isAuthenticated; else login"></app-main-page>
+<ng-template #app>
+  <app-main-page *ngIf="isAuthenticated; else login"></app-main-page>
 
-<ng-template #login>
-  <app-login-page></app-login-page>
+  <ng-template #login>
+    <app-login-page (success)="openApp()"></app-login-page>
+  </ng-template>
 </ng-template>
+
 
