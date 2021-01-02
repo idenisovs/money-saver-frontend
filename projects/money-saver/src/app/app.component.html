@@ -1,10 +1,12 @@
-<section class="container p-2">
-  <div class="card">
-    <div class="card-header">
-      Money Saver
-    </div>
-    <div class="card-body">
-      Hello world!
-    </div>
-  </div>
-</section>
+<div class="container py-2" *ngIf="requestInProgress">
+  <app-spinner>
+    Loading application...
+  </app-spinner>
+</div>
+
+<app-main-page *ngIf="isAuthenticated; else login"></app-main-page>
+
+<ng-template #login>
+  <app-login-page></app-login-page>
+</ng-template>
+
