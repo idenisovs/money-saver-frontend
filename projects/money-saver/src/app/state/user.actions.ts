@@ -1,9 +1,0 @@
-import { createAction, props } from '@ngrx/store';
-import User from './user';
-
-export const runningUserAuthRequest = createAction('running user auth request');
-
-export const receivedUserAuthentication = createAction(
-  'received user authentication',
-  props<{ user: User }>()
-);
