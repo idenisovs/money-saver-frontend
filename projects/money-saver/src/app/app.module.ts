@@ -10,6 +10,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { MessagesComponent } from './components/messages/messages.component';
     LoginPageComponent,
     MainPageComponent,
     SpinnerComponent,
-    MessagesComponent
+    MessagesComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

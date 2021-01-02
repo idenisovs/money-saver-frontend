@@ -1,8 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Auth, User } from '../shared';
 import { catchError, tap } from 'rxjs/operators';
+import { Auth, User } from '../shared';
 import { MessagesService } from '../components/messages/messages.service';
 import Message from '../components/messages/Message';
 
