@@ -2,12 +2,8 @@
   "name": "money-saver",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "frontend:build": "ng build money-saver --output-path=../backend/Source/web",
+    "frontend:watch": "npm run frontend:build -- --watch"
   },
   "private": true,
   "dependencies": {
