@@ -1,0 +1,16 @@
+<section class="card" *ngIf="visible">
+  <div class="card-body d-flex align-items-center">
+    <div class="spinner-border text-info mr-2" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+
+    <span #content>
+      <ng-content></ng-content>
+    </span>
+
+    <span *ngIf="!content.childNodes.length">
+      Loading...
+    </span>
+  </div>
+</section>
+
