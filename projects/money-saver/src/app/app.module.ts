@@ -13,7 +13,6 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardModule } from './views/dashboard/dashboard.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +31,10 @@ import { DashboardModule } from './views/dashboard/dashboard.module';
     NgbModule,
     DashboardModule
   ],
-  providers: [],
+  providers: [
+  ],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

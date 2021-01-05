@@ -6,11 +6,20 @@ import { ExpensesTableComponent } from './expenses-table/expenses-table.componen
 import { IntervalControlsComponent } from './interval-controls/interval-controls.component';
 import { IntervalOverviewComponent } from './interval-overview/interval-overview.component';
 import { ExpensesGraphComponent } from './expenses-graph/expenses-graph.component';
+import { CustomPipesModule } from '../../pipes/custom-pipes.module';
 
 @NgModule({
-  declarations: [DashboardComponent, DashboardControlsComponent, ExpensesTableComponent, IntervalControlsComponent, IntervalOverviewComponent, ExpensesGraphComponent],
+  declarations: [
+    DashboardComponent,
+    DashboardControlsComponent,
+    ExpensesTableComponent,
+    IntervalControlsComponent,
+    IntervalOverviewComponent,
+    ExpensesGraphComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    CustomPipesModule
   ],
   exports: [DashboardControlsComponent]
 })

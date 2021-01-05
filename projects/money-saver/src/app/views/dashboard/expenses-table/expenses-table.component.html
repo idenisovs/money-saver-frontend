@@ -1,7 +1,49 @@
-<div class="card mb-2" *ngIf="schedule">
-  <div class="card-body">
-    <pre>
-      {{schedule|json}}
-    </pre>
-  </div>
+<div class="expenses-table card mb-2 border-primary" *ngIf="schedule">
+  <table class="table table-sm mb-0">
+    <thead>
+    <tr>
+      <th scope="col">
+        Date
+      </th>
+      <th scope="col">
+        Expenses
+      </th>
+      <th scope="col">
+        Residual
+      </th>
+      <th scope="col">
+        Planned
+      </th>
+      <th scope="col">
+        Daily Balance
+      </th>
+      <th scope="col">
+        Balance
+      </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let item of schedule" [ngClass]="highlightDate(item)">
+      <th scope="row">
+        {{item.date|date:'dd MMM yyyy'}}
+      </th>
+      <td>
+        {{item.spent|currencyExt}}
+      </td>
+      <td>
+        {{item.residual|currencyExt}}
+      </td>
+      <td>
+        {{item.sum|currencyExt}}
+      </td>
+      <td>
+        {{item.dailyBalance|currencyExt}}
+      </td>
+      <td>
+        {{item.balance|currencyExt}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
