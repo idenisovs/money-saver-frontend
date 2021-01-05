@@ -11,6 +11,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { DashboardModule } from './views/dashboard/dashboard.module';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
