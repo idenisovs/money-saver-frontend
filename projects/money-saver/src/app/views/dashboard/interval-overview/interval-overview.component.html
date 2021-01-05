@@ -1,7 +1,72 @@
-<div class="card mb-2" *ngIf="totals">
-  <div class="card-body">
-    <pre>
-      {{totals|json}}
-    </pre>
-  </div>
+<div class="card mb-2 border-primary" *ngIf="totals">
+  <table class="table table-sm table-borderless mb-0">
+    <thead>
+    <tr class="border-bottom">
+      <th scope="col" class="w-25"></th>
+      <th>Current</th>
+      <th>Ratio</th>
+      <th>Starting</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="border-bottom">
+      <th scope="row">
+        Days
+      </th>
+      <td>
+        {{totals.currentDay}}
+      </td>
+      <td>
+        {{totals.currentDayPercents|percent}}
+      </td>
+      <td>
+        {{totals.days}}
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <th scope="row">
+        Sum
+      </th>
+      <td>
+        {{totals.residual|currencyExt}}
+      </td>
+      <td>
+        {{totals.residualPercents|percent}}
+      </td>
+      <td>
+        {{totals.startingSum|currencyExt}}
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <th scope="row">
+        Expected
+      </th>
+      <td>
+        {{totals.expectedResidual|currencyExt}}
+      </td>
+      <td colspan="2">
+        {{totals.expectedResidualPercents|percent}}
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <th scope="row">
+        Expenses
+      </th>
+      <td>
+        {{totals.expenses|currencyExt}}
+      </td>
+      <td colspan="2">
+        {{totals.expensesPercent|percent}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">
+        Avg expenses
+      </th>
+      <td colspan="3">
+        {{totals.expensesAvg|currencyExt}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
