@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ScheduleItem } from '../../../shared';
 
 @Component({
   selector: 'app-expenses-table',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./expenses-table.component.scss']
 })
 export class ExpensesTableComponent implements OnInit {
+
+  @Input()
+  schedule: ScheduleItem[];
 
   constructor() { }
 

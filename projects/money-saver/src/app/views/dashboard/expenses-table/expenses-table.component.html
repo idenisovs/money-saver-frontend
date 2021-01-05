@@ -1,5 +1,7 @@
-<div class="card mb-2">
+<div class="card mb-2" *ngIf="schedule">
   <div class="card-body">
-    Expenses table component
+    <pre>
+      {{schedule|json}}
+    </pre>
   </div>
 </div>

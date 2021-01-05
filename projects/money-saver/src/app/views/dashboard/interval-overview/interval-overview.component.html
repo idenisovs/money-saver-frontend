@@ -1,5 +1,7 @@
-<div class="card mb-2">
+<div class="card mb-2" *ngIf="totals">
   <div class="card-body">
-    Interval overview
+    <pre>
+      {{totals|json}}
+    </pre>
   </div>
 </div>
