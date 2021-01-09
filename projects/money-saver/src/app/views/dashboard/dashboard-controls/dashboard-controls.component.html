@@ -1,5 +1,9 @@
 <div class="card mb-2">
   <div class="card-body">
-    Dashboard controls component
+    <button class="btn btn-outline-primary" (click)="showPaymentInputs = true" [hidden]="showPaymentInputs">
+      Add new payment
+    </button>
+
+    <app-payment-input *ngIf="showPaymentInputs" (changes)="savePayment($event)"></app-payment-input>
   </div>
 </div>

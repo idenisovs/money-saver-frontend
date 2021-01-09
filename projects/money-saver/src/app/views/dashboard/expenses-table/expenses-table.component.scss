@@ -5,5 +5,11 @@
         border-top: none;
       }
     }
+
+    tbody {
+      tr {
+        cursor: pointer;
+      }
+    }
   }
 }

@@ -1,0 +1,24 @@
+<header class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">
+    Expenses on {{record.date|date}}
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</header>
+
+<section class="modal-body">
+  <div *ngFor="let record of payments">
+    <span>{{record.time}}</span>
+    <span>{{record.sum}}</span>
+  </div>
+</section>
+
+<footer class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="cancel()">
+    Cancel
+  </button>
+  <button type="button" class="btn btn-outline-primary" (click)="save()">
+    Save
+  </button>
+</footer>

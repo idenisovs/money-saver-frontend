@@ -1,0 +1,23 @@
+<form class="d-flex" [formGroup]="paymentForm">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="payment-input">
+        Payment:
+      </label>
+    </div>
+
+    <input id="payment-input" type="text" class="form-control" placeholder="0.00" formControlName="payment">
+
+    <div class="input-group-append">
+      <span class="input-group-text">€</span>
+    </div>
+  </div>
+
+  <button class="btn btn-outline-primary ml-2" (click)="save()" [disabled]="paymentForm.pristine || paymentForm.invalid">
+    Save
+  </button>
+
+  <button class="btn btn-outline-secondary ml-2" (click)="cancel()">
+    Cancel
+  </button>
+</form>

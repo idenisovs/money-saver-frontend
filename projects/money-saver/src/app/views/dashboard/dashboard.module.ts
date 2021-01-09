@@ -7,6 +7,9 @@ import { IntervalControlsComponent } from './interval-controls/interval-controls
 import { IntervalOverviewComponent } from './interval-overview/interval-overview.component';
 import { ExpensesGraphComponent } from './expenses-graph/expenses-graph.component';
 import { CustomPipesModule } from '../../pipes/custom-pipes.module';
+import { PaymentInputComponent } from './dashboard-controls/payment-input/payment-input.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ExpensesModalComponent } from './expenses-modal/expenses-modal.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +18,15 @@ import { CustomPipesModule } from '../../pipes/custom-pipes.module';
     ExpensesTableComponent,
     IntervalControlsComponent,
     IntervalOverviewComponent,
-    ExpensesGraphComponent
+    ExpensesGraphComponent,
+    PaymentInputComponent,
+    ExpensesModalComponent
   ],
-  imports: [
-    CommonModule,
-    CustomPipesModule
-  ],
+    imports: [
+        CommonModule,
+        CustomPipesModule,
+        ReactiveFormsModule
+    ],
   exports: [DashboardControlsComponent]
 })
 export class DashboardModule { }

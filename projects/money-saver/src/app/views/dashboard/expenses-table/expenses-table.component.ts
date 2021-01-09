@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ScheduleItem } from '../../../shared';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ExpensesModalComponent } from '../expenses-modal/expenses-modal.component';
 
 @Component({
   selector: 'app-expenses-table',
@@ -11,9 +13,27 @@ export class ExpensesTableComponent implements OnInit {
   @Input()
   schedule: ScheduleItem[];
 
-  constructor() { }
+  @Output()
+  changes = new EventEmitter<void>();
 
-  ngOnInit(): void {
+  constructor(
+    private modal: NgbModal
+  ) { }
+
+  ngOnInit(): void {}
+
+  async openExpensesModal(expensesRecord: ScheduleItem) {
+    const modal = this.modal.open(ExpensesModalComponent);
+
+    (modal.componentInstance as ExpensesModalComponent).record = expensesRecord;
+
+    try {
+      await modal.result;
+
+      this.changes.emit();
+    } catch (reason) {
+      // On cancel or just close.
+    }
   }
 
   highlightDate(expensesRecord: ScheduleItem) {

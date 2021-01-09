@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-8">
-      <app-dashboard-controls></app-dashboard-controls>
+      <app-dashboard-controls (changes)="reload()"></app-dashboard-controls>
       <app-expenses-table [schedule]="schedule"></app-expenses-table>
     </div>
 

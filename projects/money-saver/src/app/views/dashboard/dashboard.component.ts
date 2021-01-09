@@ -18,6 +18,10 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.reload();
+  }
+
+  reload() {
     this.intervals.getLatestSummary().subscribe(({ interval, schedule, totals }) => {
       this.interval = interval;
       this.schedule = schedule;

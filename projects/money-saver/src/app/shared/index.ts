@@ -5,3 +5,4 @@ export * from './ScheduleItem';
 export * from './Summary';
 export * from './Totals';
 export * from './Spending';
+export * from './Payment';
