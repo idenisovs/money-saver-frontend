@@ -1,4 +1,4 @@
-<header class="modal-header">
+<header class="modal-header border-bottom-0">
   <h4 class="modal-title" id="modal-basic-title">
     Expenses on {{record.date|date}}
   </h4>
@@ -7,18 +7,50 @@
   </button>
 </header>
 
-<section class="modal-body">
-  <div *ngFor="let record of payments">
-    <span>{{record.time}}</span>
-    <span>{{record.sum}}</span>
-  </div>
+<section class="modal-body" *ngIf="!payments.length">
+  There is no records yet!
 </section>
 
-<footer class="modal-footer">
-  <button type="button" class="btn btn-outline-secondary" (click)="cancel()">
-    Cancel
-  </button>
-  <button type="button" class="btn btn-outline-primary" (click)="save()">
-    Save
-  </button>
+<table class="modal-body table table-sm mb-0" *ngIf="payments.length > 0">
+  <tbody>
+  <tr *ngFor="let payment of payments">
+    <th class="align-middle">
+      {{payment.time|date:'HH:mm:ss'}}
+    </th>
+    <td class="align-middle">
+      {{payment.sum|currencyExt}}
+    </td>
+    <td class="text-right">
+      <button class="btn btn-sm btn-outline-primary mr-2">
+        <i class="material-icons">
+          edit
+        </i>
+        Edit
+      </button>
+      <button class="btn btn-sm btn-outline-danger">
+        <i class="material-icons">
+          delete
+        </i>
+        Delete
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<footer class="modal-footer justify-content-between">
+  <span>
+    <button type="button" class="btn btn-outline-info" (click)="cancel()">
+      Add new
+    </button>
+  </span>
+
+  <span>
+    <button type="button" class="btn btn-outline-secondary mr-2" (click)="cancel()">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-outline-primary" (click)="save()">
+      Save
+    </button>
+  </span>
 </footer>

@@ -1,7 +1,7 @@
 <div class="card mb-2">
   <div class="card-body">
     <button class="btn btn-outline-primary" (click)="showPaymentInputs = true" [hidden]="showPaymentInputs">
-      Add new payment
+      <i class="material-icons">add</i> Add new payment
     </button>
 
     <app-payment-input *ngIf="showPaymentInputs" (changes)="savePayment($event)"></app-payment-input>
