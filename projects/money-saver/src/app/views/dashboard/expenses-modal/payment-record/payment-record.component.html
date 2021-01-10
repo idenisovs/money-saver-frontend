@@ -1,0 +1,49 @@
+<th class="align-middle" [ngClass]="ContextClasses">
+  {{payment.time|date:'HH:mm:ss'}}
+</th>
+
+<td class="align-middle w-100" *ngIf="editable && editMode; else paymentSum">
+  <input type="text" [value]="payment.sum" [(ngModel)]="editable.sum" />
+</td>
+
+<ng-template #paymentSum>
+  <td class="align-middle w-100" [ngClass]="ContextClasses">
+    {{payment.sum|currencyExt}}
+  </td>
+</ng-template>
+
+
+<td class="text-right text-nowrap">
+  <button *ngIf="!editable" class="btn btn-sm btn-outline-primary mr-2" [disabled]="editMode || payment.remove" (click)="toggleEdit()">
+    <i class="material-icons">
+      edit
+    </i>
+    Edit
+  </button>
+
+  <button *ngIf="!payment.remove && !editable" class="btn btn-sm btn-outline-danger" [disabled]="editMode" (click)="toggleDelete(payment)">
+    <i class="material-icons">
+      delete
+    </i>
+    Delete
+  </button>
+
+  <button *ngIf="payment.remove" class="btn btn-sm btn-outline-info" (click)="toggleDelete(payment)">
+    <i class="material-icons">
+      replay
+    </i>
+    Cancel
+  </button>
+
+  <button *ngIf="editable" class="btn btn-sm btn-outline-primary mr-2" (click)="applyEdit()">
+    <i class="material-icons">
+      done
+    </i>
+  </button>
+
+  <button *ngIf="editable" class="btn btn-sm btn-outline-danger" (click)="cancelEdit()">
+    <i class="material-icons">
+      clear
+    </i>
+  </button>
+</td>

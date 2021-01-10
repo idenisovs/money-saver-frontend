@@ -1,4 +1,4 @@
-<header class="modal-header border-bottom-0">
+<header class="modal-header" [ngClass]="{ 'border-bottom-0': payments.length }">
   <h4 class="modal-title" id="modal-basic-title">
     Expenses on {{record.date|date}}
   </h4>
@@ -13,28 +13,7 @@
 
 <table class="modal-body table table-sm mb-0" *ngIf="payments.length > 0">
   <tbody>
-  <tr *ngFor="let payment of payments">
-    <th class="align-middle">
-      {{payment.time|date:'HH:mm:ss'}}
-    </th>
-    <td class="align-middle">
-      {{payment.sum|currencyExt}}
-    </td>
-    <td class="text-right">
-      <button class="btn btn-sm btn-outline-primary mr-2">
-        <i class="material-icons">
-          edit
-        </i>
-        Edit
-      </button>
-      <button class="btn btn-sm btn-outline-danger">
-        <i class="material-icons">
-          delete
-        </i>
-        Delete
-      </button>
-    </td>
-  </tr>
+  <tr app-payment-record *ngFor="let payment of payments" [payment]="payment" [editMode]="editMode" (edit)="toggleEdit()"></tr>
   </tbody>
 </table>
 
@@ -49,6 +28,7 @@
     <button type="button" class="btn btn-outline-secondary mr-2" (click)="cancel()">
       Cancel
     </button>
+
     <button type="button" class="btn btn-outline-primary" (click)="save()">
       Save
     </button>

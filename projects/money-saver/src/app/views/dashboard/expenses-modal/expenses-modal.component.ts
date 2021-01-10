@@ -9,11 +9,11 @@ import { PaymentsService } from '../../../services/payments.service';
   styleUrls: ['./expenses-modal.component.scss']
 })
 export class ExpensesModalComponent implements OnInit {
-
   @Input()
   record: ScheduleItem;
 
   payments: Payment[] = [];
+  editMode = false;
 
   constructor(
     private modal: NgbActiveModal,
@@ -26,12 +26,19 @@ export class ExpensesModalComponent implements OnInit {
     });
   }
 
+  toggleEdit() {
+    this.editMode = !this.editMode;
+  }
+
   save() {
+    this.payments.forEach((payment) => {
+      console.log(payment);
+    });
+
     this.modal.close('save');
   }
 
   cancel() {
     this.modal.dismiss('cancel')
   }
-
 }

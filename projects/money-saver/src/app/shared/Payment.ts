@@ -3,6 +3,9 @@ export interface PaymentRecord {
   time?: number;
   date?: string;
   sum: number;
+  remove?: boolean;
+  update?: boolean;
+  add?: boolean;
 }
 
 export class Payment {
@@ -10,6 +13,9 @@ export class Payment {
   time = new Date();
   date = Payment.date(this.time);
   sum = 0;
+  remove?: boolean;
+  update?: boolean;
+  add?: boolean;
 
   constructor(value: number) {
     if (value) {
