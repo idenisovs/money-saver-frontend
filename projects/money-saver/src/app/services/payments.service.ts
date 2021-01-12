@@ -14,6 +14,10 @@ export class PaymentsService {
     return this.http.post<void>('/api/payments', payments.map(item => item.record()));
   }
 
+  update(payments: Payment[]): Observable<void> {
+    return this.http.put<void>('/api/payments', payments.map(item => item.record()))
+  }
+
   getByDate(date: Date): Observable<Payment[]> {
     return this.http.get<PaymentRecord[]>(`/api/payments?date=${Payment.date(date)}`).pipe(
       map(records => records.map(record => Payment.build(record)))

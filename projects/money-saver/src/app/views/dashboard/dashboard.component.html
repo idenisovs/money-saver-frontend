@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-8">
       <app-dashboard-controls (changes)="reload()"></app-dashboard-controls>
-      <app-expenses-table [schedule]="schedule"></app-expenses-table>
+      <app-expenses-table [schedule]="schedule" (changes)="reload()"></app-expenses-table>
     </div>
 
     <div class="col-4">

@@ -31,11 +31,9 @@ export class ExpensesModalComponent implements OnInit {
   }
 
   save() {
-    this.payments.forEach((payment) => {
-      console.log(payment);
+    this.paymentsService.update(this.payments).subscribe(() => {
+      this.modal.close('save');
     });
-
-    this.modal.close('save');
   }
 
   cancel() {

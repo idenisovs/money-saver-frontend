@@ -25,10 +25,9 @@ export class Payment {
 
   record(): PaymentRecord {
     return {
-      id: this.id,
+      ...this,
       time: this.time.getTime(),
       date: Payment.date(this.time),
-      sum: this.sum
     };
   }
 
