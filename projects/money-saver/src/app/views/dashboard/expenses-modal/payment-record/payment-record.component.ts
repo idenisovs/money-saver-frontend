@@ -21,6 +21,7 @@ export class PaymentRecordComponent implements OnInit {
 
   get ContextClasses() {
     return {
+      'text-info': this.payment.add,
       'text-warning': this.payment.update,
       'text-danger strike-payment': this.payment.remove
     };
@@ -42,7 +43,10 @@ export class PaymentRecordComponent implements OnInit {
   applyEdit() {
     if (this.payment.sum !== this.editable.sum) {
       this.payment.sum = this.editable.sum;
-      this.payment.update = true;
+
+      if (!this.payment.add) {
+        this.payment.update = true;
+      }
     }
 
     this.toggleEdit();

@@ -30,8 +30,23 @@ export class ExpensesModalComponent implements OnInit {
     this.editMode = !this.editMode;
   }
 
+  add() {
+    const payment = new Payment(0);
+
+    payment.add = true;
+    payment.date = Payment.date(this.record.date);
+
+    this.payments.push(payment);
+  }
+
   save() {
-    this.paymentsService.update(this.payments).subscribe(() => {
+    const payments = this.payments.filter((payment) => !(payment.add && payment.remove));
+
+    if (!payments.length) {
+      return this.modal.close('nothing-to-do');
+    }
+
+    this.paymentsService.update(payments).subscribe(() => {
       this.modal.close('save');
     });
   }

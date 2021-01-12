@@ -12,22 +12,20 @@ export class Payment {
   id?: number;
   time = new Date();
   date = Payment.date(this.time);
-  sum = 0;
+  sum: number;
   remove?: boolean;
   update?: boolean;
   add?: boolean;
 
-  constructor(value: number) {
-    if (value) {
-      this.sum = value;
-    }
+  constructor(value = 0) {
+    this.sum = value;
   }
 
   record(): PaymentRecord {
     return {
       ...this,
       time: this.time.getTime(),
-      date: Payment.date(this.time),
+      date: this.date || Payment.date(this.time),
     };
   }
 
