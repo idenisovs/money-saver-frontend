@@ -3,9 +3,14 @@
     {{interval.start|date}} - {{interval.end|date}}
   </header>
   <ng-template #noIntervalHeader>
-    Interval
+    <header class="card-header">
+      Interval
+    </header>
   </ng-template>
   <div class="card-body">
+    <button type="button" class="btn btn-outline-info mr-2" [disabled]="IsLatest && IsActive">
+      Create interval
+    </button>
     <button type="button" class="btn btn-outline-info mr-2" [disabled]="IsInactive">
       Edit interval
     </button>

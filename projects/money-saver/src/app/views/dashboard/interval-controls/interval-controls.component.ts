@@ -15,6 +15,22 @@ export class IntervalControlsComponent implements OnInit {
   @Output()
   changes = new EventEmitter<void>();
 
+  get IsLatest(): boolean {
+    if (!this.interval) {
+      return false;
+    }
+
+    return this.interval.latest;
+  }
+
+  get IsActive(): boolean {
+    if (!this.interval) {
+      return false;
+    }
+
+    return this.interval.end.getTime() > Date.now()
+  }
+
   get IsInactive(): boolean {
     if (!this.interval) {
       return false;
