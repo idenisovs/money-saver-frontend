@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExpensesModalComponent } from './expenses-modal/expenses-modal.component';
 import { PaymentRecordComponent } from './expenses-modal/payment-record/payment-record.component';
 import { CompleteIntervalModalComponent } from './interval-controls/complete-interval-modal/complete-interval-modal.component';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,13 @@ import { CompleteIntervalModalComponent } from './interval-controls/complete-int
     PaymentRecordComponent,
     CompleteIntervalModalComponent
   ],
-    imports: [
-        CommonModule,
-        CustomPipesModule,
-        ReactiveFormsModule,
-        FormsModule
-    ],
+  imports: [
+    CommonModule,
+    CustomPipesModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ComponentsModule
+  ],
   exports: [DashboardControlsComponent]
 })
 export class DashboardModule { }
