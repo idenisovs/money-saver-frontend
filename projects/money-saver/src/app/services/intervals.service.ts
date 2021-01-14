@@ -24,6 +24,18 @@ export class IntervalsService {
     );
   }
 
+  getYears(): Observable<number[]> {
+    return this.http.get<number[]>('/api/intervals/years');
+  }
+
+  getByYear(year: number): Observable<Interval[]> {
+    const query = `/api/intervals?from=${year}-01-01&till=${year}-12-31`;
+
+    return this.http.get<IntervalRecord[]>(query).pipe(
+      map((intervals: IntervalRecord[]) => intervals.map((record) => new Interval(record)))
+    );
+  }
+
   update(interval: Interval): Observable<void> {
     return this.http.put<void>(`/api/intervals/${interval.id}`, interval.toRecord());
   }

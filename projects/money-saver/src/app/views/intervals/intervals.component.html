@@ -1,1 +1,13 @@
-<p>intervals works!</p>
+<section class="container-fluid">
+  <app-breadcrumb [items]="breadcrumb"></app-breadcrumb>
+  <app-spinner *ngIf="!intervals">
+    Loading intervals summary...
+  </app-spinner>
+
+  <ng-container *ngIf="intervals">
+    <pre *ngFor="let interval of intervals">
+      {{interval|json}}
+    </pre>
+  </ng-container>
+
+</section>
