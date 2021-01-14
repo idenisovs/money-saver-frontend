@@ -12,6 +12,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardModule } from './views/dashboard/dashboard.module';
+import { YearsModule } from './views/years/years.module';
+import { IntervalsModule } from './views/intervals/intervals.module';
 
 @NgModule({
   declarations: [
@@ -29,11 +31,11 @@ import { DashboardModule } from './views/dashboard/dashboard.module';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    DashboardModule
+    DashboardModule,
+    YearsModule,
+    IntervalsModule
   ],
   providers: [
-  ],
-  exports: [
   ],
   bootstrap: [AppComponent]
 })
