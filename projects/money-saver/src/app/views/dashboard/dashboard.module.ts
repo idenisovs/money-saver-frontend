@@ -11,6 +11,7 @@ import { PaymentInputComponent } from './dashboard-controls/payment-input/paymen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExpensesModalComponent } from './expenses-modal/expenses-modal.component';
 import { PaymentRecordComponent } from './expenses-modal/payment-record/payment-record.component';
+import { CompleteIntervalModalComponent } from './interval-controls/complete-interval-modal/complete-interval-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PaymentRecordComponent } from './expenses-modal/payment-record/payment-
     ExpensesGraphComponent,
     PaymentInputComponent,
     ExpensesModalComponent,
-    PaymentRecordComponent
+    PaymentRecordComponent,
+    CompleteIntervalModalComponent
   ],
     imports: [
         CommonModule,

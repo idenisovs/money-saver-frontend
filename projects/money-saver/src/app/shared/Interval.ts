@@ -6,7 +6,7 @@ export interface IntervalRecord {
   end: number;
   sum: number;
   latest: number;
-  user: User;
+  user?: User;
 }
 
 export class Interval {
@@ -24,5 +24,15 @@ export class Interval {
     this.sum = data.sum;
     this.latest = data.latest === 1;
     this.user = data.user;
+  }
+
+  toRecord(): IntervalRecord {
+    return {
+      id: this.id,
+      start: this.start.getTime(),
+      end: this.end.getTime(),
+      sum: this.sum,
+      latest: this.latest ? 1 : 0
+    }
   }
 }

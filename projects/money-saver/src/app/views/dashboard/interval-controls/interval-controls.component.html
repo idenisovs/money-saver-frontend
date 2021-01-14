@@ -1,5 +1,16 @@
-<div class="card mb-2">
+<section class="card mb-2">
+  <header class="card-header" *ngIf="interval; else noIntervalHeader">
+    {{interval.start|date}} - {{interval.end|date}}
+  </header>
+  <ng-template #noIntervalHeader>
+    Interval
+  </ng-template>
   <div class="card-body">
-    Interval controls
+    <button type="button" class="btn btn-outline-info mr-2" [disabled]="IsInactive">
+      Edit interval
+    </button>
+    <button type="button" class="btn btn-outline-info" [disabled]="IsInactive" (click)="complete()">
+      Complete interval
+    </button>
   </div>
-</div>
+</section>

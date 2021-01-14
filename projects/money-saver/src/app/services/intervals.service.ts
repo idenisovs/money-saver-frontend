@@ -23,4 +23,8 @@ export class IntervalsService {
       map((summary) => new Summary(summary))
     );
   }
+
+  update(interval: Interval): Observable<void> {
+    return this.http.put<void>(`/api/intervals/${interval.id}`, interval.toRecord());
+  }
 }

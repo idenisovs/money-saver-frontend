@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Interval } from '../../../shared';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CompleteIntervalModalComponent } from './complete-interval-modal/complete-interval-modal.component';
 
 @Component({
   selector: 'app-interval-controls',
@@ -6,10 +9,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./interval-controls.component.scss']
 })
 export class IntervalControlsComponent implements OnInit {
+  @Input()
+  interval: Interval;
 
-  constructor() { }
+  @Output()
+  changes = new EventEmitter<void>();
+
+  get IsInactive(): boolean {
+    if (!this.interval) {
+      return false;
+    }
+
+    return !this.interval.latest || this.interval.end.getTime() < Date.now();
+  }
+
+  constructor(
+    private modal: NgbModal
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  async complete() {
+    const modal = this.modal.open(CompleteIntervalModalComponent, {
+      centered: true,
+      backdrop: 'static'
+    });
+
+    (modal.componentInstance as CompleteIntervalModalComponent).interval = this.interval;
+
+    try {
+      await modal.result;
+      this.changes.emit();
+    } catch (e) {
+      // nothing to do
+    }
   }
 
 }
