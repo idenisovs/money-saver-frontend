@@ -1,7 +1,7 @@
 import { User } from './User';
 
 export interface IntervalRecord {
-  id: number;
+  id?: number;
   start: number;
   end: number;
   sum: number;

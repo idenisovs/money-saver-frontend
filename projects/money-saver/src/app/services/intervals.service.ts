@@ -36,6 +36,10 @@ export class IntervalsService {
     );
   }
 
+  create(interval: Interval): Observable<void> {
+    return this.http.post<void>('/api/intervals', interval);
+  }
+
   update(interval: Interval): Observable<void> {
     return this.http.put<void>(`/api/intervals/${interval.id}`, interval.toRecord());
   }

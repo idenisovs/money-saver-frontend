@@ -6,6 +6,7 @@ import { Interval } from '../../../../shared';
 import { NumberValidator } from '../../../../validators';
 import { DateRangeModalComponent } from '../../../../components/date-range-modal/date-range-modal.component';
 import { DateRange } from '../../../../components/date-range/date-range';
+import { IntervalsService } from '../../../../services/intervals.service';
 
 @Component({
   selector: 'app-edit-interval-modal',
@@ -30,7 +31,8 @@ export class EditIntervalModalComponent implements OnInit {
     private modalService: NgbModal,
     private modal: NgbActiveModal,
     private fb: FormBuilder,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private intervals: IntervalsService
   ) { }
 
   ngOnInit(): void {
@@ -60,9 +62,16 @@ export class EditIntervalModalComponent implements OnInit {
   }
 
   save() {
-    console.log(this.intervalForm.value);
+    const value = this.intervalForm.value;
 
-    this.modal.close('save');
+    this.intervals.create(new Interval({
+      start: value.from,
+      end: value.till,
+      sum: value.sum,
+      latest: 1
+    })).subscribe(() => {
+      this.modal.close('saved');
+    });
   }
 
   cancel() {

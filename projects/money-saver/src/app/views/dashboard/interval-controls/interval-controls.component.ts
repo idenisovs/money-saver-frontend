@@ -54,6 +54,7 @@ export class IntervalControlsComponent implements OnInit {
 
     try {
       await modal.result;
+
       this.changes.emit();
     } catch(e) {
       // nothing to do here
