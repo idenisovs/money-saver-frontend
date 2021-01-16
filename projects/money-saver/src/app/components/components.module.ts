@@ -5,12 +5,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { DateRangeComponent } from './date-range/date-range.component';
+import { DateRangeModalComponent } from './date-range-modal/date-range-modal.component';
 
 @NgModule({
   declarations: [
     BreadcrumbComponent,
     SpinnerComponent,
-    DateRangeComponent
+    DateRangeComponent,
+    DateRangeModalComponent
   ],
   imports: [
     CommonModule,
