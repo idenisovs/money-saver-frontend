@@ -1,8 +1,3 @@
-<div>
-  <app-date-range ></app-date-range>
-</div>
-<div>
-  <button type="button" class="btn btn-outline-primary" (click)="accept()">
-    Accept
-  </button>
-</div>
+<section class="d-flex justify-content-center py-3">
+  <app-date-range [starting]="startingDate" (changes)="update($event)"></app-date-range>
+</section>

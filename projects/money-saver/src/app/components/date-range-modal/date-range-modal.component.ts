@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DateRange } from '../date-range/date-range';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,6 +11,9 @@ export class DateRangeModalComponent implements OnInit {
 
   range: DateRange;
 
+  @Input()
+  startingDate = new Date();
+
   constructor(
     private modal: NgbActiveModal
   ) { }
@@ -19,10 +22,6 @@ export class DateRangeModalComponent implements OnInit {
   }
 
   update(range: DateRange) {
-    this.range = range;
-  }
-
-  accept() {
-    this.modal.close(this.range);
+    this.modal.close(range);
   }
 }

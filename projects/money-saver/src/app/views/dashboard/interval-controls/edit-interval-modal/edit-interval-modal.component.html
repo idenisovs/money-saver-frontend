@@ -14,17 +14,19 @@
         <label for="date-from">
           Interval starting from:
         </label>
-        <input type="text" class="form-control" id="date-from" disabled formControlName="from">
+        <input type="text" class="form-control" id="date-from" formControlName="fromLabel">
+        <input type="hidden" formControlName="from">
       </div>
       <div class="form-group col-6">
         <label for="date-till">
           Interval ending at:
         </label>
-        <input type="text" class="form-control" id="date-till" disabled formControlName="till">
+        <input type="text" class="form-control" id="date-till" formControlName="tillLabel">
+        <input type="hidden" formControlName="till">
       </div>
     </div>
     <div class="form-group">
-      <button type="button" class="btn btn-outline-info">
+      <button type="button" class="btn btn-outline-info" (click)="openDateRangeModal()">
         <i class="material-icons">
           date_range
         </i>
