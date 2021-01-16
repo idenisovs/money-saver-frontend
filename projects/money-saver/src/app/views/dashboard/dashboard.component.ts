@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { IntervalsService } from '../../services/intervals.service';
 import { Interval, ScheduleItem, Totals } from '../../shared';
 import { BreadcrumbItem } from '../../components/breadcrumb/breadcrumb-item';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { BreadcrumbItem } from '../../components/breadcrumb/breadcrumb-item';
   providers: [DatePipe]
 })
 export class DashboardComponent implements OnInit {
-
+  intervalId: number;
   interval: Interval;
   schedule: ScheduleItem[];
   totals: Totals;
@@ -21,15 +22,24 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private intervals: IntervalsService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.reload();
+    this.route.params.subscribe((params) => {
+      if ('intervalId' in params) {
+        this.intervalId = params.intervalId;
+      }
+
+      this.reload();
+    })
   }
 
   reload() {
-    this.intervals.getLatestSummary().subscribe(({ interval, schedule, totals }) => {
+    const request = this.intervalId ? this.intervals.getById(this.intervalId) : this.intervals.getLatestSummary();
+
+    request.subscribe(({ interval, schedule, totals }) => {
       this.interval = interval;
       this.schedule = schedule;
       this.totals = totals;

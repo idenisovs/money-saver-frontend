@@ -24,6 +24,12 @@ export class IntervalsService {
     );
   }
 
+  getById(id: number): Observable<Summary> {
+    return this.http.get<SummaryRecord>(`/api/summary/payments?intervalid=${id}`).pipe(
+      map((summary) => new Summary(summary))
+    );
+  }
+
   getYears(): Observable<number[]> {
     return this.http.get<number[]>('/api/intervals/years');
   }
