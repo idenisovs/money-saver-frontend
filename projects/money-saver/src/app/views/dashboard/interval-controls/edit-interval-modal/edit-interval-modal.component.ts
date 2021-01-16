@@ -47,7 +47,16 @@ export class EditIntervalModalComponent implements OnInit {
       backdrop: 'static'
     });
 
-    (dateRangeModal.componentInstance as DateRangeModalComponent).startingDate = this.interval.end;
+    if (this.edit) {
+      (dateRangeModal.componentInstance as DateRangeModalComponent).startingDate = this.interval.start;
+      (dateRangeModal.componentInstance as DateRangeModalComponent).endingDate = this.interval.end;
+    } else {
+      const startingDate = new Date();
+
+      startingDate.setDate(this.interval.end.getDate() + 1);
+
+      (dateRangeModal.componentInstance as DateRangeModalComponent).startingDate = startingDate;
+    }
 
     try {
       const range = await dateRangeModal.result as DateRange;

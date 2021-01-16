@@ -13,11 +13,15 @@ import { DateRange } from './date-range';
 export class DateRangeComponent implements OnInit {
 
   hoveredDate: NgbDate | null = null;
+
   fromDate: NgbDate;
   toDate: NgbDate;
 
   @Input()
   starting: Date = new Date();
+
+  @Input()
+  ending: Date;
 
   @Output()
   changes = new EventEmitter<DateRange>();
@@ -28,9 +32,12 @@ export class DateRangeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const intervalEndingDate = NgbDate.from(this.adapter.fromModel(this.starting));
-
-    this.fromDate = this.calendar.getNext(intervalEndingDate, 'd', 1);
+    if (this.ending) {
+      this.fromDate = NgbDate.from(this.adapter.fromModel(this.starting));
+      this.toDate = NgbDate.from(this.adapter.fromModel(this.ending));
+    } else {
+      this.fromDate = NgbDate.from(this.adapter.fromModel(this.starting));
+    }
   }
 
   onDateSelection(date: NgbDate) {
@@ -46,6 +53,14 @@ export class DateRangeComponent implements OnInit {
     } else {
       this.toDate = null;
       this.fromDate = date;
+    }
+  }
+
+  getMinDate() {
+    return {
+      year: this.starting.getFullYear(),
+      month: this.starting.getMonth() + 1,
+      day: this.starting.getDate()
     }
   }
 
