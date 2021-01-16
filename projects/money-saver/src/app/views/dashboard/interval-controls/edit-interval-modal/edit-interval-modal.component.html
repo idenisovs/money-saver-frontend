@@ -1,0 +1,24 @@
+<header class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">
+    Add new interval
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</header>
+
+<section class="modal-body">
+  <app-date-range [starting]="current.end" (changes)="updateDateRange($event)"></app-date-range>
+</section>
+
+<footer class="modal-footer justify-content-between">
+  <span>
+    <button type="button" class="btn btn-outline-secondary mr-2" (click)="cancel()">
+      Cancel
+    </button>
+
+    <button type="button" class="btn btn-outline-primary" (click)="save()">
+      Save
+    </button>
+  </span>
+</footer>

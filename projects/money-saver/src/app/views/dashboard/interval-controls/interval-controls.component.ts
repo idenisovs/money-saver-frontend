@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Interval } from '../../../shared';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompleteIntervalModalComponent } from './complete-interval-modal/complete-interval-modal.component';
+import { EditIntervalModalComponent } from './edit-interval-modal/edit-interval-modal.component';
 
 @Component({
   selector: 'app-interval-controls',
@@ -44,6 +45,19 @@ export class IntervalControlsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  async create() {
+    const modal = this.modal.open(EditIntervalModalComponent, {});
+
+    (modal.componentInstance as EditIntervalModalComponent).current = this.interval;
+
+    try {
+      await modal.result;
+      this.changes.emit();
+    } catch(e) {
+      // nothing to do here
+    }
   }
 
   async complete() {

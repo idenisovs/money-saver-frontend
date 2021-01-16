@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardControlsComponent } from './dashboard-controls/dashboard-controls.component';
 import { ExpensesTableComponent } from './expenses-table/expenses-table.component';
@@ -13,6 +14,7 @@ import { ExpensesModalComponent } from './expenses-modal/expenses-modal.componen
 import { PaymentRecordComponent } from './expenses-modal/payment-record/payment-record.component';
 import { CompleteIntervalModalComponent } from './interval-controls/complete-interval-modal/complete-interval-modal.component';
 import { ComponentsModule } from '../../components/components.module';
+import { EditIntervalModalComponent } from './interval-controls/edit-interval-modal/edit-interval-modal.component';
 
 @NgModule({
   declarations: [
@@ -25,14 +27,16 @@ import { ComponentsModule } from '../../components/components.module';
     PaymentInputComponent,
     ExpensesModalComponent,
     PaymentRecordComponent,
-    CompleteIntervalModalComponent
+    CompleteIntervalModalComponent,
+    EditIntervalModalComponent
   ],
   imports: [
     CommonModule,
     CustomPipesModule,
     ReactiveFormsModule,
     FormsModule,
-    ComponentsModule
+    ComponentsModule,
+    NgbModule
   ],
   exports: [DashboardControlsComponent]
 })
