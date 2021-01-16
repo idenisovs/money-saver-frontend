@@ -8,7 +8,7 @@
     </header>
   </ng-template>
   <div class="card-body">
-    <button type="button" class="btn btn-outline-info mr-2" [disabled]="IsLatest && IsActive" (click)="create()">
+    <button type="button" class="btn btn-outline-info mr-2" [disabled]="!IsLatest || IsActive" (click)="create()">
       Create interval
     </button>
     <button type="button" class="btn btn-outline-info mr-2" [disabled]="IsInactive">

@@ -5,7 +5,7 @@ export interface IntervalRecord {
   start: number;
   end: number;
   sum: number;
-  latest: number;
+  latest: number|boolean;
   user?: User;
 }
 
@@ -22,7 +22,7 @@ export class Interval {
     this.start = new Date(data.start);
     this.end = new Date(data.end);
     this.sum = data.sum;
-    this.latest = data.latest === 1;
+    this.latest = !!data.latest;
     this.user = data.user;
   }
 
