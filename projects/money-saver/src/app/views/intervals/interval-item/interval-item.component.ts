@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Interval } from '../../../shared';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-interval-item',
@@ -11,17 +12,19 @@ export class IntervalItemComponent implements OnInit {
   @Input()
   interval: Interval;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
   setContextBorder() {
-    if (this.interval.latest) {
-      return 'border-primary';
-    } else {
-      return 'border-info';
-    }
+    return 'border-info';
+  }
+
+  async openInterval() {
+    await this.router.navigate(['intervals', this.interval.id]);
   }
 
 }

@@ -1,4 +1,7 @@
-<section class="card interval-item mr-3 mb-3" [ngClass]="setContextBorder()">
+<section class="card interval-item mr-3 mb-3" [ngClass]="setContextBorder()" (click)="openInterval()">
+  <header class="card-header text-center" *ngIf="interval.latest">
+    Current
+  </header>
   <table class="table table-sm mb-0">
     <tbody>
     <tr>
@@ -9,6 +12,7 @@
         {{interval.start|date}}
       </td>
     </tr>
+
     <tr>
       <th>
         Till
@@ -17,6 +21,7 @@
         {{interval.end|date}}
       </td>
     </tr>
+
     <tr>
       <th>
         Sum
@@ -25,6 +30,7 @@
         {{interval.sum|currencyExt}}
       </td>
     </tr>
+
     <tr>
       <td colspan="2">
         <a routerLink="/intervals/{{interval.id}}" class="stretched-link">
@@ -32,6 +38,7 @@
         </a>
       </td>
     </tr>
+
     </tbody>
   </table>
 </section>
