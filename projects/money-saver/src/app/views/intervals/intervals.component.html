@@ -4,10 +4,8 @@
     Loading intervals summary...
   </app-spinner>
 
-  <ng-container *ngIf="intervals">
-    <pre *ngFor="let interval of intervals">
-      {{interval|json}}
-    </pre>
-  </ng-container>
+  <div class="d-flex flex-row flex-wrap">
+    <app-interval-item *ngFor="let interval of intervals" [interval]="interval"></app-interval-item>
+  </div>
 
 </section>

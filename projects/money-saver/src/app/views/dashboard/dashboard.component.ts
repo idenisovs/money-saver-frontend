@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { IntervalsService } from '../../services/intervals.service';
-import { Interval, Payment, ScheduleItem, Totals } from '../../shared';
+import { Interval, ScheduleItem, Totals } from '../../shared';
 import { BreadcrumbItem } from '../../components/breadcrumb/breadcrumb-item';
 
 
@@ -48,8 +48,8 @@ export class DashboardComponent implements OnInit {
     current.active = true;
 
     this.breadcrumb = [
-      new BreadcrumbItem('Years', 'years'),
-      new BreadcrumbItem(year.toString(), `years/${year}`),
+      new BreadcrumbItem('Years', '/years'),
+      new BreadcrumbItem(year.toString(), `/years/${year}`),
       current
     ];
   }

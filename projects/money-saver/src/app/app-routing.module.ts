@@ -7,7 +7,8 @@ import { IntervalsComponent } from './views/intervals/intervals.component';
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'years', component: YearsComponent },
-  { path: 'years/:year', component: IntervalsComponent }
+  { path: 'years/:year', component: IntervalsComponent },
+  { path: 'intervals/:intervalId', component: DashboardComponent }
 ];
 
 @NgModule({
