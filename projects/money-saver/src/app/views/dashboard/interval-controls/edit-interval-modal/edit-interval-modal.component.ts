@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { DateRange } from '../../../../components/date-range/date-range';
 import { Interval } from '../../../../shared';
+import { FormBuilder, Validators } from '@angular/forms';
+import { NumberValidator } from '../../../../validators';
 
 @Component({
   selector: 'app-edit-interval-modal',
@@ -13,15 +14,18 @@ export class EditIntervalModalComponent implements OnInit {
   @Input()
   current: Interval;
 
+  intervalForm = this.fb.group({
+    from: [ '', Validators.required ],
+    till: [ '', Validators.required ],
+    sum: [ '', [ Validators.required, NumberValidator() ] ]
+  });
+
   constructor(
-    private modal: NgbActiveModal
+    private modal: NgbActiveModal,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
-  }
-
-  updateDateRange(range: DateRange) {
-    console.log(range);
   }
 
   save() {
