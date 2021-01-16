@@ -9,12 +9,21 @@
   </ng-template>
   <div class="card-body">
     <button type="button" class="btn btn-outline-info mr-2" [disabled]="!IsLatest || IsActive" (click)="create()">
+      <i class="material-icons">
+        insert_drive_file
+      </i>
       Create interval
     </button>
-    <button type="button" class="btn btn-outline-info mr-2" [disabled]="IsInactive">
+    <button type="button" class="btn btn-outline-info mr-2" [disabled]="IsInactive" (click)="edit()">
+      <i class="material-icons">
+        edit
+      </i>
       Edit interval
     </button>
     <button type="button" class="btn btn-outline-info" [disabled]="IsInactive" (click)="complete()">
+      <i class="material-icons">
+        flag
+      </i>
       Complete interval
     </button>
   </div>

@@ -17,15 +17,12 @@ import { IntervalsService } from '../../../../services/intervals.service';
 export class EditIntervalModalComponent implements OnInit {
 
   @Input()
-  latestInterval: Interval;
+  edit: boolean = false;
 
-  intervalForm = this.fb.group({
-    fromLabel: [ '', Validators.required ],
-    tillLabel: [ '', Validators.required ],
-    from: [ '' ],
-    till: [ '' ],
-    sum: [ '', [ Validators.required, NumberValidator() ] ]
-  });
+  @Input()
+  interval: Interval;
+
+  intervalForm = this.makeCreateForm();
 
   constructor(
     private modalService: NgbModal,
@@ -36,6 +33,10 @@ export class EditIntervalModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (this.edit) {
+      this.intervalForm = this.makeEditForm();
+    }
+
     this.intervalForm.get('fromLabel').disable();
     this.intervalForm.get('tillLabel').disable();
   }
@@ -46,7 +47,7 @@ export class EditIntervalModalComponent implements OnInit {
       backdrop: 'static'
     });
 
-    (dateRangeModal.componentInstance as DateRangeModalComponent).startingDate = this.latestInterval.end;
+    (dateRangeModal.componentInstance as DateRangeModalComponent).startingDate = this.interval.end;
 
     try {
       const range = await dateRangeModal.result as DateRange;
@@ -64,18 +65,44 @@ export class EditIntervalModalComponent implements OnInit {
   save() {
     const value = this.intervalForm.value;
 
-    this.intervals.create(new Interval({
+    const interval = new Interval({
+      id: value.id,
       start: value.from,
       end: value.till,
-      sum: value.sum,
-      latest: 1
-    })).subscribe(() => {
+      sum: parseFloat(value.sum)
+    });
+
+    const request = this.edit ? this.intervals.update(interval) : this.intervals.create(interval);
+
+    request.subscribe(() => {
       this.modal.close('saved');
     });
   }
 
   cancel() {
     this.modal.dismiss('cancel');
+  }
+
+  makeCreateForm() {
+    return this.fb.group({
+      id: [''],
+      fromLabel: [ '', Validators.required ],
+      tillLabel: [ '', Validators.required ],
+      from: [ '' ],
+      till: [ '' ],
+      sum: [ '', [ Validators.required, NumberValidator() ] ]
+    });
+  }
+
+  makeEditForm() {
+    return this.fb.group({
+      id: [ this.interval.id.toString() ],
+      fromLabel: [ this.datePipe.transform(this.interval.start), Validators.required ],
+      tillLabel: [ this.datePipe.transform(this.interval.end), Validators.required ],
+      from: [ this.interval.start.getTime() ],
+      till: [ this.interval.end.getTime() ],
+      sum: [ this.interval.sum.toString(), [ Validators.required, NumberValidator() ] ]
+    });
   }
 
 }

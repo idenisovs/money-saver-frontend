@@ -50,7 +50,22 @@ export class IntervalControlsComponent implements OnInit {
   async create() {
     const modal = this.modal.open(EditIntervalModalComponent, {});
 
-    (modal.componentInstance as EditIntervalModalComponent).latestInterval = this.interval;
+    (modal.componentInstance as EditIntervalModalComponent).interval = this.interval;
+
+    try {
+      await modal.result;
+
+      this.changes.emit();
+    } catch(e) {
+      // nothing to do here
+    }
+  }
+
+  async edit() {
+    const modal = this.modal.open(EditIntervalModalComponent, {});
+
+    (modal.componentInstance as EditIntervalModalComponent).interval = this.interval;
+    (modal.componentInstance as EditIntervalModalComponent).edit = true;
 
     try {
       await modal.result;

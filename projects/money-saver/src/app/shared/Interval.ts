@@ -5,7 +5,7 @@ export interface IntervalRecord {
   start: number;
   end: number;
   sum: number;
-  latest: number|boolean;
+  latest?: number|boolean;
   user?: User;
 }
 
