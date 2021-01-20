@@ -9,7 +9,7 @@
     <div class="col-4">
       <app-interval-controls [interval]="interval" (changes)="reload()"></app-interval-controls>
       <app-interval-overview [totals]="totals"></app-interval-overview>
-      <app-expenses-graph></app-expenses-graph>
+      <app-expenses-graph *ngIf="schedule" [expenses]="schedule"></app-expenses-graph>
     </div>
   </div>
 </div>
