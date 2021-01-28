@@ -17,6 +17,9 @@ export class DateRangeModalComponent implements OnInit {
   @Input()
   endingDate: Date;
 
+  @Input()
+  minDateAny = false;
+
   constructor(
     private modal: NgbActiveModal
   ) { }

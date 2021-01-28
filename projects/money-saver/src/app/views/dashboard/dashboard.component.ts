@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   totals: Totals;
 
   breadcrumb: BreadcrumbItem[] = [];
+  requestRunning = true;
 
   constructor(
     private intervals: IntervalsService,
@@ -37,14 +38,24 @@ export class DashboardComponent implements OnInit {
   }
 
   reload() {
-    const request = this.intervalId ? this.intervals.getById(this.intervalId) : this.intervals.getLatestSummary();
+    this.requestInterval().subscribe((summary) => {
+      if (summary) {
+        this.interval = summary.interval;
+        this.schedule = summary.schedule;
+        this.totals = summary.totals;
+        this.updateBreadcrumb();
+      }
 
-    request.subscribe(({ interval, schedule, totals }) => {
-      this.interval = interval;
-      this.schedule = schedule;
-      this.totals = totals;
-      this.updateBreadcrumb();
+      this.requestRunning = false;
     });
+  }
+
+  requestInterval() {
+    if (this.intervalId) {
+      return this.intervals.getById(this.intervalId)
+    } else {
+      return this.intervals.getLatestSummary();
+    }
   }
 
   updateBreadcrumb() {

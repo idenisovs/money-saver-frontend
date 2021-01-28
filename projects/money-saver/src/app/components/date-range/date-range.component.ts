@@ -23,6 +23,9 @@ export class DateRangeComponent implements OnInit {
   @Input()
   ending: Date;
 
+  @Input()
+  minDateAny = false;
+
   @Output()
   changes = new EventEmitter<DateRange>();
 
@@ -58,7 +61,7 @@ export class DateRangeComponent implements OnInit {
 
   getMinDate() {
     return {
-      year: this.starting.getFullYear(),
+      year: this.minDateAny ? 1900 : this.starting.getFullYear(),
       month: this.starting.getMonth() + 1,
       day: this.starting.getDate()
     }

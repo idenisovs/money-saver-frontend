@@ -6,6 +6,7 @@ export interface IntervalRecord {
   end: number;
   sum: number;
   latest?: number|boolean;
+  single: boolean;
   user?: User;
 }
 
@@ -15,6 +16,7 @@ export class Interval {
   end: Date;
   sum: number;
   latest: boolean;
+  single: boolean;
   user: User;
 
   constructor(data: IntervalRecord) {
@@ -23,6 +25,7 @@ export class Interval {
     this.end = new Date(data.end);
     this.sum = data.sum;
     this.latest = !!data.latest;
+    this.single = data.single;
     this.user = data.user;
   }
 
@@ -32,7 +35,8 @@ export class Interval {
       start: this.start.getTime(),
       end: this.end.getTime(),
       sum: this.sum,
-      latest: this.latest ? 1 : 0
+      latest: this.latest ? 1 : 0,
+      single: this.single
     }
   }
 }

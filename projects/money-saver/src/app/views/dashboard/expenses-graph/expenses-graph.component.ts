@@ -55,7 +55,7 @@ export class ExpensesGraphComponent implements OnInit, OnChanges {
     return {
       data: this.expenses.map((record) => this.round(record.residual)),
       label: 'Actual',
-      backgroundColor: 'blue'
+      backgroundColor: '#007bff'
     };
   }
 

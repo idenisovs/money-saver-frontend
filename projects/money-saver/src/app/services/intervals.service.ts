@@ -18,9 +18,12 @@ export class IntervalsService {
     );
   }
 
-  getLatestSummary(): Observable<Summary> {
+  getLatestSummary(): Observable<Summary|null> {
     return this.http.get<SummaryRecord>('/api/intervals/latest/summary').pipe(
-      map((summary) => new Summary(summary))
+      map((summary) => {
+        console.log(summary);
+        return summary ? new Summary(summary) : null;
+      })
     );
   }
 

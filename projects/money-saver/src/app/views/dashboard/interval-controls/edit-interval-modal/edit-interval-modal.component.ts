@@ -47,15 +47,21 @@ export class EditIntervalModalComponent implements OnInit {
       backdrop: 'static'
     });
 
+    const dateRangeComponent = dateRangeModal.componentInstance as DateRangeModalComponent;
+    const startingDate = new Date();
+
     if (this.edit) {
-      (dateRangeModal.componentInstance as DateRangeModalComponent).startingDate = this.interval.start;
-      (dateRangeModal.componentInstance as DateRangeModalComponent).endingDate = this.interval.end;
-    } else {
-      const startingDate = new Date();
-
+      dateRangeComponent.startingDate = this.interval.start;
+      dateRangeComponent.endingDate = this.interval.end;
+    } else if (this.interval) {
       startingDate.setDate(this.interval.end.getDate() + 1);
+      dateRangeComponent.startingDate = startingDate;
+    } else {
+      dateRangeComponent.startingDate = startingDate;
+    }
 
-      (dateRangeModal.componentInstance as DateRangeModalComponent).startingDate = startingDate;
+    if (this.interval && this.interval.single && this.interval.end.getTime() > Date.now()) {
+      dateRangeComponent.minDateAny = true;
     }
 
     try {
@@ -78,18 +84,25 @@ export class EditIntervalModalComponent implements OnInit {
       id: value.id,
       start: value.from,
       end: value.till,
-      sum: parseFloat(value.sum)
+      sum: parseFloat(value.sum),
+      single: false
     });
 
-    const request = this.edit ? this.intervals.update(interval) : this.intervals.create(interval);
-
-    request.subscribe(() => {
+    this.request(interval).subscribe(() => {
       this.modal.close('saved');
     });
   }
 
   cancel() {
     this.modal.dismiss('cancel');
+  }
+
+  request(interval: Interval) {
+    if (this.edit) {
+      return this.intervals.update(interval);
+    } else {
+      return this.intervals.create(interval);
+    }
   }
 
   makeCreateForm() {

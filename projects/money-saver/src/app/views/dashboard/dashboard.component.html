@@ -1,14 +1,24 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-8">
-      <app-breadcrumb [items]="breadcrumb"></app-breadcrumb>
-      <app-dashboard-controls (changes)="reload()"></app-dashboard-controls>
-      <app-expenses-table [schedule]="schedule" (changes)="reload()"></app-expenses-table>
-    </div>
+      <div class="col-8">
+        <ng-container *ngIf="!requestRunning && schedule">
+          <app-breadcrumb [items]="breadcrumb"></app-breadcrumb>
+          <app-dashboard-controls (changes)="reload()"></app-dashboard-controls>
+          <app-expenses-table [schedule]="schedule" (changes)="reload()"></app-expenses-table>
+        </ng-container>
+
+        <app-spinner *ngIf="requestRunning">
+          Loading expenses overview....
+        </app-spinner>
+
+        <div class="alert alert-info" role="alert" *ngIf="!requestRunning && !schedule">
+          Seems you are first time here! Create new interval!
+        </div>
+      </div>
 
     <div class="col-4">
       <app-interval-controls [interval]="interval" (changes)="reload()"></app-interval-controls>
-      <app-interval-overview [totals]="totals"></app-interval-overview>
+      <app-interval-overview *ngIf="totals" [totals]="totals"></app-interval-overview>
       <app-expenses-graph *ngIf="schedule" [expenses]="schedule"></app-expenses-graph>
     </div>
   </div>

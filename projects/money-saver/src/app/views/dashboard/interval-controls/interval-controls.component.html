@@ -8,7 +8,7 @@
     </header>
   </ng-template>
   <div class="card-body">
-    <button type="button" class="btn btn-outline-info mr-2" [disabled]="!IsLatest || IsActive" (click)="create()">
+    <button type="button" class="btn btn-outline-info mr-2" [disabled]="(!IsLatest || IsActive) && interval" (click)="create()">
       <i class="material-icons">
         insert_drive_file
       </i>

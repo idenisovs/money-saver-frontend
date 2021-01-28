@@ -34,7 +34,7 @@ export class IntervalControlsComponent implements OnInit {
 
   get IsInactive(): boolean {
     if (!this.interval) {
-      return false;
+      return true;
     }
 
     return !this.interval.latest || this.interval.end.getTime() < Date.now();

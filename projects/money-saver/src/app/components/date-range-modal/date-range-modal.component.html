@@ -1,3 +1,7 @@
 <section class="d-flex justify-content-center py-3">
-  <app-date-range [starting]="startingDate" [ending]="endingDate" (changes)="update($event)"></app-date-range>
+  <app-date-range [starting]="startingDate"
+                  [ending]="endingDate"
+                  [minDateAny]="minDateAny"
+                  (changes)="update($event)">
+  </app-date-range>
 </section>

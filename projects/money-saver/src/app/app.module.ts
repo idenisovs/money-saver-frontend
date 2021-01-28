@@ -16,27 +16,29 @@ import { YearsModule } from './views/years/years.module';
 import { IntervalsModule } from './views/intervals/intervals.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginPageComponent,
-    MainPageComponent,
-    MessagesComponent,
-    NavbarComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    ChartsModule,
-    DashboardModule,
-    YearsModule,
-    IntervalsModule
-  ],
-  providers: [
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginPageComponent,
+        MainPageComponent,
+        MessagesComponent,
+        NavbarComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgbModule,
+        ChartsModule,
+        DashboardModule,
+        YearsModule,
+        IntervalsModule
+    ],
+    providers: [],
+    exports: [
+        MessagesComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
