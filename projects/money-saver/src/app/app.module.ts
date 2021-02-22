@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +32,7 @@ import { IntervalsModule } from './views/intervals/intervals.module';
         ReactiveFormsModule,
         NgbModule,
         ChartsModule,
+        NgSelectModule,
         DashboardModule,
         YearsModule,
         IntervalsModule
