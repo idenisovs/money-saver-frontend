@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-      <div class="col-8">
+      <div class="col-12 col-md-4">
         <ng-container *ngIf="!requestRunning && schedule">
           <app-breadcrumb [items]="breadcrumb"></app-breadcrumb>
           <app-dashboard-controls (changes)="reload()"></app-dashboard-controls>
@@ -16,7 +16,7 @@
         </div>
       </div>
 
-    <div class="col-4">
+    <div class="col-12 col-md-4">
       <app-interval-controls [interval]="interval" (changes)="reload()"></app-interval-controls>
       <app-interval-overview *ngIf="totals" [totals]="totals"></app-interval-overview>
       <app-expenses-graph *ngIf="schedule" [expenses]="schedule"></app-expenses-graph>
