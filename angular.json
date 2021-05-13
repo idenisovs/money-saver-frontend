@@ -45,7 +45,7 @@
             "polyfills": "projects/money-saver/src/polyfills.ts",
             "tsConfig": "projects/money-saver/tsconfig.app.json",
             "assets": [
-              "projects/money-saver/src/favicon.ico",
+              "projects/money-saver/src/assets/favicon.ico",
               "projects/money-saver/src/assets"
             ],
             "styles": [
