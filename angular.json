@@ -44,7 +44,6 @@
             "main": "projects/money-saver/src/main.ts",
             "polyfills": "projects/money-saver/src/polyfills.ts",
             "tsConfig": "projects/money-saver/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/money-saver/src/favicon.ico",
               "projects/money-saver/src/assets"
@@ -52,7 +51,13 @@
             "styles": [
               "projects/money-saver/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
