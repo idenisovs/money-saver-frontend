@@ -1,5 +1,5 @@
-<form class="d-flex" [formGroup]="paymentForm">
-  <div class="input-group">
+<form class="d-flex flex-wrap justify-content-end flex-md-nowrap" [formGroup]="paymentForm">
+  <div class="input-group mb-2 mb-md-0">
     <div class="input-group-prepend">
       <label class="input-group-text" for="payment-input">
         Payment:
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <button class="btn btn-outline-primary ml-2" (click)="save()" [disabled]="paymentForm.pristine || paymentForm.invalid">
+  <button class="btn btn-outline-primary ml-0 ml-md-2" (click)="save()" [disabled]="paymentForm.pristine || paymentForm.invalid">
     Save
   </button>
 
