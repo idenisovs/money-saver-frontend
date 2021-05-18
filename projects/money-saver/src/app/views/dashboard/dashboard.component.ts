@@ -61,8 +61,8 @@ export class DashboardComponent implements OnInit {
   updateBreadcrumb() {
     const year = this.interval.start.getFullYear();
 
-    const start = this.datePipe.transform(this.interval.start);
-    const end = this.datePipe.transform(this.interval.end);
+    const start = this.datePipe.transform(this.interval.start, 'MMM d');
+    const end = this.datePipe.transform(this.interval.end, 'MMM d');
 
     const current = new BreadcrumbItem(`${start} - ${end}`);
 
