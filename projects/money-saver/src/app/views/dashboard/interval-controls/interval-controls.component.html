@@ -8,23 +8,25 @@
     </header>
   </ng-template>
   <div class="card-body">
-    <button type="button" class="btn btn-outline-info mr-2" [disabled]="(!IsLatest || IsActive) && interval" (click)="create()">
+    <button type="button" class="btn btn-outline-info btn-block-custom mr-2 mb-1 mb-xlg-0" [disabled]="(!IsLatest || IsActive) && interval" (click)="create()">
       <i class="material-icons">
         insert_drive_file
       </i>
-      Create interval
+      Create <span class="d-none d-lg-inline">interval</span>
     </button>
-    <button type="button" class="btn btn-outline-info mr-2" [disabled]="IsInactive" (click)="edit()">
+
+    <button type="button" class="btn btn-outline-info btn-block-custom mr-2 mb-1 mb-xlg-0" [disabled]="IsInactive" (click)="edit()">
       <i class="material-icons">
         edit
       </i>
-      Edit interval
+      Edit <span class="d-none d-lg-inline">interval</span>
     </button>
-    <button type="button" class="btn btn-outline-info" [disabled]="IsInactive" (click)="complete()">
+
+    <button type="button" class="btn btn-outline-info btn-block-custom mb-1 mb-xlg-0" [disabled]="IsInactive" (click)="complete()">
       <i class="material-icons">
         flag
       </i>
-      Complete interval
+      Complete <span class="d-none d-lg-inline">interval</span>
     </button>
   </div>
 </section>
