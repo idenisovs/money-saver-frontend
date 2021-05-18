@@ -1,0 +1,11 @@
+.dashboard-controls {
+  .btn-block {
+    width: auto;
+  }
+
+  @media screen and (max-width: 320px) {
+    .btn-block {
+      width: 100%;
+    }
+  }
+}
