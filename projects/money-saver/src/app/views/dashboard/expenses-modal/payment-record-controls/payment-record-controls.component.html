@@ -27,8 +27,8 @@
 		</button>
 	</ng-container>
 
-	<ng-container *ngSwitchCase="ItemMode.Delete" (click)="action.emit(Action.Delete)">
-		<button type="button" class="btn btn-sm btn-outline-danger mr-1">
+	<ng-container *ngSwitchCase="ItemMode.Delete">
+		<button type="button" class="btn btn-sm btn-outline-danger mr-1" (click)="action.emit(Action.Delete)">
 			<i class="material-icons">
 				done
 			</i>

@@ -56,12 +56,11 @@ export class PaymentRecordComponent implements OnInit {
 				this.mode = ItemMode.View;
 				break;
 			case ControlsAction.Delete:
-				console.log('DELETE');
 				this.payment.remove = true;
+				this.mode = ItemMode.View;
 				this.clean.emit();
 				break;
 			default:
-				console.log('CANCEL');
 				this.value = 0;
 				this.mode = ItemMode.View;
 				break;
