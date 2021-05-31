@@ -48,13 +48,7 @@ export class ExpensesModalComponent implements OnInit {
 	}
 
 	save() {
-		const payments = this.payments.filter((payment) => !(payment.add && payment.remove));
-
-		if (!payments.length) {
-			return this.modal.close('nothing-to-do');
-		}
-
-		this.paymentsService.update(payments).subscribe(() => {
+		this.paymentsService.update(this.payments).subscribe(() => {
 			this.modal.close('save');
 		});
 	}

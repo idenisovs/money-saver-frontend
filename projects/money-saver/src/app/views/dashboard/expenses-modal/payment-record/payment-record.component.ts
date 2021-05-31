@@ -48,7 +48,9 @@ export class PaymentRecordComponent implements OnInit {
 				console.log('DELETE MODE');
 				break;
 			case ControlsAction.Save:
-				console.log('SAVE');
+				this.payment.sum = this.editable.sum;
+				this.payment.update = true;
+				this.mode = ItemMode.View;
 				break;
 			case ControlsAction.Delete:
 				console.log('DELETE');
