@@ -1,0 +1,43 @@
+<ng-container [ngSwitch]="mode">
+	<ng-container *ngSwitchCase="ItemMode.View">
+		<button type="button" class="btn btn-sm btn-outline-primary mr-1">
+			<i class="material-icons">
+				mode_edit
+			</i>
+		</button>
+
+		<button type="button" class="btn btn-sm btn-outline-danger btn-outline-primary">
+			<i class="material-icons">
+				delete
+			</i>
+		</button>
+	</ng-container>
+
+	<ng-container *ngSwitchCase="ItemMode.Edit">
+		<button type="button" class="btn btn-sm btn-primary mr-1">
+			<i class="material-icons">
+				done
+			</i>
+		</button>
+
+		<button type="button" class="btn btn-sm btn-outline-danger btn-outline-primary">
+			<i class="material-icons">
+				close
+			</i>
+		</button>
+	</ng-container>
+
+	<ng-container *ngSwitchCase="ItemMode.Delete">
+		<button type="button" class="btn btn-sm btn-outline-primary mr-1">
+			<i class="material-icons">
+				done
+			</i>
+		</button>
+
+		<button type="button" class="btn btn-sm btn-outline-danger btn-outline-primary">
+			<i class="material-icons">
+				replay
+			</i>
+		</button>
+	</ng-container>
+</ng-container>

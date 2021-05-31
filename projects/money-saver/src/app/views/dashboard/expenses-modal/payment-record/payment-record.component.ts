@@ -1,43 +1,39 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Payment } from '../../../../shared';
-
-enum ItemMode {
-  View,
-  Edit,
-  Delete
-}
+import { ItemMode } from '../item-mode';
 
 @Component({
-  selector: 'app-payment-record',
-  templateUrl: './payment-record.component.html',
-  styleUrls: ['./payment-record.component.scss']
+	selector: 'app-payment-record',
+	templateUrl: './payment-record.component.html',
+	styleUrls: ['./payment-record.component.scss']
 })
 export class PaymentRecordComponent implements OnInit {
-  ItemMode = ItemMode;
+	ItemMode = ItemMode;
 
-  mode = ItemMode.View;
+	mode = ItemMode.View;
 
-  editable: Payment;
+	editable: Payment;
 
-  @Input()
-  payment: Payment;
+	@Input()
+	payment: Payment;
 
-  @Output()
-  edit = new EventEmitter<void>()
+	@Output()
+	edit = new EventEmitter<void>()
 
-  get ContextClasses() {
-    return {
-      'text-info': this.payment.add,
-      'text-warning': this.payment.update,
-      'text-danger strike-payment': this.payment.remove
-    };
-  }
+	get ContextClasses() {
+		return {
+			'text-info': this.payment.add,
+			'text-warning': this.payment.update,
+			'text-danger strike-payment': this.payment.remove
+		};
+	}
 
-  constructor() { }
+	constructor() {
+	}
 
-  ngOnInit(): void {
-    if (this.payment.add) {
-      this.mode = ItemMode.Edit;
-    }
-  }
+	ngOnInit(): void {
+		if (this.payment.add) {
+			this.mode = ItemMode.Edit;
+		}
+	}
 }

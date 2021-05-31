@@ -16,6 +16,7 @@ import { CompleteIntervalModalComponent } from './interval-controls/complete-int
 import { ComponentsModule } from '../../components/components.module';
 import { EditIntervalModalComponent } from './interval-controls/edit-interval-modal/edit-interval-modal.component';
 import { ChartsModule } from 'ng2-charts';
+import { PaymentRecordControlsComponent } from './expenses-modal/payment-record-controls/payment-record-controls.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ChartsModule } from 'ng2-charts';
     ExpensesModalComponent,
     PaymentRecordComponent,
     CompleteIntervalModalComponent,
-    EditIntervalModalComponent
+    EditIntervalModalComponent,
+    PaymentRecordControlsComponent
   ],
     imports: [
         CommonModule,
