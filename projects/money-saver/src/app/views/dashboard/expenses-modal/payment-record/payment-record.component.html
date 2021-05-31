@@ -1,49 +1,27 @@
-<th class="align-middle" [ngClass]="ContextClasses">
+<div class="record-date-time">
   {{payment.time|date:'HH:mm:ss'}}
-</th>
+</div>
 
-<td class="align-middle w-100" *ngIf="editable && editMode; else paymentSum">
-  <input type="text" [value]="payment.sum" [(ngModel)]="editable.sum" />
-</td>
+<div class="record-value flex-grow-1 ml-2">
+  <input *ngIf="mode === ItemMode.Edit" type="text" class="w-100" />
 
-<ng-template #paymentSum>
-  <td class="align-middle w-100" [ngClass]="ContextClasses">
-    {{payment.sum|currencyExt}}
-  </td>
-</ng-template>
+  <span [ngClass]="ContextClasses" *ngIf="mode === ItemMode.View">
+    {{ payment.sum | currencyExt }}
+  </span>
+</div>
 
+<div class="ml-2" [ngSwitch]="mode">
+  <ng-container *ngSwitchCase="ItemMode.Edit">
+    <button type="button" class="btn btn-sm btn-primary mr-1">
+      <i class="material-icons">
+        done
+      </i>
+    </button>
 
-<td class="text-right text-nowrap">
-  <button *ngIf="!editable" class="btn btn-sm btn-outline-primary mr-2" [disabled]="editMode || payment.remove" (click)="toggleEdit()">
-    <i class="material-icons">
-      edit
-    </i>
-    Edit
-  </button>
-
-  <button *ngIf="!payment.remove && !editable" class="btn btn-sm btn-outline-danger" [disabled]="editMode" (click)="toggleDelete(payment)">
-    <i class="material-icons">
-      delete
-    </i>
-    Delete
-  </button>
-
-  <button *ngIf="payment.remove" class="btn btn-sm btn-outline-info" (click)="toggleDelete(payment)">
-    <i class="material-icons">
-      replay
-    </i>
-    Cancel
-  </button>
-
-  <button *ngIf="editable" class="btn btn-sm btn-outline-primary mr-2" (click)="applyEdit()">
-    <i class="material-icons">
-      done
-    </i>
-  </button>
-
-  <button *ngIf="editable" class="btn btn-sm btn-outline-danger" (click)="cancelEdit()">
-    <i class="material-icons">
-      clear
-    </i>
-  </button>
-</td>
+    <button type="button" class="btn btn-sm btn-outline-danger btn-outline-primary">
+      <i class="material-icons">
+        close
+      </i>
+    </button>
+  </ng-container>
+</div>

@@ -1,20 +1,26 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Payment } from '../../../../shared';
 
+enum ItemMode {
+  View,
+  Edit,
+  Delete
+}
+
 @Component({
-  selector: 'tr[app-payment-record]',
+  selector: 'app-payment-record',
   templateUrl: './payment-record.component.html',
   styleUrls: ['./payment-record.component.scss']
 })
 export class PaymentRecordComponent implements OnInit {
+  ItemMode = ItemMode;
+
+  mode = ItemMode.View;
 
   editable: Payment;
 
   @Input()
   payment: Payment;
-
-  @Input()
-  editMode: boolean;
 
   @Output()
   edit = new EventEmitter<void>()
@@ -30,42 +36,8 @@ export class PaymentRecordComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  toggleDelete(payment: Payment) {
-    if (payment.remove) {
-      delete payment.remove;
-    } else {
-      payment.remove = true;
+    if (this.payment.add) {
+      this.mode = ItemMode.Edit;
     }
   }
-
-  applyEdit() {
-    if (this.payment.sum !== this.editable.sum) {
-      this.payment.sum = this.editable.sum;
-
-      if (!this.payment.add) {
-        this.payment.update = true;
-      }
-    }
-
-    this.toggleEdit();
-  }
-
-  cancelEdit() {
-    delete this.payment.update;
-    delete this.payment.remove;
-    this.toggleEdit();
-  }
-
-  toggleEdit() {
-    if (this.editMode) {
-      delete this.editable;
-    } else {
-      this.editable = { ...this.payment } as Payment;
-    }
-
-    this.edit.emit();
-  }
-
 }

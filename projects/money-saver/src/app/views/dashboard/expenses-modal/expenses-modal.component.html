@@ -7,15 +7,15 @@
   </button>
 </header>
 
-<section class="modal-body" *ngIf="!payments.length">
-  There is no records yet!
-</section>
+<section class="modal-body">
+  <div *ngIf="!payments.length; else paymentRecords">
+    There is no records yet!
+  </div>
 
-<table class="modal-body table table-sm mb-0" *ngIf="payments.length > 0">
-  <tbody>
-  <tr app-payment-record *ngFor="let payment of payments" [payment]="payment" [editMode]="editMode" (edit)="toggleEdit()"></tr>
-  </tbody>
-</table>
+  <ng-template #paymentRecords>
+    <app-payment-record *ngFor="let payment of payments" [payment]="payment"></app-payment-record>
+  </ng-template>
+</section>
 
 <footer class="modal-footer justify-content-between">
   <span>

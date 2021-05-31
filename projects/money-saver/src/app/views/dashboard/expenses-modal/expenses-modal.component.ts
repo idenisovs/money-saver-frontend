@@ -13,7 +13,6 @@ export class ExpensesModalComponent implements OnInit {
   record: ScheduleItem;
 
   payments: Payment[] = [];
-  editMode = false;
 
   constructor(
     private modal: NgbActiveModal,
@@ -24,10 +23,6 @@ export class ExpensesModalComponent implements OnInit {
     this.paymentsService.getByDate(this.record.date).subscribe((response) => {
       this.payments = response;
     });
-  }
-
-  toggleEdit() {
-    this.editMode = !this.editMode;
   }
 
   add() {
