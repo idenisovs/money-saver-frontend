@@ -42,28 +42,43 @@ export class PaymentRecordComponent implements OnInit {
 	handleControlsAction(action: ControlsAction) {
 		switch (action) {
 			case ControlsAction.EditMode:
-				this.value = this.payment.sum;
-				this.mode = ItemMode.Edit;
-				break;
+				return this.editModeAction();
 			case ControlsAction.DeleteMode:
-				this.mode = ItemMode.Delete;
-				break;
+				return this.deleteModeAction();
 			case ControlsAction.Save:
-				this.payment.sum = this.value;
-				this.payment.update = !this.payment.add;
-
-				this.value = 0;
-				this.mode = ItemMode.View;
-				break;
+				return this.saveAction();
 			case ControlsAction.Delete:
-				this.payment.remove = true;
-				this.mode = ItemMode.View;
-				this.clean.emit();
-				break;
+				return this.deleteAction();
 			default:
-				this.value = 0;
-				this.mode = ItemMode.View;
-				break;
+				this.cancelAction();
 		}
+	}
+
+	editModeAction() {
+		this.value = this.payment.sum;
+		this.mode = ItemMode.Edit;
+	}
+
+	deleteModeAction() {
+		this.mode = ItemMode.Delete;
+	}
+
+	saveAction() {
+		this.payment.sum = this.value;
+		this.payment.update = !this.payment.add;
+
+		this.value = 0;
+		this.mode = ItemMode.View;
+	}
+
+	deleteAction() {
+		this.payment.remove = true;
+		this.mode = ItemMode.View;
+		this.clean.emit();
+	}
+
+	cancelAction() {
+		this.value = 0;
+		this.mode = ItemMode.View;
 	}
 }
