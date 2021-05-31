@@ -1,13 +1,19 @@
 <div class="record-date-time">
-  {{payment.time|date:'HH:mm:ss'}}
+	{{payment.time|date:'HH:mm:ss'}}
 </div>
 
 <div class="record-value flex-grow-1 ml-2">
-  <input *ngIf="mode === ItemMode.Edit" type="text" class="w-100" [(ngModel)]="editable.sum" />
+	<input *ngIf="mode === ItemMode.Edit" type="text" class="w-100" [(ngModel)]="editable.sum"/>
 
-  <span [ngClass]="ContextClasses" *ngIf="mode === ItemMode.View">
+	<span [ngClass]="ContextClasses" *ngIf="mode === ItemMode.View">
     {{ payment.sum | currencyExt }}
   </span>
+</div>
+
+<div class="ml-2">
+	<span class="material-icons-outlined text-primary align-middle" style="font-size: 1rem" *ngIf="DisplayEditIcon">
+		upload
+	</span>
 </div>
 
 <div class="ml-2" [ngSwitch]="mode">
