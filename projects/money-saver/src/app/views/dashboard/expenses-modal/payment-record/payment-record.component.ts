@@ -12,8 +12,7 @@ export class PaymentRecordComponent implements OnInit {
 	ItemMode = ItemMode;
 
 	mode = ItemMode.View;
-
-	editable: Payment;
+	value = 0;
 
 	@Input()
 	payment: Payment;
@@ -35,7 +34,7 @@ export class PaymentRecordComponent implements OnInit {
 
 	ngOnInit(): void {
 		if (this.payment.add) {
-			this.editable = this.payment;
+			this.value = this.payment.sum;
 			this.mode = ItemMode.Edit;
 		}
 	}
@@ -43,32 +42,29 @@ export class PaymentRecordComponent implements OnInit {
 	handleControlsAction(action: ControlsAction) {
 		switch (action) {
 			case ControlsAction.EditMode:
-				console.log('EDIT MODE');
+				this.value = this.payment.sum;
+				this.mode = ItemMode.Edit;
 				break;
 			case ControlsAction.DeleteMode:
-				console.log('DELETE MODE');
+				this.mode = ItemMode.Delete;
 				break;
 			case ControlsAction.Save:
-				this.payment.sum = this.editable.sum;
-				this.payment.update = true;
+				this.payment.sum = this.value;
+				this.payment.update = !this.payment.add;
+
+				this.value = 0;
 				this.mode = ItemMode.View;
 				break;
 			case ControlsAction.Delete:
 				console.log('DELETE');
+				this.payment.remove = true;
+				this.clean.emit();
 				break;
 			default:
-				this.cancelEdit();
+				console.log('CANCEL');
+				this.value = 0;
+				this.mode = ItemMode.View;
 				break;
-		}
-	}
-
-	cancelEdit() {
-		console.log('CANCEL');
-		this.mode = ItemMode.View;
-
-		if (this.payment.add) {
-			this.payment.remove = true;
-			this.clean.emit();
 		}
 	}
 }

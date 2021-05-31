@@ -28,13 +28,13 @@
 	</ng-container>
 
 	<ng-container *ngSwitchCase="ItemMode.Delete" (click)="action.emit(Action.Delete)">
-		<button type="button" class="btn btn-sm btn-outline-primary mr-1">
+		<button type="button" class="btn btn-sm btn-outline-danger mr-1">
 			<i class="material-icons">
 				done
 			</i>
 		</button>
 
-		<button type="button" class="btn btn-sm btn-outline-danger btn-outline-primary" (click)="action.emit(Action.Cancel)">
+		<button type="button" class="btn btn-sm btn-outline-primary btn-outline-primary" (click)="action.emit(Action.Cancel)">
 			<i class="material-icons">
 				replay
 			</i>

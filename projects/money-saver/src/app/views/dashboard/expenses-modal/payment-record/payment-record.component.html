@@ -3,11 +3,13 @@
 </div>
 
 <div class="record-value flex-grow-1 ml-2">
-	<input *ngIf="mode === ItemMode.Edit" type="text" class="w-100" [(ngModel)]="editable.sum"/>
+	<span [ngClass]="ContextClasses" *ngIf="mode !== ItemMode.Edit; else inputValue">
+		{{ payment.sum | currencyExt }}
+	</span>
 
-	<span [ngClass]="ContextClasses" *ngIf="mode === ItemMode.View">
-    {{ payment.sum | currencyExt }}
-  </span>
+	<ng-template #inputValue>
+		<input *ngIf="mode === ItemMode.Edit" type="text" class="w-100" [(ngModel)]="value"/>
+	</ng-template>
 </div>
 
 <div class="ml-2">
