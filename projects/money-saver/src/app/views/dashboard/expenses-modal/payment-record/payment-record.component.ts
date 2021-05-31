@@ -23,14 +23,15 @@ export class PaymentRecordComponent implements OnInit {
 
 	get ContextClasses() {
 		return {
-			'text-info': this.payment.add,
-			'text-warning': this.payment.update,
-			'text-danger strike-payment': this.payment.remove
+			'strike-payment': this.payment.remove
 		};
 	}
 
-	constructor() {
+	get DisplayEditIcon(): boolean {
+		return this.mode === ItemMode.View && (this.payment.add || this.payment.update || this.payment.remove);
 	}
+
+	constructor() {}
 
 	ngOnInit(): void {
 		if (this.payment.add) {
