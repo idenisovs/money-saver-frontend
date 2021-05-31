@@ -1,21 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ItemMode } from '../item-mode';
+import { ControlsAction } from '../controls-action';
 
 @Component({
-  selector: 'app-payment-record-controls',
-  templateUrl: './payment-record-controls.component.html',
-  styleUrls: ['./payment-record-controls.component.scss']
+	selector: 'app-payment-record-controls',
+	templateUrl: './payment-record-controls.component.html',
+	styleUrls: ['./payment-record-controls.component.scss']
 })
 export class PaymentRecordControlsComponent implements OnInit {
+	Action = ControlsAction
+	ItemMode = ItemMode;
 
-  ItemMode = ItemMode;
+	@Input()
+	mode = ItemMode.View;
 
-  @Input()
-  mode = ItemMode.View;
+	@Output()
+	action = new EventEmitter<ControlsAction>();
 
-  constructor() { }
+	constructor() {
+	}
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+	}
 
 }

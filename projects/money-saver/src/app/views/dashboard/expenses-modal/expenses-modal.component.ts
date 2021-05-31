@@ -4,49 +4,62 @@ import { Payment, ScheduleItem } from '../../../shared';
 import { PaymentsService } from '../../../services/payments.service';
 
 @Component({
-  selector: 'app-expenses-modal',
-  templateUrl: './expenses-modal.component.html',
-  styleUrls: ['./expenses-modal.component.scss']
+	selector: 'app-expenses-modal',
+	templateUrl: './expenses-modal.component.html',
+	styleUrls: ['./expenses-modal.component.scss']
 })
 export class ExpensesModalComponent implements OnInit {
-  @Input()
-  record: ScheduleItem;
+	@Input()
+	record: ScheduleItem;
 
-  payments: Payment[] = [];
+	payments: Payment[] = [];
 
-  constructor(
-    private modal: NgbActiveModal,
-    private paymentsService: PaymentsService
-  ) { }
+	constructor(
+		private modal: NgbActiveModal,
+		private paymentsService: PaymentsService
+	) {
+	}
 
-  ngOnInit(): void {
-    this.paymentsService.getByDate(this.record.date).subscribe((response) => {
-      this.payments = response;
-    });
-  }
+	ngOnInit(): void {
+		this.paymentsService.getByDate(this.record.date).subscribe((response) => {
+			this.payments = response;
+		});
+	}
 
-  add() {
-    const payment = new Payment(0);
+	clean() {
+		console.log('clean event triggered!');
 
-    payment.add = true;
-    payment.date = Payment.date(this.record.date);
+		for (let idx = 0; idx < this.payments.length; idx++) {
+			const payment = this.payments[idx];
 
-    this.payments.push(payment);
-  }
+			if (payment.add && payment.remove) {
+				this.payments.splice(idx, 1);
+				idx--;
+			}
+		}
+	}
 
-  save() {
-    const payments = this.payments.filter((payment) => !(payment.add && payment.remove));
+	add() {
+		const payment = new Payment();
 
-    if (!payments.length) {
-      return this.modal.close('nothing-to-do');
-    }
+		payment.add = true;
 
-    this.paymentsService.update(payments).subscribe(() => {
-      this.modal.close('save');
-    });
-  }
+		this.payments.push(payment);
+	}
 
-  cancel() {
-    this.modal.dismiss('cancel')
-  }
+	save() {
+		const payments = this.payments.filter((payment) => !(payment.add && payment.remove));
+
+		if (!payments.length) {
+			return this.modal.close('nothing-to-do');
+		}
+
+		this.paymentsService.update(payments).subscribe(() => {
+			this.modal.close('save');
+		});
+	}
+
+	cancel() {
+		this.modal.dismiss('cancel')
+	}
 }

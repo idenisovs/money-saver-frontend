@@ -13,7 +13,7 @@
   </div>
 
   <ng-template #paymentRecords>
-    <app-payment-record *ngFor="let payment of payments" [payment]="payment"></app-payment-record>
+    <app-payment-record *ngFor="let payment of payments" [payment]="payment" (clean)="clean()"></app-payment-record>
   </ng-template>
 </section>
 
@@ -29,7 +29,7 @@
       Cancel
     </button>
 
-    <button type="button" class="btn btn-outline-primary" (click)="save()">
+    <button type="button" class="btn btn-outline-primary" (click)="save()" [disabled]="!payments.length">
       Save
     </button>
   </span>
