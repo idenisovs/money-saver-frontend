@@ -34,7 +34,6 @@ export class PaymentRecordComponent implements OnInit {
 
 	ngOnInit(): void {
 		if (this.payment.add) {
-			this.value = this.payment.sum;
 			this.mode = ItemMode.Edit;
 		}
 	}
@@ -64,11 +63,8 @@ export class PaymentRecordComponent implements OnInit {
 	}
 
 	saveAction() {
-		this.payment.sum = this.value;
-		this.payment.update = !this.payment.add;
-
-		this.value = 0;
 		this.mode = ItemMode.View;
+		this.payment.update = !this.payment.add;
 	}
 
 	deleteAction() {
@@ -78,7 +74,7 @@ export class PaymentRecordComponent implements OnInit {
 	}
 
 	cancelAction() {
-		this.value = 0;
+		this.payment.sum = this.value;
 		this.mode = ItemMode.View;
 	}
 }

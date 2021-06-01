@@ -27,8 +27,6 @@ export class ExpensesModalComponent implements OnInit {
 	}
 
 	clean() {
-		console.log('clean event triggered!');
-
 		for (let idx = 0; idx < this.payments.length; idx++) {
 			const payment = this.payments[idx];
 
