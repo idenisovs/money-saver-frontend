@@ -42,8 +42,6 @@ export class PaymentRecordComponent implements OnInit {
 		switch (action) {
 			case ControlsAction.EditMode:
 				return this.editModeAction();
-			case ControlsAction.DeleteMode:
-				return this.deleteModeAction();
 			case ControlsAction.Save:
 				return this.saveAction();
 			case ControlsAction.Delete:
@@ -58,10 +56,6 @@ export class PaymentRecordComponent implements OnInit {
 		this.mode = ItemMode.Edit;
 	}
 
-	deleteModeAction() {
-		this.mode = ItemMode.Delete;
-	}
-
 	saveAction() {
 		this.mode = ItemMode.View;
 		this.payment.update = !this.payment.add;
@@ -69,12 +63,19 @@ export class PaymentRecordComponent implements OnInit {
 
 	deleteAction() {
 		this.payment.remove = true;
-		this.mode = ItemMode.View;
+		this.mode = ItemMode.Delete;
 		this.clean.emit();
 	}
 
 	cancelAction() {
-		this.payment.sum = this.value;
+		if (this.mode === ItemMode.Edit) {
+			this.payment.sum = this.value;
+		}
+
+		if (this.mode === ItemMode.Delete) {
+			this.payment.remove = false;
+		}
+
 		this.mode = ItemMode.View;
 	}
 }
