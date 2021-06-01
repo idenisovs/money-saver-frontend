@@ -38,7 +38,7 @@ export class ExpensesModalComponent implements OnInit {
 	}
 
 	add() {
-		const payment = new Payment();
+		const payment = new Payment(0, this.record.date);
 
 		payment.add = true;
 
