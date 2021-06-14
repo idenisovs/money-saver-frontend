@@ -1,0 +1,16 @@
+#!/bin/bash
+
+REMOTE_USER=
+HOST=
+SOURCE=
+TARGET=
+
+echo $HOST:$TARGET
+
+# shellcheck disable=SC2029
+npm run frontend:build:prod && \
+ssh $REMOTE_USER@$HOST "rm -frv $TARGET/*" && \
+scp -r $SOURCE/* $REMOTE_USER@$HOST:$TARGET
+
+
+
