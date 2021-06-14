@@ -1,17 +1,21 @@
-<nav aria-label="breadcrumb" *ngIf="items.length > 0">
-  <ol class="breadcrumb">
-    <li *ngFor="let item of items"
-        aria-current="page"
-        class="breadcrumb-item"
-        [ngClass]="{ active: item.active }"
-    >
-      <a *ngIf="item.link" [routerLink]="item.link">
-        {{item.label}}
-      </a>
+<nav aria-label="breadcrumb" *ngIf="items.length > 0" class="d-flex flex-row justify-content-center mb-2">
+	<button class="btn btn-outline-primary mr-2" routerLink="/">
+		<span class="material-icons-outlined">home</span>
+	</button>
 
-      <span *ngIf="!item.link">
+	<ol class="breadcrumb m-0 flex-grow-1">
+		<li *ngFor="let item of items"
+			aria-current="page"
+			class="breadcrumb-item"
+			[ngClass]="{ active: item.active }"
+		>
+			<a *ngIf="item.link" [routerLink]="item.link">
+				{{item.label}}
+			</a>
+
+			<span *ngIf="!item.link">
         {{item.label}}
       </span>
-    </li>
-  </ol>
+		</li>
+	</ol>
 </nav>
