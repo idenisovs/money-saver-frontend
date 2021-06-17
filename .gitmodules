@@ -1,0 +1,3 @@
+[submodule "projects/money-saver/src/app/shared"]
+	path = projects/money-saver/src/app/shared
+	url = git@github.com:idenisovs/money-saver-shared.git
