@@ -19,7 +19,15 @@ export class PaymentsService {
   }
 
   getByDate(date: Date): Observable<Payment[]> {
-    return this.http.get<Payment[]>(`/api/payments?date=${date.toISOString()}`).pipe(
+  	const queryStr = date.toISOString().split('T')[0];
+
+  	const options = {
+  		params: {
+  			date: queryStr
+		}
+	};
+
+    return this.http.get<Payment[]>(`/api/payments`, options).pipe(
       map(records => records.map(record => new Payment(record)))
     );
   }

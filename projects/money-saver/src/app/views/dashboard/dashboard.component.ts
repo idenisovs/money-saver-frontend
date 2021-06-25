@@ -5,6 +5,7 @@ import { Interval, Summary, Totals } from '../../shared';
 import { BreadcrumbItem } from '../../components/breadcrumb/breadcrumb-item';
 import { ActivatedRoute } from '@angular/router';
 import { Day } from '../../shared/Day';
+import { SummaryService } from '../../services/summary.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class DashboardComponent implements OnInit {
 
 	constructor(
 		private intervals: IntervalsService,
+		private summaryService: SummaryService,
 		private datePipe: DatePipe,
 		private route: ActivatedRoute
 	) {
@@ -41,7 +43,7 @@ export class DashboardComponent implements OnInit {
 	}
 
 	reload() {
-		this.requestInterval().subscribe((summary: Summary) => {
+		this.summaryService.getExpensesSummary(this.intervalId).subscribe((summary: Summary) => {
 			if (summary) {
 				this.summary = summary;
 				this.interval = summary;
@@ -53,14 +55,6 @@ export class DashboardComponent implements OnInit {
 
 			this.requestRunning = false;
 		});
-	}
-
-	requestInterval() {
-		if (this.intervalId) {
-			return this.intervals.getById(this.intervalId)
-		} else {
-			return this.intervals.getLatestSummary();
-		}
 	}
 
 	updateBreadcrumb() {
