@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Payment, ScheduleItem } from '../../../shared';
+import { Payment } from '../../../shared';
 import { PaymentsService } from '../../../services/payments.service';
+import { Day } from '../../../shared/Day';
 
 @Component({
 	selector: 'app-expenses-modal',
@@ -10,7 +11,7 @@ import { PaymentsService } from '../../../services/payments.service';
 })
 export class ExpensesModalComponent implements OnInit {
 	@Input()
-	record: ScheduleItem;
+	record: Day;
 
 	payments: Payment[] = [];
 
@@ -44,8 +45,10 @@ export class ExpensesModalComponent implements OnInit {
 		time.setMonth(this.record.date.getMonth());
 		time.setDate(this.record.date.getDate());
 
-		const payment = new Payment(0, time);
+		const payment = new Payment();
 
+		payment.sum = 0;
+		payment.time = time;
 		payment.add = true;
 
 		this.payments.push(payment);

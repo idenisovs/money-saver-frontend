@@ -1,77 +1,82 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { IntervalsService } from '../../services/intervals.service';
-import { Interval, ScheduleItem, Totals } from '../../shared';
+import { Interval, Summary, Totals } from '../../shared';
 import { BreadcrumbItem } from '../../components/breadcrumb/breadcrumb-item';
 import { ActivatedRoute } from '@angular/router';
+import { Day } from '../../shared/Day';
 
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  providers: [DatePipe]
+	selector: 'app-dashboard',
+	templateUrl: './dashboard.component.html',
+	styleUrls: ['./dashboard.component.scss'],
+	providers: [DatePipe]
 })
 export class DashboardComponent implements OnInit {
-  intervalId: number;
-  interval: Interval;
-  schedule: ScheduleItem[];
-  totals: Totals;
+	intervalId: number;
+	interval: Interval;
+	summary: Summary;
+	schedule: Day[];
+	totals: Totals;
 
-  breadcrumb: BreadcrumbItem[] = [];
-  requestRunning = true;
+	breadcrumb: BreadcrumbItem[] = [];
+	requestRunning = true;
 
-  constructor(
-    private intervals: IntervalsService,
-    private datePipe: DatePipe,
-    private route: ActivatedRoute
-  ) { }
+	constructor(
+		private intervals: IntervalsService,
+		private datePipe: DatePipe,
+		private route: ActivatedRoute
+	) {
+	}
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      if ('intervalId' in params) {
-        this.intervalId = params.intervalId;
-      }
+	ngOnInit(): void {
+		this.route.params.subscribe((params) => {
+			if ('intervalId' in params) {
+				this.intervalId = params.intervalId;
+			}
 
-      this.reload();
-    })
-  }
+			this.reload();
+		})
+	}
 
-  reload() {
-    this.requestInterval().subscribe((summary) => {
-      if (summary) {
-        this.interval = summary.interval;
-        this.schedule = summary.schedule;
-        this.totals = summary.totals;
-        this.updateBreadcrumb();
-      }
+	reload() {
+		this.requestInterval().subscribe((summary: Summary) => {
+			if (summary) {
+				this.summary = summary;
+				this.interval = summary;
+				this.schedule = summary.days;
+				this.totals = summary.totals;
 
-      this.requestRunning = false;
-    });
-  }
+				this.updateBreadcrumb();
+			}
 
-  requestInterval() {
-    if (this.intervalId) {
-      return this.intervals.getById(this.intervalId)
-    } else {
-      return this.intervals.getLatestSummary();
-    }
-  }
+			this.requestRunning = false;
+		});
+	}
 
-  updateBreadcrumb() {
-    const year = this.interval.start.getFullYear();
+	requestInterval() {
+		if (this.intervalId) {
+			return this.intervals.getById(this.intervalId)
+		} else {
+			return this.intervals.getLatestSummary();
+		}
+	}
 
-    const start = this.datePipe.transform(this.interval.start, 'MMM d');
-    const end = this.datePipe.transform(this.interval.end, 'MMM d');
+	updateBreadcrumb() {
+		const year = this.summary.start.getFullYear();
 
-    const current = new BreadcrumbItem(`${start} - ${end}`);
+		const start = this.datePipe.transform(this.summary.start, 'MMM d');
+		const end = this.datePipe.transform(this.summary.end, 'MMM d');
 
-    current.active = true;
+		const current = new BreadcrumbItem(`${start} - ${end}`);
 
-    this.breadcrumb = [
-      new BreadcrumbItem('Years', '/years'),
-      new BreadcrumbItem(year.toString(), `/years/${year}`),
-      current
-    ];
-  }
+		current.active = true;
+
+		this.breadcrumb = [
+			new BreadcrumbItem('Years', '/years'),
+			new BreadcrumbItem(year.toString(), `/years/${year}`),
+			current
+		];
+	}
 }

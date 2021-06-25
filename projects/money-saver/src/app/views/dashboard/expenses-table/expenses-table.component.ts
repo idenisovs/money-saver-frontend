@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ScheduleItem } from '../../../shared';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExpensesModalComponent } from '../expenses-modal/expenses-modal.component';
+import { Day } from '../../../shared/Day';
 
 @Component({
   selector: 'app-expenses-table',
@@ -11,7 +11,7 @@ import { ExpensesModalComponent } from '../expenses-modal/expenses-modal.compone
 export class ExpensesTableComponent implements OnInit {
 
   @Input()
-  schedule: ScheduleItem[];
+  schedule: Day[];
 
   @Output()
   changes = new EventEmitter<void>();
@@ -22,7 +22,7 @@ export class ExpensesTableComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  async openExpensesModal(expensesRecord: ScheduleItem) {
+  async openExpensesModal(expensesRecord: Day) {
     const modal = this.modal.open(ExpensesModalComponent);
 
     (modal.componentInstance as ExpensesModalComponent).record = expensesRecord;
@@ -36,7 +36,7 @@ export class ExpensesTableComponent implements OnInit {
     }
   }
 
-  highlightDate(expensesRecord: ScheduleItem) {
+  highlightDate(expensesRecord: Day) {
     const result = [];
 
     const compare = this.compareDates(expensesRecord.date, new Date());

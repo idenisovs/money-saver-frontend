@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Interval, IntervalRecord, Summary, SummaryRecord  } from '../shared';
+import { Interval, Summary  } from '../shared';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +13,13 @@ export class IntervalsService {
   constructor(private http: HttpClient) { }
 
   getLatest(): Observable<Interval> {
-    return this.http.get<IntervalRecord>('/api/intervals/latest').pipe(
-      map((interval: IntervalRecord) => new Interval(interval))
+    return this.http.get<Interval>('/api/intervals/latest').pipe(
+      map((interval: Interval) => new Interval(interval))
     );
   }
 
   getLatestSummary(): Observable<Summary|null> {
-    return this.http.get<SummaryRecord>('/api/intervals/latest/summary').pipe(
+    return this.http.get<Summary>('/api/intervals/latest/summary').pipe(
       map((summary) => {
         console.log(summary);
         return summary ? new Summary(summary) : null;
@@ -28,7 +28,7 @@ export class IntervalsService {
   }
 
   getById(id: number): Observable<Summary> {
-    return this.http.get<SummaryRecord>(`/api/summary/payments?intervalid=${id}`).pipe(
+    return this.http.get<Summary>(`/api/summary/payments?intervalid=${id}`).pipe(
       map((summary) => new Summary(summary))
     );
   }
@@ -40,8 +40,8 @@ export class IntervalsService {
   getByYear(year: number): Observable<Interval[]> {
     const query = `/api/intervals?from=${year}-01-01&till=${year}-12-31`;
 
-    return this.http.get<IntervalRecord[]>(query).pipe(
-      map((intervals: IntervalRecord[]) => intervals.map((record) => new Interval(record)))
+    return this.http.get<Interval[]>(query).pipe(
+      map((intervals: Interval[]) => intervals.map((record) => new Interval(record)))
     );
   }
 
@@ -50,6 +50,6 @@ export class IntervalsService {
   }
 
   update(interval: Interval): Observable<void> {
-    return this.http.put<void>(`/api/intervals/${interval.id}`, interval.toRecord());
+    return this.http.put<void>(`/api/intervals/${interval.id}`, interval);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Label } from 'ng2-charts';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { ScheduleItem } from '../../../shared';
+import { Day } from '../../../shared/Day';
 
 @Component({
   selector: 'app-expenses-graph',
@@ -11,7 +11,7 @@ import { ScheduleItem } from '../../../shared';
 export class ExpensesGraphComponent implements OnInit, OnChanges {
 
   @Input()
-  expenses: ScheduleItem[] = [];
+  expenses: Day[] = [];
 
   barChartType: ChartType = 'bar';
   barChartLabels: Label[] = [];
@@ -44,7 +44,7 @@ export class ExpensesGraphComponent implements OnInit, OnChanges {
 
   makePlannedBalanceDataSet(): ChartDataSets {
     return {
-      data: this.expenses.map((record) => this.round(record.sum)),
+      data: this.expenses.map(record => this.round(record.residual.planned)),
       label: 'Planned',
       type: 'line',
       backgroundColor: 'rgba(0, 0, 0, 0)'
@@ -53,7 +53,7 @@ export class ExpensesGraphComponent implements OnInit, OnChanges {
 
   makeActualBalanceDataSet(): ChartDataSets {
     return {
-      data: this.expenses.map((record) => this.round(record.residual)),
+      data: this.expenses.map(record => this.round(record.residual.real)),
       label: 'Actual',
       backgroundColor: '#007bff'
     };
@@ -66,8 +66,8 @@ export class ExpensesGraphComponent implements OnInit, OnChanges {
 
     const [ plannedBalance, actualBalance ] = this.barChartData;
 
-    plannedBalance.data = this.expenses.map(record => this.round(record.sum));
-    actualBalance.data = this.expenses.map(record => this.round(record.residual));
+    plannedBalance.data = this.expenses.map(record => this.round(record.residual.planned));
+    actualBalance.data = this.expenses.map(record => this.round(record.residual.real));
 
     this.barChartLabels = this.expenses.map((record) => this.getDateString(record.date));
   }

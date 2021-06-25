@@ -60,7 +60,7 @@ export class EditIntervalModalComponent implements OnInit {
       dateRangeComponent.startingDate = startingDate;
     }
 
-    if (this.interval && this.interval.single && this.interval.end.getTime() > Date.now()) {
+    if (this.interval && this.interval.end.getTime() > Date.now()) {
       dateRangeComponent.minDateAny = true;
     }
 
@@ -84,8 +84,7 @@ export class EditIntervalModalComponent implements OnInit {
       id: value.id,
       start: value.from,
       end: value.till,
-      sum: parseFloat(value.sum),
-      single: false
+      sum: parseFloat(value.sum)
     });
 
     this.request(interval).subscribe(() => {
