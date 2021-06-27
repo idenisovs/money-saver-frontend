@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 export class SummaryService {
 	constructor(private http: HttpClient) {}
 
-	getExpensesSummary(intervalId?: number): Observable<Summary> {
+	getExpensesSummary(intervalId?: number): Observable<Summary|null> {
 		const options = {};
 
 		if (typeof intervalId !== 'undefined') {
@@ -20,7 +20,7 @@ export class SummaryService {
 		}
 
 		return this.http.get<Summary>('/api/summary/expenses', options).pipe(
-			map(response => new Summary(response))
+			map((response) => response ? new Summary(response) : null)
 		);
 	}
 }

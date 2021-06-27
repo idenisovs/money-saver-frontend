@@ -55,7 +55,7 @@ export class ExpensesModalComponent implements OnInit {
 	}
 
 	save() {
-		this.paymentsService.update(this.payments).subscribe(() => {
+		this.paymentsService.save(this.payments).subscribe(() => {
 			this.modal.close('save');
 		});
 	}
