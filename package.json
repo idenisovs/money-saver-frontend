@@ -4,7 +4,8 @@
 	"scripts": {
 		"frontend:build": "ng build money-saver --output-path=../backend/target/web",
 		"frontend:watch": "npm run frontend:build -- --watch",
-		"frontend:build:prod": "ng build money-saver --configuration production"
+		"frontend:build:prod": "ng build money-saver --configuration production",
+		"frontend:deploy": "./update.sh"
 	},
 	"private": true,
 	"dependencies": {
