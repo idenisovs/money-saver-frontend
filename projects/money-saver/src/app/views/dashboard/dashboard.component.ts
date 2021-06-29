@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { IntervalsService } from '../../services/intervals.service';
-import { Interval, Summary, Totals } from '../../shared';
-import { BreadcrumbItem } from '../../components/breadcrumb/breadcrumb-item';
 import { ActivatedRoute } from '@angular/router';
-import { Day } from '../../shared/Day';
+import { IntervalsService } from '../../services/intervals.service';
+import { BreadcrumbItem } from '../../components/breadcrumb/breadcrumb-item';
 import { SummaryService } from '../../services/summary.service';
+import { Interval, Summary, Totals, Day } from '../../shared';
 
 
 @Component({
@@ -58,8 +57,8 @@ export class DashboardComponent implements OnInit {
 	updateBreadcrumb() {
 		const year = this.interval.start.getFullYear();
 
-		const start = this.datePipe.transform(this.interval.start, 'MMM d');
-		const end = this.datePipe.transform(this.interval.end, 'MMM d');
+		const start = this.datePipe.transform(this.interval.start, 'MMM d', '+0000');
+		const end = this.datePipe.transform(this.interval.end, 'MMM d', '+0000');
 
 		const current = new BreadcrumbItem(`${start} - ${end}`);
 
