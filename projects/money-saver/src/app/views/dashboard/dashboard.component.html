@@ -1,17 +1,17 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-12 col-sm-6 col-md-7">
-			<ng-container *ngIf="!requestRunning && summary">
+			<ng-container *ngIf="!requestRunning && interval">
 				<app-breadcrumb [items]="breadcrumb"></app-breadcrumb>
 				<app-dashboard-controls (changes)="reload()"></app-dashboard-controls>
-				<app-expenses-table [schedule]="summary.days" (changes)="reload()"></app-expenses-table>
+				<app-expenses-table [schedule]="schedule" (changes)="reload()"></app-expenses-table>
 			</ng-container>
 
 			<app-spinner *ngIf="requestRunning">
 				Loading expenses overview....
 			</app-spinner>
 
-			<div class="alert alert-info" role="alert" *ngIf="!requestRunning && !summary">
+			<div class="alert alert-info" role="alert" *ngIf="!requestRunning && !interval">
 				Seems you are first time here! Create new interval!
 			</div>
 		</div>

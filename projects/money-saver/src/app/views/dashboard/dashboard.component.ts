@@ -17,7 +17,6 @@ import { SummaryService } from '../../services/summary.service';
 export class DashboardComponent implements OnInit {
 	intervalId: number;
 	interval: Interval;
-	summary: Summary;
 	schedule: Day[];
 	totals: Totals;
 
@@ -45,8 +44,7 @@ export class DashboardComponent implements OnInit {
 	reload() {
 		this.summaryService.getExpensesSummary(this.intervalId).subscribe((summary: Summary) => {
 			if (summary) {
-				this.summary = summary;
-				this.interval = summary;
+				this.interval = summary.interval;
 				this.schedule = summary.days;
 				this.totals = summary.totals;
 
@@ -58,10 +56,10 @@ export class DashboardComponent implements OnInit {
 	}
 
 	updateBreadcrumb() {
-		const year = this.summary.start.getFullYear();
+		const year = this.interval.start.getFullYear();
 
-		const start = this.datePipe.transform(this.summary.start, 'MMM d');
-		const end = this.datePipe.transform(this.summary.end, 'MMM d');
+		const start = this.datePipe.transform(this.interval.start, 'MMM d');
+		const end = this.datePipe.transform(this.interval.end, 'MMM d');
 
 		const current = new BreadcrumbItem(`${start} - ${end}`);
 
