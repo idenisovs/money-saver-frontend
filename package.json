@@ -1,6 +1,6 @@
 {
 	"name": "money-saver",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"scripts": {
 		"frontend:build": "ng build money-saver --output-path=../backend/target/web",
 		"frontend:watch": "npm run frontend:build -- --watch",
