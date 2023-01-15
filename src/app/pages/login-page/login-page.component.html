@@ -1,1 +1,35 @@
-<p>Login Page</p>
+<div class="container">
+  <h1 class="py-5">
+    Money Saver
+    <small class="text-muted">
+      Personal expenses manager
+    </small>
+  </h1>
+
+  <section class="card">
+    <header class="card-header">
+      Authentication
+    </header>
+    <main class="card-body">
+      <form>
+        <div class="mb-3">
+          <label for="login" class="form-label">
+            Username
+          </label>
+          <input id="login" type="text" autoselect class="form-control" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">
+            Password
+          </label>
+          <input id="password" type="password" class="form-control">
+        </div>
+        <div class="mb-3">
+          <button type="button" class="btn btn-primary" (click)="authenticate()">
+            Log in
+          </button>
+        </div>
+      </form>
+    </main>
+  </section>
+</div>
