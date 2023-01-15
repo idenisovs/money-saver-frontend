@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<div class="container pt-4" *ngIf="isRequestRunning; else main">
+  <app-spinner [delay]="1000"></app-spinner>
+</div>
+
+<ng-template #main>
+  <router-outlet></router-outlet>
+</ng-template>
