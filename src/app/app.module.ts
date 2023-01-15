@@ -9,18 +9,20 @@ import { LoginPageModule } from './pages/login-page/login-page.module';
 import { ComponentsModule } from './components/components.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgbModule,
-    LoginPageModule,
-    ComponentsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		NgbModule,
+		LoginPageModule,
+		ComponentsModule
+	],
+	providers: [],
+	exports: [
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
