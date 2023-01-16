@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Message } from './Message';
-import { InfoMessage } from './InfoMessage';
-import { WarningMessage } from './WarningMessage';
-import { ErrorMessage } from './ErrorMessage';
+import { ErrorMessage, InfoMessage, Message, WarningMessage } from './message-types';
 
 @Injectable({
   providedIn: 'root'
