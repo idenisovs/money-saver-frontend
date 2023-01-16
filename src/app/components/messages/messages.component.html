@@ -1,6 +1,4 @@
-<div>
-  Messages:
-</div>
-<div *ngFor="let message of messages.list">
-  {{message.text}}
-</div>
+<app-message
+  *ngFor="let message of messages.list"
+  [message]="message"
+></app-message>
