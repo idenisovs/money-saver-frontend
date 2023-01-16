@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -6,10 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
-  constructor() {
+  authForm = this.fb.group({
+    username: [''],
+    password: ['']
+  });
+
+  constructor(
+    private fb: FormBuilder
+  ) {
   }
 
   authenticate() {
     console.log('Authenticate!');
+    console.log(this.authForm.value);
   }
 }
