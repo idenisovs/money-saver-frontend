@@ -1,27 +1,28 @@
 import { Injectable } from '@angular/core';
-import { MessagesModule } from './messages.module';
+
 import { Message } from './Message';
 import { InfoMessage } from './InfoMessage';
 import { WarningMessage } from './WarningMessage';
 import { ErrorMessage } from './ErrorMessage';
 
 @Injectable({
-  providedIn: MessagesModule
+  providedIn: 'root'
 })
 export class MessagesService {
 
-  messages: Message[] = [];
+  list: Message[] = [];
+
   constructor() { }
 
   info(text: string) {
-    this.messages.push(new InfoMessage(text));
+    this.list.push(new InfoMessage(text));
   }
 
   warning(text: string) {
-    this.messages.push(new WarningMessage(text));
+    this.list.push(new WarningMessage(text));
   }
 
   error(text: string) {
-    this.messages.push(new ErrorMessage(text));
+    this.list.push(new ErrorMessage(text));
   }
 }

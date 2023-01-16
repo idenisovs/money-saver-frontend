@@ -2,15 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SpinnerComponent } from './spinner/spinner.component';
+import { MessagesModule } from './messages/messages.module';
+
 @NgModule({
   declarations: [
     SpinnerComponent
   ],
   exports: [
-    SpinnerComponent
+    SpinnerComponent,
+    MessagesModule
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MessagesModule
   ]
 })
 export class ComponentsModule { }
