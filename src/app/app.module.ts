@@ -7,22 +7,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginPageModule } from './pages/login-page/login-page.module';
 import { ComponentsModule } from './components/components.module';
+import { LoginPageModule } from './pages/login-page/login-page.module';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 	],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		HttpClientModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
-		NgbModule,
-		LoginPageModule,
-		ComponentsModule
-	],
+    NgbModule,
+    ComponentsModule,
+    LoginPageModule
+  ],
 	providers: [],
 	exports: [
 	],
