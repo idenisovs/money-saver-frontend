@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from './services/auth.service';
-import { Auth } from './shared';
+import { User } from './shared';
 
 @Component({
   selector: 'app-root',
@@ -21,16 +21,18 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.isRequestRunning = true;
 
-    this.auth.getAuth().subscribe(this.processAuthResponse.bind(this));
+    this.auth.getUserAuth().subscribe(this.processAuthResponse.bind(this));
   }
 
-  async processAuthResponse(auth: Auth|null) {
+  async processAuthResponse(user: User|null) {
     this.isRequestRunning = false;
 
-    if (auth) {
-      return;
+    if (user) {
+      await this.router.navigate(['expenses']);
+      history.pushState(null, '', window.location.href);
+    } else {
+      await this.router.navigate(['']);
     }
 
-    await this.router.navigate(['']);
   }
 }

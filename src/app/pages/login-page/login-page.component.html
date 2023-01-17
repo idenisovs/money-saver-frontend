@@ -25,8 +25,9 @@
           <input id="password" type="password" class="form-control" formControlName="password">
         </div>
         <div class="mb-3">
-          <button type="button" class="btn btn-primary" (click)="authenticate()">
+          <button type="button" class="btn btn-primary" (click)="authenticate()" [disabled]="authForm.invalid || authForm.disabled">
             Log in
+            <span *ngIf="authRequestRunning" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
           </button>
         </div>
       </form>
