@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-expenses-page',
   templateUrl: './expenses-page.component.html',
   styleUrls: ['./expenses-page.component.scss']
 })
-export class ExpensesPageComponent {
+export class ExpensesPageComponent implements OnInit {
+  ngOnInit() {
 
+  }
 }
