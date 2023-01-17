@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Message } from '../message-types';
 import { MessageType } from '../message-types/MessageType';
 
@@ -10,6 +10,9 @@ import { MessageType } from '../message-types/MessageType';
 export class MessageComponent {
   @Input()
   message!: Message;
+
+  @Output()
+  close = new EventEmitter<Message>();
 
   getStyle() {
     switch (this.message.type) {

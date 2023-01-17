@@ -6,20 +6,25 @@ import { ErrorMessage, InfoMessage, Message, WarningMessage } from './message-ty
   providedIn: 'root'
 })
 export class MessagesService {
-
-  list: Message[] = [];
+  public list: Message[] = [];
 
   constructor() { }
 
-  info(text: string) {
+  public info(text: string) {
     this.list.push(new InfoMessage(text));
   }
 
-  warning(text: string) {
+  public warning(text: string) {
     this.list.push(new WarningMessage(text));
   }
 
-  error(text: string) {
+  public error(text: string) {
     this.list.push(new ErrorMessage(text));
+  }
+
+  public remove(message: Message) {
+    const idx = this.list.indexOf(message);
+
+    this.list.splice(idx, 1);
   }
 }
