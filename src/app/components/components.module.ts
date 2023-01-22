@@ -3,18 +3,23 @@ import { CommonModule } from '@angular/common';
 
 import { SpinnerComponent } from './spinner/spinner.component';
 import { MessagesModule } from './messages/messages.module';
+import { NavbarComponent } from './navbar/navbar.component';
+import { NgbCollapse } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
-    SpinnerComponent
-  ],
-  exports: [
     SpinnerComponent,
-    MessagesModule
+    NavbarComponent
   ],
+	exports: [
+		SpinnerComponent,
+		MessagesModule,
+		NavbarComponent
+	],
   imports: [
     CommonModule,
-    MessagesModule
+    MessagesModule,
+    NgbCollapse
   ]
 })
 export class ComponentsModule { }
