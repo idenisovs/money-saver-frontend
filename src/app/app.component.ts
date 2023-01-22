@@ -27,12 +27,14 @@ export class AppComponent implements OnInit {
   async processAuthResponse(user: User|null) {
     this.isRequestRunning = false;
 
-    if (user) {
-      await this.router.navigate(['expenses']);
-      history.pushState(null, '', window.location.href);
-    } else {
+    if (!user) {
       await this.router.navigate(['']);
+      return;
     }
 
+    if (this.router.url === '/') {
+      await this.router.navigate(['expenses']);
+      history.pushState(null, '', window.location.href);
+    }
   }
 }

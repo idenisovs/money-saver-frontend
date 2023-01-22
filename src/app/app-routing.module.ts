@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ExpensesPageComponent } from './pages/expenses-page/expenses-page.component';
+import { SettingsPageComponent } from "./pages/settings-page/settings-page.component";
 
 const routes: Routes = [
   {
@@ -14,6 +15,11 @@ const routes: Routes = [
   {
     path: 'expenses',
     component: ExpensesPageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'settings',
+    component: SettingsPageComponent,
     canActivate: [AuthGuard]
   }
 ];
