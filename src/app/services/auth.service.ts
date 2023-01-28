@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Observable, of, tap } from 'rxjs';
+import { catchError, Observable, of, ReplaySubject, tap } from 'rxjs';
 
 import { Auth, User } from '../shared';
 import { MessagesService } from '../components/messages/messages.service';
@@ -9,27 +9,33 @@ import { MessagesService } from '../components/messages/messages.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private user: User|null = null;
+  // private user: Observable<User|null> = this.getUserAuth();
+  private user = new ReplaySubject<User|null>();
+  private isAuthenticated = false;
 
-  get User(): User|null {
-    return this.user;
+  get User(): Observable<User|null> {
+    return this.user.asObservable();
   }
 
   get IsAuthenticated(): boolean {
-    return !!this.user;
+    return this.isAuthenticated;
   }
 
   constructor(
     private http: HttpClient,
     private messages: MessagesService
-  ) { }
+  ) {
+    this.getUserAuth()
+  }
 
-  getUserAuth(): Observable<User|null> {
-    return this.http.get<User|null>('/api/auth').pipe(
-      tap((response: User|null) => {
-        this.user = response;
+  private getUserAuth() {
+    this.http.get<User|null>('/api/auth').pipe(
+      tap((response) => {
+        this.isAuthenticated = !!response;
       })
-    )
+    ).subscribe((response: User|null) => {
+      this.user.next(response);
+    });
   }
 
   authenticate(credentials: Auth): Observable<User|null> {
@@ -44,9 +50,8 @@ export class AuthService {
         return of(null);
       }),
       tap((response) => {
-        if (response) {
-          this.user = response;
-        }
+        this.user.next(response);
+        this.isAuthenticated = !!response;
       })
     )
   }
