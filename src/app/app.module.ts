@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
 import { LoginPageModule } from './pages/login-page/login-page.module';
+import { ExpensesPageModule } from './pages/expenses-page/expenses-page.module';
 
 @NgModule({
 	declarations: [
@@ -21,7 +22,8 @@ import { LoginPageModule } from './pages/login-page/login-page.module';
     ReactiveFormsModule,
     NgbModule,
     ComponentsModule,
-    LoginPageModule
+    LoginPageModule,
+    ExpensesPageModule
   ],
 	providers: [],
 	exports: [
