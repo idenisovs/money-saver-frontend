@@ -10,7 +10,7 @@ import { MessagesService } from '../components/messages/messages.service';
 })
 export class AuthService {
   // private user: Observable<User|null> = this.getUserAuth();
-  private user = new ReplaySubject<User|null>();
+  private user = new ReplaySubject<User|null>(1);
   private isAuthenticated = false;
 
   get User(): Observable<User|null> {

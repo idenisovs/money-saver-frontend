@@ -30,17 +30,17 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  async authenticate() {
+  authenticate() {
     this.authRequestRunning = true;
     this.authForm.disable();
 
-    this.auth.authenticate(this.authForm.value as Auth).subscribe((response: User|null) => {
+    this.auth.authenticate(this.authForm.value as Auth).subscribe(async (response: User|null) => {
       this.authRequestRunning = false;
       this.authForm.reset();
       this.authForm.enable();
 
       if (response) {
-        this.router.navigate(['expenses']);
+        await this.router.navigate(['expenses']);
       }
     });
   }
