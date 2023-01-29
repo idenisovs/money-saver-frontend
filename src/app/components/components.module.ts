@@ -6,6 +6,7 @@ import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { MessagesModule } from './messages/messages.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LoadingPopupModule } from './loading-popup/loading-popup.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 	exports: [
 		SpinnerComponent,
 		MessagesModule,
-		NavbarComponent
+		NavbarComponent,
+    LoadingPopupModule
 	],
   imports: [
     CommonModule,
