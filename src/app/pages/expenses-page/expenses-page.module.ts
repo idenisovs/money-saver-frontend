@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { ExpensesPageComponent } from './expenses-page.component';
 import { NoIntervalsWarningComponent } from './no-intervals-warning/no-intervals-warning.component';
 import { SimpleExpensesInputComponent } from './simple-expenses-input/simple-expenses-input.component';
@@ -17,7 +19,8 @@ import { IntervalControlPanelComponent } from './interval-control-panel/interval
     IntervalControlPanelComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ]
 })
 export class ExpensesPageModule { }
