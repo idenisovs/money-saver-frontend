@@ -27,8 +27,6 @@ export class ExpensesTableComponent {
   }
 
   public getDateStr(date = new Date()): string {
-    console.log(date.getDate());
-
     const result: string[] = [];
 
     result.push(date.getFullYear().toString());
