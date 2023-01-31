@@ -9,7 +9,7 @@ import LoadingPopupProperties from './LoadingPopupParams';
 })
 export class LoadingPopupService {
   private modalRef?: NgbModalRef;
-  private timeoutRef?: NodeJS.Timeout;
+  private timeoutRef?: any;
   private readonly defaultProperties: LoadingPopupProperties = {
     delay: 1000
   };

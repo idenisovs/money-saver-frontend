@@ -1,7 +1,9 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { Expenses, Interval } from '../../../shared';
+import { ExpensesService } from '../../../services/expenses.service';
+import { MessagesService } from '../../../components/messages/messages.service';
 
 @Component({
   selector: 'app-simple-expenses-input',
@@ -19,9 +21,31 @@ export class SimpleExpensesInputComponent implements OnChanges {
   @Input()
   interval?: Interval;
 
-  constructor() {}
+  @Output()
+  changes = new EventEmitter<void>();
+
+  constructor(
+    private expenses: ExpensesService,
+    private messages: MessagesService
+  ) {}
 
   ngOnChanges() {
+    this.setSimpleExpensesInputAvailability();
+  }
+
+  public addExpenses() {
+    const record = new Expenses();
+
+    record.sum = parseFloat(this.simpleExpensesInput.value!);
+
+    this.expenses.add(record).subscribe(() => {
+      this.messages.info('Expenses record added!');
+      this.simpleExpensesInput.reset();
+      this.changes.emit();
+    });
+  }
+
+  private setSimpleExpensesInputAvailability() {
     if (!this.interval) {
       return;
     }
@@ -38,13 +62,5 @@ export class SimpleExpensesInputComponent implements OnChanges {
     } else {
       this.simpleExpensesInput.disable();
     }
-  }
-
-  addExpenses() {
-    const record = new Expenses();
-
-    record.sum = parseFloat(this.simpleExpensesInput.value!);
-
-    this.simpleExpensesInput.reset();
   }
 }
