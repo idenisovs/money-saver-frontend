@@ -1,1 +1,46 @@
-<p>expenses-table works!</p>
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th scope="col">
+      Date
+    </th>
+    <th scope="col">
+      Expenses
+    </th>
+    <th>
+      Daily Balance
+    </th>
+    <th>
+      Available Balance
+    </th>
+    <th>
+      Planned Residuals
+    </th>
+    <th>
+      Total Residuals
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let record of expenses">
+    <th scope="row">
+      {{record.date|date:'dd.MM.YYYY.'}}
+    </th>
+    <td>
+      {{record.expenses|currency:'EUR'}}
+    </td>
+    <td>
+      {{record.balance.daily|currency:'EUR'}}
+    </td>
+    <td>
+      {{record.balance.total|currency:'EUR'}}
+    </td>
+    <td>
+      {{record.residual.planned|currency:'EUR'}}
+    </td>
+    <td>
+      {{record.residual.real|currency:'EUR'}}
+    </td>
+  </tr>
+  </tbody>
+</table>
