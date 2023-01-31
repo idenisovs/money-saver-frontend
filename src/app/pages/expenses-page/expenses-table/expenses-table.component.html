@@ -1,6 +1,6 @@
 <table class="table table-bordered">
   <thead>
-  <tr>
+  <tr class="table-primary">
     <th scope="col">
       Date
     </th>
@@ -21,8 +21,9 @@
     </th>
   </tr>
   </thead>
+
   <tbody>
-  <tr *ngFor="let record of expenses">
+  <tr *ngFor="let record of expenses" [ngClass]="getRowStyle(record)">
     <th scope="row">
       {{record.date|date:'dd.MM.YYYY.'}}
     </th>
