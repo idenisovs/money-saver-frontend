@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
-import { Expenses, Interval } from '../../../shared';
+import { Interval, Payment } from '../../../shared';
 import { ExpensesService } from '../../../services/expenses.service';
 import { MessagesService } from '../../../components/messages/messages.service';
 
@@ -34,7 +34,7 @@ export class SimpleExpensesInputComponent implements OnChanges {
   }
 
   public addExpenses() {
-    const record = new Expenses();
+    const record = new Payment();
 
     record.sum = parseFloat(this.simpleExpensesInput.value!);
 

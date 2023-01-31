@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Expenses } from '../shared';
+import { Payment } from '../shared';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { Expenses } from '../shared';
 export class ExpensesService {
   constructor(private http: HttpClient) { }
 
-  add(expenses: Expenses) {
+  add(expenses: Payment) {
     return this.http.post('/api/payments', expenses);
   }
 }
