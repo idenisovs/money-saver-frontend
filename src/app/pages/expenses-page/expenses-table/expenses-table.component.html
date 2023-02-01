@@ -23,7 +23,7 @@
   </thead>
 
   <tbody>
-  <tr *ngFor="let record of expenses" [ngClass]="getRowStyle(record)">
+  <tr *ngFor="let record of expenses" [ngClass]="getRowStyle(record)" (click)="openExpensesModal(record)">
     <th scope="row">
       {{record.date|date:'dd.MM.YYYY.'}}
     </th>

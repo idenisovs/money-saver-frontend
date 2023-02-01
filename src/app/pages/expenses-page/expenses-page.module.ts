@@ -8,6 +8,7 @@ import { SimpleExpensesInputComponent } from './simple-expenses-input/simple-exp
 import { ExpensesTableComponent } from './expenses-table/expenses-table.component';
 import { IntervalSummaryPanelComponent } from './interval-summary-panel/interval-summary-panel.component';
 import { IntervalControlPanelComponent } from './interval-control-panel/interval-control-panel.component';
+import { ExpensesEditModalComponent } from './expenses-table/expenses-edit-modal/expenses-edit-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { IntervalControlPanelComponent } from './interval-control-panel/interval
     ExpensesTableComponent,
     IntervalSummaryPanelComponent,
     IntervalControlPanelComponent,
+    ExpensesEditModalComponent,
   ],
   imports: [
     CommonModule,

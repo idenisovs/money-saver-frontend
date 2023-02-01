@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
+import { ExpensesEditModalComponent } from './expenses-edit-modal/expenses-edit-modal.component';
 import { Day } from '../../../shared';
 
 @Component({
@@ -10,6 +13,9 @@ import { Day } from '../../../shared';
 export class ExpensesTableComponent {
   @Input()
   expenses: Day[] = [];
+
+  constructor(private modal: NgbModal) {
+  }
 
   public getRowStyle(dailyExpensesOverview: Day) {
     const today = this.getDateStr(new Date());
@@ -24,6 +30,26 @@ export class ExpensesTableComponent {
     }
 
     return 'table-light';
+  }
+
+  public async openExpensesModal(day: Day) {
+    const modalRef = this.modal.open(ExpensesEditModalComponent, {
+      centered: true
+    });
+
+    modalRef.componentInstance.day = day;
+
+    const result = await this.modalResult(modalRef);
+
+    console.log(result);
+  }
+
+  private async modalResult(modalRef: NgbModalRef): Promise<any> {
+    try {
+      return await modalRef.result;
+    } catch (e) {
+      return e;
+    }
   }
 
   private getDateStr(date = new Date()): string {
