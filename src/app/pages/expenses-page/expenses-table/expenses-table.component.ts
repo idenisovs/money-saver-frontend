@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
 import { ExpensesEditModalComponent } from './expenses-edit-modal/expenses-edit-modal.component';
-import { Day } from '../../../shared';
+import { DailyExpensesOverview } from '../../../shared';
 import { getDateStr } from '../../../shared/utils';
 
 @Component({
@@ -13,12 +13,12 @@ import { getDateStr } from '../../../shared/utils';
 })
 export class ExpensesTableComponent {
   @Input()
-  expenses: Day[] = [];
+  expenses: DailyExpensesOverview[] = [];
 
   constructor(private modal: NgbModal) {
   }
 
-  public getRowStyle(dailyExpensesOverview: Day) {
+  public getRowStyle(dailyExpensesOverview: DailyExpensesOverview) {
     const today = getDateStr(new Date());
     const expensesDate = getDateStr(dailyExpensesOverview.date);
 
@@ -33,7 +33,7 @@ export class ExpensesTableComponent {
     return 'table-light';
   }
 
-  public async openExpensesModal(day: Day) {
+  public async openExpensesModal(day: DailyExpensesOverview) {
     const modalRef = this.modal.open(ExpensesEditModalComponent, {
       centered: true
     });

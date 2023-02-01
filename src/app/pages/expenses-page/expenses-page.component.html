@@ -1,7 +1,7 @@
 <div class="row" *ngIf="summary && !isSummaryLoading">
   <div class="col-9">
     <app-simple-expenses-input [interval]="summary.interval" (changes)="requestExpensesSummary()"></app-simple-expenses-input>
-    <app-expenses-table [expenses]="summary.days"></app-expenses-table>
+    <app-expenses-table [expenses]="summary.dailyExpenses"></app-expenses-table>
   </div>
 
   <div class="col-3">

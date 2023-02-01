@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ExpensesService } from '../../../../services/expenses.service';
-import { Day, Payment } from '../../../../shared';
+import { DailyExpensesOverview, Payment } from '../../../../shared';
 
 @Component({
   selector: 'app-expenses-edit-modal',
@@ -11,7 +11,7 @@ import { Day, Payment } from '../../../../shared';
 })
 export class ExpensesEditModalComponent implements OnInit {
   @Input()
-  dailyExpensesOverview?: Day;
+  dailyExpensesOverview?: DailyExpensesOverview;
 
   isExpensesLoading = true;
   expenses: Payment[] = [];
