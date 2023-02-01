@@ -10,13 +10,52 @@
     <app-borderless-spinner *ngIf="isExpensesLoading">
       Loading expenses...
     </app-borderless-spinner>
-    <pre *ngIf="expenses">
-      {{expenses|json}}
-    </pre>
+
+    <table class="table table-borderless">
+      <thead>
+      <tr>
+        <th>
+          Time
+        </th>
+        <th>
+          Sum
+        </th>
+        <th>
+          Actions
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let record of expenses">
+        <th>
+          {{record.time|date:'HH:mm'}}
+        </th>
+        <td class="w-100">
+          {{record.sum|currency:'EUR'}}
+        </td>
+        <td>
+          Actions
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </main>
 
-  <footer class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+  <footer class="modal-footer justify-content-between">
+    <div>
+      <button type="button" class="btn btn-outline-primary">
+        <i class="material-symbols-outlined">add</i> Add
+      </button>
+    </div>
+
+    <div>
+      <button type="button" class="btn btn-outline-primary me-2">
+        Save
+      </button>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">
+        Cancel
+      </button>
+    </div>
   </footer>
 </ng-container>
 
