@@ -1,1 +1,106 @@
-<p>interval-summary-panel works!</p>
+<section class="card" *ngIf="totals; else noTotalsWarning">
+  <header class="card-header">
+    Summary
+  </header>
+  <main class="card-body">
+    <table class="table interval-summary-table mb-0">
+      <tbody>
+      <tr>
+        <th>
+          Starting sum:
+        </th>
+        <td class="text-center">
+          {{totals.startingSum|currency:'EUR'}}
+        </td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <th>
+          Total expenses:
+        </th>
+        <td class="text-center">
+          {{totals.expenses|currency:'EUR'}}
+        </td>
+        <td class="text-center">
+          {{totals.expensesPercent|percent}}
+        </td>
+      </tr>
+
+      <tr>
+        <th>
+          Residuals:
+        </th>
+        <td class="text-center">
+          {{totals.residual|currency:'EUR'}}
+        </td>
+        <td class="text-center">
+          {{totals.residualPercents|percent}}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Days:
+        </th>
+        <td class="text-center">
+          {{totals.days}}
+        </td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <th>
+          Current day:
+        </th>
+        <td class="text-center">
+          {{totals.currentDay}}
+        </td>
+        <td class="text-center">
+          {{totals.currentDayPercents|percent}}
+        </td>
+      </tr>
+
+      <tr>
+        <th>
+          Avg expenses:
+        </th>
+        <td class="text-center">
+          {{totals.expensesAvg|currency:'EUR'}}
+        </td>
+        <td class="text-center"></td>
+      </tr>
+
+      <tr>
+        <th>
+          Avg incomes:
+        </th>
+        <td class="text-center">
+          {{totals.incomesAvg|currency:'EUR'}}
+        </td>
+        <td class="text-center"></td>
+      </tr>
+
+      <tr>
+        <th>
+          Expected residual:
+        </th>
+        <td class="text-center">
+          {{totals.expectedResidual|currency:'EUR'}}
+        </td>
+        <td class="text-center">
+          {{totals.expectedResidualPercents|percent}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </main>
+</section>
+
+<ng-template #noTotalsWarning>
+  <div class="alert alert-info">
+    <i class="material-symbols-outlined">warning</i>
+    <span>
+      No totals is provided!
+    </span>
+  </div>
+</ng-template>

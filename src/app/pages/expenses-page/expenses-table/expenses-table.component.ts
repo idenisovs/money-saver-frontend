@@ -11,7 +11,7 @@ export class ExpensesTableComponent {
   @Input()
   expenses: Day[] = [];
 
-  getRowStyle(dailyExpensesOverview: Day) {
+  public getRowStyle(dailyExpensesOverview: Day) {
     const today = this.getDateStr(new Date());
     const expensesDate = this.getDateStr(dailyExpensesOverview.date);
 
@@ -26,7 +26,7 @@ export class ExpensesTableComponent {
     return 'table-light';
   }
 
-  public getDateStr(date = new Date()): string {
+  private getDateStr(date = new Date()): string {
     const result: string[] = [];
 
     result.push(date.getFullYear().toString());

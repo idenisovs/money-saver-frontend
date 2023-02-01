@@ -11,13 +11,13 @@
       Daily Balance
     </th>
     <th>
-      Available Balance
+      Total Residuals
     </th>
     <th>
       Planned Residuals
     </th>
     <th>
-      Total Residuals
+      Total Balance
     </th>
   </tr>
   </thead>
@@ -34,13 +34,13 @@
       {{record.balance.daily|currency:'EUR'}}
     </td>
     <td>
-      {{record.balance.total|currency:'EUR'}}
+      {{record.residual.real|currency:'EUR'}}
     </td>
     <td>
       {{record.residual.planned|currency:'EUR'}}
     </td>
     <td>
-      {{record.residual.real|currency:'EUR'}}
+      {{record.balance.total|currency:'EUR'}}
     </td>
   </tr>
   </tbody>

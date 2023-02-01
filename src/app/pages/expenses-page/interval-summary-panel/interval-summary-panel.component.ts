@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { Totals } from '../../../shared';
 
 @Component({
   selector: 'app-interval-summary-panel',
@@ -6,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./interval-summary-panel.component.scss']
 })
 export class IntervalSummaryPanelComponent {
-
+  @Input()
+  totals?: Totals;
 }
