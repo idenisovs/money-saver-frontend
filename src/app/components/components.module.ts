@@ -7,17 +7,20 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { MessagesModule } from './messages/messages.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoadingPopupModule } from './loading-popup/loading-popup.module';
+import { BorderlessSpinnerComponent } from './borderless-spinner/borderless-spinner.component';
 
 @NgModule({
   declarations: [
     SpinnerComponent,
-    NavbarComponent
+    NavbarComponent,
+    BorderlessSpinnerComponent
   ],
 	exports: [
 		SpinnerComponent,
 		MessagesModule,
 		NavbarComponent,
-    LoadingPopupModule
+		LoadingPopupModule,
+		BorderlessSpinnerComponent
 	],
   imports: [
     CommonModule,
