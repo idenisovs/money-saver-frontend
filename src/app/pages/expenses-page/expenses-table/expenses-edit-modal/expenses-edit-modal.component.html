@@ -1,12 +1,23 @@
-<header class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
-  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-</header>
+<ng-container *ngIf="dailyExpensesOverview">
+  <header class="modal-header">
+    <h4 class="modal-title">
+      {{dailyExpensesOverview.date|date}}
+    </h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </header>
 
-<main class="modal-body">
-  <strong>hello world</strong>
-</main>
+  <main class="modal-body">
+    <app-borderless-spinner *ngIf="isExpensesLoading">
+      Loading expenses...
+    </app-borderless-spinner>
+    <pre *ngIf="expenses">
+      {{expenses|json}}
+    </pre>
+  </main>
 
-<footer class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
-</footer>
+  <footer class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+  </footer>
+</ng-container>
+
+

@@ -4,6 +4,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
 import { ExpensesEditModalComponent } from './expenses-edit-modal/expenses-edit-modal.component';
 import { Day } from '../../../shared';
+import { getDateStr } from '../../../shared/utils';
 
 @Component({
   selector: 'app-expenses-table',
@@ -18,8 +19,8 @@ export class ExpensesTableComponent {
   }
 
   public getRowStyle(dailyExpensesOverview: Day) {
-    const today = this.getDateStr(new Date());
-    const expensesDate = this.getDateStr(dailyExpensesOverview.date);
+    const today = getDateStr(new Date());
+    const expensesDate = getDateStr(dailyExpensesOverview.date);
 
     if (expensesDate < today) {
       return 'table-success';
@@ -37,7 +38,7 @@ export class ExpensesTableComponent {
       centered: true
     });
 
-    modalRef.componentInstance.day = day;
+    modalRef.componentInstance.dailyExpensesOverview = day;
 
     const result = await this.modalResult(modalRef);
 
@@ -50,29 +51,5 @@ export class ExpensesTableComponent {
     } catch (e) {
       return e;
     }
-  }
-
-  private getDateStr(date = new Date()): string {
-    const result: string[] = [];
-
-    result.push(date.getFullYear().toString());
-
-    let mm = (date.getMonth() + 1);
-
-    if (mm < 10) {
-      result.push('0' + mm);
-    } else {
-      result.push(mm.toString())
-    }
-
-    const dd = date.getDate();
-
-    if (dd < 10) {
-      result.push('0' + dd);
-    } else {
-      result.push(dd.toString())
-    }
-
-    return result.join('-');
   }
 }

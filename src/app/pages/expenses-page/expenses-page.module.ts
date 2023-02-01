@@ -9,6 +9,7 @@ import { ExpensesTableComponent } from './expenses-table/expenses-table.componen
 import { IntervalSummaryPanelComponent } from './interval-summary-panel/interval-summary-panel.component';
 import { IntervalControlPanelComponent } from './interval-control-panel/interval-control-panel.component';
 import { ExpensesEditModalComponent } from './expenses-table/expenses-edit-modal/expenses-edit-modal.component';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ExpensesEditModalComponent } from './expenses-table/expenses-edit-modal
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsModule
   ]
 })
 export class ExpensesPageModule { }
