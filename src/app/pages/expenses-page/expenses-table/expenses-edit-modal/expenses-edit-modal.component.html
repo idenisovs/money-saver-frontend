@@ -11,30 +11,27 @@
       Loading expenses...
     </app-borderless-spinner>
 
-    <table class="table table-borderless">
-      <thead>
-      <tr>
-        <th>
-          Time
-        </th>
-        <th>
-          Sum
-        </th>
-        <th>
-          Actions
-        </th>
-      </tr>
-      </thead>
+    <table class="table table-borderless m-0">
       <tbody>
       <tr *ngFor="let record of expenses">
-        <th>
+        <th class="align-middle">
           {{record.time|date:'HH:mm'}}
         </th>
-        <td class="w-100">
+        <td class="w-100 align-middle">
           {{record.sum|currency:'EUR'}}
         </td>
-        <td>
-          Actions
+        <td class="align-middle text-nowrap">
+          <button class="btn btn-sm btn-outline-primary me-1">
+            <i class="material-symbols-outlined">
+              edit
+            </i>
+          </button>
+
+          <button class="btn btn-sm btn-outline-danger">
+            <i class="material-symbols-outlined">
+              delete
+            </i>
+          </button>
         </td>
       </tr>
       </tbody>
