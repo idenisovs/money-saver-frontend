@@ -1,21 +1,30 @@
-<th class="align-middle">
+<th class="align-middle" [ngClass]="{'text-decoration-line-through text-secondary': payment.remove}">
   {{payment.time|date:'HH:mm'}}
 </th>
 
-<td class="w-100 align-middle">
+<td class="w-100 align-middle" [ngClass]="{'text-decoration-line-through text-secondary': payment.remove}">
   {{payment.sum|currency:'EUR'}}
 </td>
 
-<td class="align-middle text-nowrap">
-  <button class="btn btn-sm btn-outline-primary me-1">
+<td class="align-middle text-end text-nowrap">
+  <button *ngIf="!payment.remove" class="btn btn-sm btn-outline-primary" (click)="toggleEditMode()">
     <i class="material-symbols-outlined">
       edit
     </i>
   </button>
 
-  <button class="btn btn-sm btn-outline-danger">
+  <button *ngIf="!payment.remove" class="btn btn-sm btn-outline-danger ms-1" (click)="toggleRemoveFlagOnRecord()">
     <i class="material-symbols-outlined">
       delete
+    </i>
+  </button>
+
+  <button *ngIf="payment.remove || payment.add || payment.update"
+          class="btn btn-sm btn-outline-secondary ms-1"
+          (click)="cancel()"
+  >
+    <i class="material-symbols-outlined">
+      replay
     </i>
   </button>
 </td>

@@ -13,7 +13,7 @@ export class ExpensesEditModalComponent implements OnInit {
   @Input()
   dailyExpensesOverview?: DailyExpensesOverview;
 
-  isExpensesLoading = true;
+  isExpensesLoading = false;
   expenses: Payment[] = [];
 
   constructor(

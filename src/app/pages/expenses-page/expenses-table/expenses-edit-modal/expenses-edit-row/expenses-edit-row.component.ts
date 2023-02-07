@@ -10,4 +10,19 @@ import { Payment } from '../../../../../shared';
 export class ExpensesEditRowComponent {
   @Input()
   payment!: Payment;
+
+  isEditMode = false;
+
+  toggleEditMode() {
+    this.isEditMode = !this.isEditMode;
+  }
+
+  toggleRemoveFlagOnRecord() {
+    this.payment.remove = !this.payment.remove;
+  }
+
+  cancel() {
+    this.payment.remove = false;
+    this.isEditMode = false;
+  }
 }
