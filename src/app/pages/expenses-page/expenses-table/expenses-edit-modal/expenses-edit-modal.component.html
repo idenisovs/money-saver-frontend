@@ -11,11 +11,17 @@
       Loading expenses...
     </app-borderless-spinner>
 
-    <table class="table table-borderless m-0">
+    <table class="table table-borderless table-expenses-edit m-0" *ngIf="expenses.length; else noExpensesAlert">
       <tbody>
       <tr app-expenses-edit-row *ngFor="let record of expenses" [payment]="record"></tr>
       </tbody>
     </table>
+
+    <ng-template #noExpensesAlert>
+      <div class="alert alert-info m-0">
+        <i class="material-symbols-outlined">info</i> There is no expenses yet!
+      </div>
+    </ng-template>
   </main>
 
   <footer class="modal-footer justify-content-between">
