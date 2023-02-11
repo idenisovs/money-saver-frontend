@@ -11,6 +11,7 @@ import { IntervalControlPanelComponent } from './interval-control-panel/interval
 import { ExpensesEditModalComponent } from './expenses-table/expenses-edit-modal/expenses-edit-modal.component';
 import { ComponentsModule } from '../../components/components.module';
 import { ExpensesEditRowComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-edit-row.component';
+import { ExpensesRowViewControlsComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-row-view-controls/expenses-row-view-controls.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ExpensesEditRowComponent } from './expenses-table/expenses-edit-modal/e
     IntervalControlPanelComponent,
     ExpensesEditModalComponent,
     ExpensesEditRowComponent,
+    ExpensesRowViewControlsComponent,
   ],
   imports: [
     CommonModule,
