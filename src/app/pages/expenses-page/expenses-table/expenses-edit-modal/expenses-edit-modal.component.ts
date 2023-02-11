@@ -38,8 +38,8 @@ export class ExpensesEditModalComponent implements OnInit {
   }
 
   add() {
-    const payment = new Payment();
-    payment.add = true;
+    const payment = this.makeNewPaymentObj();
+
     this.expenses.push(payment);
   }
 
@@ -53,9 +53,21 @@ export class ExpensesEditModalComponent implements OnInit {
     this.isExpensesSaving = true;
 
     this.expensesService.save(this.expenses).subscribe(() => {
-      this.messages.info('Payments is saved!');
+      this.messages.info('Changes is saved!');
       this.isExpensesSaving = false;
       this.modal.close(true);
     });
+  }
+  makeNewPaymentObj(): Payment {
+    const payment = new Payment();
+    this.setPaymentDate(payment);
+    payment.add = true;
+    return payment;
+  }
+
+  setPaymentDate(payment: Payment) {
+    const targetDate = this.dailyExpensesOverview!.date;
+
+    payment.time.setFullYear(targetDate?.getFullYear(), targetDate?.getMonth(), targetDate?.getDate());
   }
 }
