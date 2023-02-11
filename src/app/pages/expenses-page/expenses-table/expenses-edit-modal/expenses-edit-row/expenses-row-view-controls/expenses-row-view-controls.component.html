@@ -11,7 +11,7 @@
 </button>
 
 <button class="btn btn-sm btn-outline-secondary ms-1"
-        [disabled]="!payment.add && !payment.update && !payment.remove"
+        [disabled]="!payment.add && !payment.remove"
         (click)="cancel.emit()"
 >
   <i class="material-symbols-outlined">

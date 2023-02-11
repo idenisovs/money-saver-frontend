@@ -13,6 +13,8 @@ export class ExpensesEditRowComponent {
 
   isEditMode = false;
 
+  editableValue?: string;
+
   get IsEditMode(): boolean {
     return this.isEditMode;
   }
@@ -23,6 +25,10 @@ export class ExpensesEditRowComponent {
 
   toggleEditMode() {
     this.isEditMode = !this.isEditMode;
+
+    if (this.isEditMode) {
+      this.editableValue = this.payment!.sum.toFixed(2);
+    }
   }
 
   toggleRemoveFlagOnRecord() {
@@ -30,11 +36,31 @@ export class ExpensesEditRowComponent {
   }
 
   cancel() {
-    this.payment.remove = false;
+    delete this.editableValue;
     this.isEditMode = false;
+    this.payment.remove = false;
   }
 
-  acceptChanges() {}
+  acceptChanges() {
+    if (typeof this.editableValue === 'undefined') {
+      return;
+    }
 
-  declineChanges() {}
+    this.payment.sum = parseFloat(this.editableValue);
+    this.payment.update = true;
+    this.isEditMode = false;
+    delete this.editableValue;
+  }
+
+  getPaymentViewStyle() {
+    if (this.payment.remove) {
+      return 'text-decoration-line-through text-secondary';
+    }
+
+    if (this.payment.update) {
+      return 'text-info';
+    }
+
+    return '';
+  }
 }

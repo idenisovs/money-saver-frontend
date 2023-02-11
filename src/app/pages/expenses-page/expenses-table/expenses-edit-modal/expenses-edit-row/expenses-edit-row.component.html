@@ -1,13 +1,13 @@
-<th class="align-middle" [ngClass]="{'text-decoration-line-through text-secondary': payment.remove}">
+<th class="align-middle" [ngClass]="getPaymentViewStyle()">
   {{payment.time|date:'HH:mm'}}
 </th>
 
-<td *ngIf="!isEditMode" class="w-100 align-middle" [ngClass]="{'text-decoration-line-through text-secondary': payment.remove}">
+<td *ngIf="IsViewMode" class="w-100 align-middle" [ngClass]="getPaymentViewStyle()">
   {{payment.sum|currency:'EUR'}}
 </td>
 
-<td *ngIf="isEditMode" class="w-100">
-  <input type="text" class="form-control" [id]="'payment' + payment.id" />
+<td *ngIf="IsEditMode" class="w-100">
+  <input type="text" class="form-control" [id]="'payment' + payment.id" [(ngModel)]="editableValue" />
 </td>
 
 <td class="align-middle text-end text-nowrap">
@@ -17,8 +17,8 @@
                                   (remove)="toggleRemoveFlagOnRecord()"
                                   (cancel)="cancel()" />
 
-  <app-expenses-row-edit-controls *ngIf="isEditMode"
+  <app-expenses-row-edit-controls *ngIf="IsEditMode"
                                   [payment]="payment"
                                   (accept)="acceptChanges()"
-                                  (decline)="declineChanges()" />
+                                  (decline)="cancel()" />
 </td>

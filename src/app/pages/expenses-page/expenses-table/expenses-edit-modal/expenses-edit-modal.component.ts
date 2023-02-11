@@ -33,4 +33,9 @@ export class ExpensesEditModalComponent implements OnInit {
       this.expenses = expenses;
     });
   }
+
+  save() {
+    console.log(this.expenses);
+    this.modal.close();
+  }
 }
