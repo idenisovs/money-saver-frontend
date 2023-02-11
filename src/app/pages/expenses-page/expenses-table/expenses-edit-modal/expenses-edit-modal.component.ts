@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ExpensesService } from '../../../../services/expenses.service';
 import { DailyExpensesOverview, Payment } from '../../../../shared';
+import { MessagesService } from '../../../../components/messages/messages.service';
 
 @Component({
   selector: 'app-expenses-edit-modal',
@@ -14,11 +15,13 @@ export class ExpensesEditModalComponent implements OnInit {
   dailyExpensesOverview?: DailyExpensesOverview;
 
   isExpensesLoading = false;
+  isExpensesSaving = false;
   expenses: Payment[] = [];
 
   constructor(
     public modal: NgbActiveModal,
-    private expensesService: ExpensesService
+    private expensesService: ExpensesService,
+    private messages: MessagesService
   ) {}
 
   ngOnInit() {
@@ -47,7 +50,12 @@ export class ExpensesEditModalComponent implements OnInit {
   }
 
   save() {
-    console.log(this.expenses);
-    this.modal.close();
+    this.isExpensesSaving = true;
+
+    this.expensesService.save(this.expenses).subscribe(() => {
+      this.messages.info('Payments is saved!');
+      this.isExpensesSaving = false;
+      this.modal.close(true);
+    });
   }
 }

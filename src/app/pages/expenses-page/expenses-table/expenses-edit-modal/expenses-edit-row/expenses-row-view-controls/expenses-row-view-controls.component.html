@@ -1,4 +1,7 @@
-<button class="btn btn-sm btn-outline-primary" [disabled]="payment.remove" (click)="edit.emit()">
+<button class="btn btn-sm btn-outline-primary"
+        [disabled]="disabled || payment.remove"
+        (click)="edit.emit()"
+>
   <i class="material-symbols-outlined">
     edit
   </i>
@@ -6,7 +9,7 @@
 
 <button *ngIf="!payment.remove; else cancelRemoveButton"
         class="btn btn-sm btn-outline-danger ms-1"
-        [disabled]="payment.remove"
+        [disabled]="disabled || payment.remove"
         (click)="remove.emit()"
 >
   <i class="material-symbols-outlined">
@@ -16,7 +19,7 @@
 
 <ng-template #cancelRemoveButton>
   <button class="btn btn-sm btn-outline-secondary ms-1"
-          [disabled]="!payment.remove"
+          [disabled]="disabled || !payment.remove"
           (click)="cancel.emit()"
   >
     <i class="material-symbols-outlined">

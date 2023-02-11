@@ -1,10 +1,10 @@
-<button class="btn btn-sm btn-outline-primary" [disabled]="payment.remove" (click)="accept.emit()">
+<button class="btn btn-sm btn-outline-primary" [disabled]="disabled || payment.remove" (click)="accept.emit()">
   <i class="material-symbols-outlined">
     done
   </i>
 </button>
 
-<button class="btn btn-sm btn-outline-danger ms-1" [disabled]="payment.remove" (click)="decline.emit()">
+<button class="btn btn-sm btn-outline-danger ms-1" [disabled]="disabled || payment.remove" (click)="decline.emit()">
   <i class="material-symbols-outlined">
     close
   </i>

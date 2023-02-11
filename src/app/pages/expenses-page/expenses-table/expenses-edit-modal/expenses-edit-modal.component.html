@@ -13,7 +13,12 @@
 
     <table class="table table-borderless table-expenses-edit m-0" *ngIf="expenses.length; else noExpensesAlert">
       <tbody>
-      <tr app-expenses-edit-row *ngFor="let record of expenses" [payment]="record" (removeAddedPayment)="removeAdded(record)"></tr>
+      <tr app-expenses-edit-row
+          *ngFor="let record of expenses"
+          [payment]="record"
+          [disabled]="isExpensesSaving"
+          (removeAddedPayment)="removeAdded(record)"
+      ></tr>
       </tbody>
     </table>
 
@@ -26,17 +31,18 @@
 
   <footer class="modal-footer justify-content-between">
     <div>
-      <button type="button" class="btn btn-outline-primary" (click)="add()">
+      <button type="button" class="btn btn-outline-primary" [disabled]="isExpensesSaving" (click)="add()">
         <i class="material-symbols-outlined">add</i> Add
       </button>
     </div>
 
     <div>
-      <button type="button" class="btn btn-outline-primary me-2" (click)="save()">
-        Save
+      <button type="button" class="btn btn-outline-primary me-2" [disabled]="isExpensesSaving" (click)="save()">
+        {{ isExpensesSaving ? 'Saving...' : 'Save' }}
+        <span *ngIf="isExpensesSaving" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       </button>
 
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">
+      <button type="button" class="btn btn-outline-dark" [disabled]="isExpensesSaving" (click)="modal.close(false)">
         Cancel
       </button>
     </div>

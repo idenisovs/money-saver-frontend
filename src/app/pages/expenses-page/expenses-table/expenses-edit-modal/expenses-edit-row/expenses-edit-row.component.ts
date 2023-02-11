@@ -11,6 +11,9 @@ export class ExpensesEditRowComponent implements OnInit {
   @Input()
   payment!: Payment;
 
+  @Input()
+  disabled = false;
+
   @Output()
   removeAddedPayment = new EventEmitter<void>();
 

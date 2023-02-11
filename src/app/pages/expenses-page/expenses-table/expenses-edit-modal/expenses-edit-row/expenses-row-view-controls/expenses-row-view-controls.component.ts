@@ -11,6 +11,9 @@ export class ExpensesRowViewControlsComponent {
   @Input()
   payment!: Payment;
 
+  @Input()
+  disabled = false;
+
   @Output()
   edit = new EventEmitter<void>();
 

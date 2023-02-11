@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
@@ -14,6 +14,9 @@ import { getDateStr } from '../../../shared/utils';
 export class ExpensesTableComponent {
   @Input()
   expenses: DailyExpensesOverview[] = [];
+
+  @Output()
+  changes = new EventEmitter<void>();
 
   constructor(private modal: NgbModal) {
   }
@@ -42,7 +45,9 @@ export class ExpensesTableComponent {
 
     const result = await this.modalResult(modalRef);
 
-    console.log(result);
+    if (result) {
+      this.changes.emit();
+    }
   }
 
   private async modalResult(modalRef: NgbModalRef): Promise<any> {

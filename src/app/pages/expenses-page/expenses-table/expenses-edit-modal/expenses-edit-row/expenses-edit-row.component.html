@@ -13,12 +13,14 @@
 <td class="align-middle text-end text-nowrap">
   <app-expenses-row-view-controls *ngIf="IsViewMode"
                                   [payment]="payment"
+                                  [disabled]="disabled"
                                   (edit)="toggleEditMode()"
                                   (remove)="remove()"
                                   (cancel)="cancel()" />
 
   <app-expenses-row-edit-controls *ngIf="IsEditMode"
                                   [payment]="payment"
+                                  [disabled]="disabled"
                                   (accept)="acceptChanges()"
                                   (decline)="cancel()" />
 </td>

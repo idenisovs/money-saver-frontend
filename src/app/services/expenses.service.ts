@@ -22,4 +22,8 @@ export class ExpensesService {
         })
       )
   }
+
+  save(expenses: Payment[]) {
+    return this.http.post<void>('/api/payments', expenses);
+  }
 }

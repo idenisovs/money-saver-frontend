@@ -10,6 +10,9 @@ export class ExpensesRowEditControlsComponent {
   @Input()
   payment!: Payment;
 
+  @Input()
+  disabled = false;
+
   @Output()
   accept = new EventEmitter<void>();
 
