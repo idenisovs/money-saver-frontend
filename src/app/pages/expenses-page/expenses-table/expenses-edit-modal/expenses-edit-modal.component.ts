@@ -34,6 +34,18 @@ export class ExpensesEditModalComponent implements OnInit {
     });
   }
 
+  add() {
+    const payment = new Payment();
+    payment.add = true;
+    this.expenses.push(payment);
+  }
+
+  removeAdded(payment: Payment) {
+    const idx = this.expenses.indexOf(payment);
+
+    this.expenses.splice(idx, 1);
+  }
+
   save() {
     console.log(this.expenses);
     this.modal.close();

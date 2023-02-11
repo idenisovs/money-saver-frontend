@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Payment } from '../../../../../shared';
 
@@ -7,9 +7,12 @@ import { Payment } from '../../../../../shared';
   templateUrl: './expenses-edit-row.component.html',
   styleUrls: ['./expenses-edit-row.component.scss']
 })
-export class ExpensesEditRowComponent {
+export class ExpensesEditRowComponent implements OnInit {
   @Input()
   payment!: Payment;
+
+  @Output()
+  removeAddedPayment = new EventEmitter<void>();
 
   isEditMode = false;
 
@@ -23,6 +26,12 @@ export class ExpensesEditRowComponent {
     return !this.IsEditMode;
   }
 
+  ngOnInit() {
+    if (this.payment && this.payment.add) {
+      this.toggleEditMode();
+    }
+  }
+
   toggleEditMode() {
     this.isEditMode = !this.isEditMode;
 
@@ -31,8 +40,12 @@ export class ExpensesEditRowComponent {
     }
   }
 
-  toggleRemoveFlagOnRecord() {
-    this.payment.remove = !this.payment.remove;
+  remove() {
+    if (this.payment.add) {
+      this.removeAddedPayment.emit();
+    } else {
+      this.payment.remove = !this.payment.remove;
+    }
   }
 
   cancel() {
@@ -46,13 +59,20 @@ export class ExpensesEditRowComponent {
       return;
     }
 
+    if (!this.payment.add) {
+      this.payment.update = true;
+    }
+
     this.payment.sum = parseFloat(this.editableValue);
-    this.payment.update = true;
     this.isEditMode = false;
     delete this.editableValue;
   }
 
   getPaymentViewStyle() {
+    if (this.payment.add) {
+      return 'text-primary';
+    }
+
     if (this.payment.remove) {
       return 'text-decoration-line-through text-secondary';
     }

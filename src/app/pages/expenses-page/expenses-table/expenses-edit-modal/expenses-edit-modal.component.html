@@ -13,7 +13,7 @@
 
     <table class="table table-borderless table-expenses-edit m-0" *ngIf="expenses.length; else noExpensesAlert">
       <tbody>
-      <tr app-expenses-edit-row *ngFor="let record of expenses" [payment]="record"></tr>
+      <tr app-expenses-edit-row *ngFor="let record of expenses" [payment]="record" (removeAddedPayment)="removeAdded(record)"></tr>
       </tbody>
     </table>
 
@@ -26,7 +26,7 @@
 
   <footer class="modal-footer justify-content-between">
     <div>
-      <button type="button" class="btn btn-outline-primary">
+      <button type="button" class="btn btn-outline-primary" (click)="add()">
         <i class="material-symbols-outlined">add</i> Add
       </button>
     </div>
@@ -35,6 +35,7 @@
       <button type="button" class="btn btn-outline-primary me-2" (click)="save()">
         Save
       </button>
+
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">
         Cancel
       </button>

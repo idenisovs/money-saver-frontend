@@ -14,7 +14,7 @@
   <app-expenses-row-view-controls *ngIf="IsViewMode"
                                   [payment]="payment"
                                   (edit)="toggleEditMode()"
-                                  (remove)="toggleRemoveFlagOnRecord()"
+                                  (remove)="remove()"
                                   (cancel)="cancel()" />
 
   <app-expenses-row-edit-controls *ngIf="IsEditMode"
