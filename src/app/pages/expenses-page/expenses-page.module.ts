@@ -12,6 +12,7 @@ import { ExpensesEditModalComponent } from './expenses-table/expenses-edit-modal
 import { ComponentsModule } from '../../components/components.module';
 import { ExpensesEditRowComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-edit-row.component';
 import { ExpensesRowViewControlsComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-row-view-controls/expenses-row-view-controls.component';
+import { ExpensesRowEditControlsComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-row-edit-controls/expenses-row-edit-controls.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ExpensesRowViewControlsComponent } from './expenses-table/expenses-edit
     ExpensesEditModalComponent,
     ExpensesEditRowComponent,
     ExpensesRowViewControlsComponent,
+    ExpensesRowEditControlsComponent,
   ],
   imports: [
     CommonModule,

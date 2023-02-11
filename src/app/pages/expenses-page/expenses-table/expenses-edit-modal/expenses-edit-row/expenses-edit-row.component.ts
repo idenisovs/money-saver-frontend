@@ -13,6 +13,14 @@ export class ExpensesEditRowComponent {
 
   isEditMode = false;
 
+  get IsEditMode(): boolean {
+    return this.isEditMode;
+  }
+
+  get IsViewMode(): boolean {
+    return !this.IsEditMode;
+  }
+
   toggleEditMode() {
     this.isEditMode = !this.isEditMode;
   }
@@ -25,4 +33,8 @@ export class ExpensesEditRowComponent {
     this.payment.remove = false;
     this.isEditMode = false;
   }
+
+  acceptChanges() {}
+
+  declineChanges() {}
 }

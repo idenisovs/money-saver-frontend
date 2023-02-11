@@ -2,29 +2,23 @@
   {{payment.time|date:'HH:mm'}}
 </th>
 
-<td class="w-100 align-middle" [ngClass]="{'text-decoration-line-through text-secondary': payment.remove}">
+<td *ngIf="!isEditMode" class="w-100 align-middle" [ngClass]="{'text-decoration-line-through text-secondary': payment.remove}">
   {{payment.sum|currency:'EUR'}}
 </td>
 
+<td *ngIf="isEditMode" class="w-100">
+  <input type="text" class="form-control" [id]="'payment' + payment.id" />
+</td>
+
 <td class="align-middle text-end text-nowrap">
-  <button *ngIf="!payment.remove" class="btn btn-sm btn-outline-primary" (click)="toggleEditMode()">
-    <i class="material-symbols-outlined">
-      edit
-    </i>
-  </button>
+  <app-expenses-row-view-controls *ngIf="IsViewMode"
+                                  [payment]="payment"
+                                  (edit)="toggleEditMode()"
+                                  (remove)="toggleRemoveFlagOnRecord()"
+                                  (cancel)="cancel()" />
 
-  <button *ngIf="!payment.remove" class="btn btn-sm btn-outline-danger ms-1" (click)="toggleRemoveFlagOnRecord()">
-    <i class="material-symbols-outlined">
-      delete
-    </i>
-  </button>
-
-  <button *ngIf="payment.remove || payment.add || payment.update"
-          class="btn btn-sm btn-outline-secondary ms-1"
-          (click)="cancel()"
-  >
-    <i class="material-symbols-outlined">
-      replay
-    </i>
-  </button>
+  <app-expenses-row-edit-controls *ngIf="isEditMode"
+                                  [payment]="payment"
+                                  (accept)="acceptChanges()"
+                                  (decline)="declineChanges()" />
 </td>
