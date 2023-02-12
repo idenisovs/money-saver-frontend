@@ -1,8 +1,13 @@
 <section class="card mb-2">
-  <header class="card-header">
+  <header class="card-header fw-bold">
     {{interval.start|date}} - {{interval.end|date}}
   </header>
   <main class="card-body">
-    Interval
+    <button type="button" class="btn btn-primary me-2" [disabled]="!isIntervalFinished">
+      Start new interval
+    </button>
+    <button type="button" class="btn btn-primary">
+      Finish current interval
+    </button>
   </main>
 </section>

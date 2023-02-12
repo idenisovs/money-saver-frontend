@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { Interval } from '../../../shared';
 
@@ -7,7 +7,16 @@ import { Interval } from '../../../shared';
   templateUrl: './interval-control-panel.component.html',
   styleUrls: ['./interval-control-panel.component.scss']
 })
-export class IntervalControlPanelComponent {
+export class IntervalControlPanelComponent implements OnChanges {
+  isIntervalFinished = false;
+
   @Input()
   interval = new Interval();
+
+  ngOnChanges(changes: SimpleChanges) {
+    const today = new Date();
+    const interval = changes['interval'].currentValue as Interval;
+
+    this.isIntervalFinished = interval.end <= today;
+  }
 }

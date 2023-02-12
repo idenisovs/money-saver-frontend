@@ -7,17 +7,17 @@
     <th scope="col">
       Expenses
     </th>
-    <th>
+    <th scope="col">
       Daily Balance
     </th>
-    <th>
+    <th scope="col">
       Total Balance
     </th>
-    <th>
-      Total Residuals
-    </th>
-    <th>
+    <th scope="col">
       Expected Residuals
+    </th>
+    <th scope="col">
+      Total Residuals
     </th>
   </tr>
   </thead>
@@ -37,10 +37,10 @@
       {{record.balance.total|currency:'EUR'}}
     </td>
     <td>
-      {{record.residual.real|currency:'EUR'}}
+      {{record.residual.planned|currency:'EUR'}}
     </td>
     <td>
-      {{record.residual.planned|currency:'EUR'}}
+      {{record.residual.real|currency:'EUR'}}
     </td>
   </tr>
   </tbody>
