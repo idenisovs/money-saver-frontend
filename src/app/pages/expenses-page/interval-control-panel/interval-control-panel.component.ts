@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { Interval } from '../../../shared';
 
 @Component({
   selector: 'app-interval-control-panel',
@@ -6,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./interval-control-panel.component.scss']
 })
 export class IntervalControlPanelComponent {
-
+  @Input()
+  interval = new Interval();
 }
