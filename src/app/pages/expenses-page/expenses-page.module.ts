@@ -13,6 +13,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { ExpensesEditRowComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-edit-row.component';
 import { ExpensesRowViewControlsComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-row-view-controls/expenses-row-view-controls.component';
 import { ExpensesRowEditControlsComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-row-edit-controls/expenses-row-edit-controls.component';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -27,11 +28,12 @@ import { ExpensesRowEditControlsComponent } from './expenses-table/expenses-edit
     ExpensesRowViewControlsComponent,
     ExpensesRowEditControlsComponent,
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    ComponentsModule,
-    FormsModule
-  ]
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		ComponentsModule,
+		FormsModule,
+		RouterLink
+	]
 })
 export class ExpensesPageModule { }

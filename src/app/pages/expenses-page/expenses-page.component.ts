@@ -12,6 +12,7 @@ import { LoadingPopupService } from '../../components/loading-popup/loading-popu
 export class ExpensesPageComponent implements OnInit {
   public summary: Summary|null = null;
   public isSummaryLoading = false;
+  public intervalYear?: number;
 
   constructor(
     private summaryService: SummaryService,
@@ -33,6 +34,7 @@ export class ExpensesPageComponent implements OnInit {
       this.loadingPopup.close();
       this.isSummaryLoading = false;
       this.summary = summary;
+      this.intervalYear = summary?.interval.start.getFullYear();
     });
   }
 }
