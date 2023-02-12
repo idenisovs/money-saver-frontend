@@ -1,26 +1,4 @@
-<section class="card mb-2">
-  <main class="card-body">
-    <nav class="breadcrumb m-0" *ngIf="summary">
-      <ol class="breadcrumb m-0">
-        <li class="breadcrumb-item">
-          <a routerLink="/years">
-            All
-          </a>
-        </li>
-        <li class="breadcrumb-item">
-          <a [routerLink]="['years', intervalYear]">
-            {{intervalYear}}
-          </a>
-        </li>
-        <li class="breadcrumb-item active">
-          {{summary.interval.start|date:'MMM dd'}}
-          -
-          {{summary.interval.end|date:'MMM dd'}}
-        </li>
-      </ol>
-    </nav>
-  </main>
-</section>
+<app-breadcrumb />
 
 <div class="row" *ngIf="summary && !isSummaryLoading">
   <div class="col-9">

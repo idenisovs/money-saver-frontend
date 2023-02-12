@@ -8,6 +8,7 @@ import { MessagesModule } from './messages/messages.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoadingPopupModule } from './loading-popup/loading-popup.module';
 import { BorderlessSpinnerComponent } from './borderless-spinner/borderless-spinner.component';
+import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BorderlessSpinnerComponent } from './borderless-spinner/borderless-spin
 		MessagesModule,
 		NavbarComponent,
 		LoadingPopupModule,
-		BorderlessSpinnerComponent
+		BorderlessSpinnerComponent,
+    BreadcrumbModule
 	],
   imports: [
     CommonModule,

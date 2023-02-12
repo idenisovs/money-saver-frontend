@@ -1,25 +1,33 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
-import { Summary } from '../../shared';
+import { Interval, Summary } from '../../shared';
 import { SummaryService } from '../../services/summary.service';
 import { LoadingPopupService } from '../../components/loading-popup/loading-popup.service';
+import { BreadcrumbService } from '../../components/breadcrumb/breadcrumb.service';
+import { BreadcrumbItem } from '../../components/breadcrumb/BreadcrumbItem';
 
 @Component({
   selector: 'app-expenses-page',
   templateUrl: './expenses-page.component.html',
-  styleUrls: ['./expenses-page.component.scss']
+  styleUrls: ['./expenses-page.component.scss'],
+  providers: [ DatePipe ]
 })
 export class ExpensesPageComponent implements OnInit {
   public summary: Summary|null = null;
   public isSummaryLoading = false;
-  public intervalYear?: number;
 
   constructor(
+    private datePipe: DatePipe,
     private summaryService: SummaryService,
-    private loadingPopup: LoadingPopupService
+    private loadingPopup: LoadingPopupService,
+    private breadcrumb: BreadcrumbService
   ) {}
   ngOnInit() {
     this.requestExpensesSummary();
+    this.breadcrumb.nodes = [
+      new BreadcrumbItem('All', '/years')
+    ];
   }
 
   requestExpensesSummary() {
@@ -34,7 +42,27 @@ export class ExpensesPageComponent implements OnInit {
       this.loadingPopup.close();
       this.isSummaryLoading = false;
       this.summary = summary;
-      this.intervalYear = summary?.interval.start.getFullYear();
+      this.setBreadcrumbNodes();
     });
+  }
+
+  setBreadcrumbNodes() {
+    const interval = this.summary?.interval!;
+    this.addYearBreadcrumbNode(interval);
+    this.addIntervalBreadcrumbNode(interval);
+  }
+
+  addYearBreadcrumbNode(interval: Interval) {
+    const year = interval.start.getFullYear();
+    const yearNode = new BreadcrumbItem(year.toString(), `/years/${year}`);
+    this.breadcrumb.nodes.push(yearNode);
+  }
+
+  addIntervalBreadcrumbNode(interval: Interval) {
+    const intervalStart = this.datePipe.transform(interval.start, 'MMM dd');
+    const intervalEnd = this.datePipe.transform(interval.end, 'MMM dd');
+    const intervalNode = new BreadcrumbItem(`${intervalStart} - ${intervalEnd}`);
+    intervalNode.active = true;
+    this.breadcrumb.nodes.push(intervalNode);
   }
 }

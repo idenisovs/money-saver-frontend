@@ -1,0 +1,19 @@
+<section class="card mb-2">
+  <main class="card-body">
+    <nav class="breadcrumb m-0" *ngIf="breadcrumb.nodes.length; else noBreadcrumbNodes">
+      <ol class="breadcrumb m-0">
+        <li *ngFor="let node of breadcrumb.nodes" class="breadcrumb-item" [ngClass]="{ active: node.active }">
+          <a *ngIf="node.link; else justLabel" [routerLink]="node.link">
+            {{node.label}}
+          </a>
+          <ng-template #justLabel>
+            {{node.label}}
+          </ng-template>
+        </li>
+      </ol>
+    </nav>
+    <ng-template #noBreadcrumbNodes>
+      --
+    </ng-template>
+  </main>
+</section>
