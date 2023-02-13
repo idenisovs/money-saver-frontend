@@ -1,0 +1,12 @@
+<section class="card">
+  <header class="card-header fw-bold">
+    Expenses chart
+  </header>
+  <main class="card-body">
+    <canvas baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [type]="'bar'">
+    </canvas>
+  </main>
+</section>

@@ -14,6 +14,8 @@ import { ExpensesEditRowComponent } from './expenses-table/expenses-edit-modal/e
 import { ExpensesRowViewControlsComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-row-view-controls/expenses-row-view-controls.component';
 import { ExpensesRowEditControlsComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-row-edit-controls/expenses-row-edit-controls.component';
 import { RouterLink } from '@angular/router';
+import { ExpensesChartPanelComponent } from './expenses-chart-panel/expenses-chart-panel.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -27,13 +29,15 @@ import { RouterLink } from '@angular/router';
     ExpensesEditRowComponent,
     ExpensesRowViewControlsComponent,
     ExpensesRowEditControlsComponent,
+    ExpensesChartPanelComponent,
   ],
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,
 		ComponentsModule,
 		FormsModule,
-		RouterLink
+		RouterLink,
+		NgChartsModule
 	]
 })
 export class ExpensesPageModule { }
