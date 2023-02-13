@@ -4,9 +4,10 @@
   </header>
   <main class="card-body">
     <canvas baseChart
+            [type]="'bar'"
             [data]="barChartData"
             [options]="barChartOptions"
-            [type]="'bar'">
+    >
     </canvas>
   </main>
 </section>

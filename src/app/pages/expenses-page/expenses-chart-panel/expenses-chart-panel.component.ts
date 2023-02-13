@@ -13,13 +13,18 @@ export class ExpensesChartPanelComponent {
   @Input()
   summary = new Summary();
 
-  barChartData: ChartData<'bar'> = {
+  barChartData: ChartData<'bar'|'line'> = {
     datasets: [{
+      type: 'bar',
       label: 'Salary',
       data: [ 10, 20, 30, 40, 40, 30, 20 ]
+    }, {
+      type: 'line',
+      label: 'Expenses',
+      data: [ 70, 60, 50, 40, 30, 20, 10 ]
     }],
     labels: ['1', '2', '3', '4', '5', '6', '7']
   };
 
-  barChartOptions: ChartOptions<'bar'> = {};
+  barChartOptions: ChartOptions<'bar'|'line'> = {};
 }
