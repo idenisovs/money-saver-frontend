@@ -12,6 +12,7 @@ import { LoginPageModule } from './pages/login-page/login-page.module';
 import { ExpensesPageModule } from './pages/expenses-page/expenses-page.module';
 import { IntervalsPageComponent } from './pages/intervals-page/intervals-page.component';
 import { YearsPageComponent } from './pages/years-page/years-page.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
 	declarations: [
@@ -27,7 +28,8 @@ import { YearsPageComponent } from './pages/years-page/years-page.component';
     NgbModule,
     ComponentsModule,
     LoginPageModule,
-    ExpensesPageModule
+    ExpensesPageModule,
+    NgChartsModule
   ],
 	providers: [],
 	exports: [
