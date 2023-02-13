@@ -24,10 +24,10 @@ export class ExpensesPageComponent implements OnInit {
     private breadcrumb: BreadcrumbService
   ) {}
   ngOnInit() {
-    this.requestExpensesSummary();
     this.breadcrumb.nodes = [
       new BreadcrumbItem('All', '/years')
     ];
+    this.requestExpensesSummary();
   }
 
   requestExpensesSummary() {
@@ -42,7 +42,10 @@ export class ExpensesPageComponent implements OnInit {
       this.loadingPopup.close();
       this.isSummaryLoading = false;
       this.summary = summary;
-      this.setBreadcrumbNodes();
+
+      if (this.breadcrumb.nodes.length < 2) {
+        this.setBreadcrumbNodes();
+      }
     });
   }
 
