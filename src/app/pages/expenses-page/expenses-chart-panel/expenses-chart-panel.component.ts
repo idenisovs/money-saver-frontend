@@ -15,13 +15,16 @@ export class ExpensesChartPanelComponent {
 
   barChartData: ChartData<'bar'|'line'> = {
     datasets: [{
-      type: 'bar',
-      label: 'Salary',
-      data: [ 10, 20, 30, 40, 40, 30, 20 ]
-    }, {
       type: 'line',
       label: 'Expenses',
-      data: [ 70, 60, 50, 40, 30, 20, 10 ]
+      data: [ 70, 60, 50, 40, 30, 20, 10 ],
+      backgroundColor: 'red',
+      borderColor: 'red'
+    }, {
+      type: 'bar',
+      label: 'Salary',
+      data: [ 10, 20, 30, 40, 40, 30, 20 ],
+      backgroundColor: 'blue'
     }],
     labels: ['1', '2', '3', '4', '5', '6', '7']
   };
