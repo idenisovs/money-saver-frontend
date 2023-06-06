@@ -50,9 +50,12 @@ export class ExpensesPageComponent implements OnInit {
   }
 
   setBreadcrumbNodes() {
-    const interval = this.summary?.interval!;
-    this.addYearBreadcrumbNode(interval);
-    this.addIntervalBreadcrumbNode(interval);
+    const interval = this.summary?.interval;
+
+    if (interval) {
+      this.addYearBreadcrumbNode(interval);
+      this.addIntervalBreadcrumbNode(interval);
+    }
   }
 
   addYearBreadcrumbNode(interval: Interval) {
@@ -67,5 +70,9 @@ export class ExpensesPageComponent implements OnInit {
     const intervalNode = new BreadcrumbItem(`${intervalStart} - ${intervalEnd}`);
     intervalNode.active = true;
     this.breadcrumb.nodes.push(intervalNode);
+  }
+
+  openIntervalModal() {
+    console.log('Opening interval modal!');
   }
 }
