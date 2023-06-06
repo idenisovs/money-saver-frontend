@@ -3,7 +3,7 @@
 </header>
 
 <main class="modal-body">
-  <app-interval-datepicker />
+  <app-interval-datepicker (change)="handleDatepickerChange($event)" />
 </main>
 
 <footer class="modal-footer">

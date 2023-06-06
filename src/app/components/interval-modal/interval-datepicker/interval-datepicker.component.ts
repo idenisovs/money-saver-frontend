@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core'
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
@@ -11,6 +11,9 @@ export class IntervalDatepickerComponent {
   till: NgbDate|null = null;
   hoveredDate: NgbDate|null = null;
 
+  @Output()
+  change = new EventEmitter();
+
   constructor(
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter) {
@@ -21,6 +24,11 @@ export class IntervalDatepickerComponent {
       this.from = date;
     } else if (this.from && !this.till && date && date.after(this.from)) {
       this.till = date;
+
+      this.change.next({
+        from: this.makeDateObj(this.from),
+        till: this.makeDateObj(this.till, true)
+      })
     } else {
       this.till = null;
       this.from = date;
@@ -50,5 +58,13 @@ export class IntervalDatepickerComponent {
     const parsed = this.formatter.parse(input);
 
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+  }
+
+  makeDateObj(ngbDate: NgbDate, endOfTheDay = false): Date {
+    if (!endOfTheDay) {
+      return new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
+    }
+
+    return new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day, 23, 59, 59, 999);
   }
 }
