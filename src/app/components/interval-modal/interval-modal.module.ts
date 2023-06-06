@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IntervalModalComponent } from './interval-modal.component';
 import { NgbDatepicker, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { IntervalDatepickerComponent } from './interval-datepicker/interval-datepicker.component'
+import { ReactiveFormsModule } from '@angular/forms'
 
 
 
@@ -14,7 +15,8 @@ import { IntervalDatepickerComponent } from './interval-datepicker/interval-date
   imports: [
     CommonModule,
     NgbDatepicker,
-    NgbInputDatepicker
+    NgbInputDatepicker,
+    ReactiveFormsModule
   ]
 })
 export class IntervalModalModule { }
