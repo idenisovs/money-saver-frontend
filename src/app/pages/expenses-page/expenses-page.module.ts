@@ -16,6 +16,8 @@ import { ExpensesRowEditControlsComponent } from './expenses-table/expenses-edit
 import { RouterLink } from '@angular/router';
 import { ExpensesChartPanelComponent } from './expenses-chart-panel/expenses-chart-panel.component';
 import { NgChartsModule } from 'ng2-charts';
+import { IntervalFinishConfirmationModalComponent } from './interval-control-panel/interval-finish-confirmation-modal/interval-finish-confirmation-modal.component';
+import { CreateIntervalModalComponent } from './interval-control-panel/create-interval-modal/create-interval-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { NgChartsModule } from 'ng2-charts';
     ExpensesRowViewControlsComponent,
     ExpensesRowEditControlsComponent,
     ExpensesChartPanelComponent,
+    IntervalFinishConfirmationModalComponent,
+    CreateIntervalModalComponent,
   ],
 	imports: [
 		CommonModule,
