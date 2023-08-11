@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoadingPopupModule } from './loading-popup/loading-popup.module';
 import { BorderlessSpinnerComponent } from './borderless-spinner/borderless-spinner.component';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
+import { IntervalModalModule } from './interval-modal/interval-modal.module'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 		NavbarComponent,
 		LoadingPopupModule,
 		BorderlessSpinnerComponent,
-    BreadcrumbModule
+    BreadcrumbModule,
+    IntervalModalModule
 	],
   imports: [
     CommonModule,

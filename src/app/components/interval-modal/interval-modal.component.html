@@ -1,0 +1,20 @@
+<header class="modal-header">
+  Create/Edit Interval
+</header>
+
+<main class="modal-body">
+  <app-interval-datepicker (change)="handleDatepickerChange($event)" />
+
+  <form [formGroup]="form">
+    <div class="form-group mt-2">
+      <label for="intervalSum">Sum:</label>
+      <input type="text" class="form-control" id="intervalSum" placeholder="0.00" formControlName="sum">
+    </div>
+  </form>
+</main>
+
+<footer class="modal-footer">
+  <button type="button" class="btn btn-outline-primary" (click)="createInterval()">
+    Create
+  </button>
+</footer>

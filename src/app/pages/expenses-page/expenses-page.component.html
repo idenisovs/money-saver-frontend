@@ -1,16 +1,27 @@
-<app-breadcrumb />
+<ng-container *ngIf="summary && !isSummaryLoading">
+  <app-breadcrumb />
 
-<div class="row" *ngIf="summary && !isSummaryLoading">
-  <div class="col-9">
-    <app-simple-expenses-input [interval]="summary.interval" (changes)="requestExpensesSummary()"></app-simple-expenses-input>
-    <app-expenses-table [expenses]="summary.dailyExpenses" (changes)="requestExpensesSummary()"></app-expenses-table>
+  <div class="row">
+    <div class="col-9">
+      <app-simple-expenses-input [interval]="summary.interval" (changes)="requestExpensesSummary()"></app-simple-expenses-input>
+      <app-expenses-table [expenses]="summary.dailyExpenses" (changes)="requestExpensesSummary()"></app-expenses-table>
+    </div>
+
+    <div class="col-3">
+      <app-interval-control-panel [interval]="summary.interval"></app-interval-control-panel>
+      <app-interval-summary-panel [totals]="summary.totals"></app-interval-summary-panel>
+      <app-expenses-chart-panel [summary]="summary"></app-expenses-chart-panel>
+    </div>
   </div>
+</ng-container>
 
-  <div class="col-3">
-    <app-interval-control-panel [interval]="summary.interval"></app-interval-control-panel>
-    <app-interval-summary-panel [totals]="summary.totals"></app-interval-summary-panel>
-    <app-expenses-chart-panel [summary]="summary"></app-expenses-chart-panel>
+<ng-container *ngIf="!summary && !isSummaryLoading">
+  <div>
+    <app-no-intervals-warning *ngIf="!summary && !isSummaryLoading"></app-no-intervals-warning>
   </div>
-</div>
-
-<app-no-intervals-warning *ngIf="!summary && !isSummaryLoading"></app-no-intervals-warning>
+  <div class="text-center">
+    <button type="button" class="btn btn-outline-primary" (click)="openIntervalModal()">
+      Create Interval
+    </button>
+  </div>
+</ng-container>

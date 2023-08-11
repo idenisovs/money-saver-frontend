@@ -1,5 +1,5 @@
 {
-  "name": "money-saver",
+  "name": "@money-saver/frontend",
   "version": "0.0.0",
   "scripts": {
     "build:dev": "ng build --output-path ../backend/target/web --configuration development",

@@ -6,6 +6,8 @@ import { SummaryService } from '../../services/summary.service';
 import { LoadingPopupService } from '../../components/loading-popup/loading-popup.service';
 import { BreadcrumbService } from '../../components/breadcrumb/breadcrumb.service';
 import { BreadcrumbItem } from '../../components/breadcrumb/BreadcrumbItem';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { IntervalModalComponent } from '../../components/interval-modal/interval-modal.component'
 
 @Component({
   selector: 'app-expenses-page',
@@ -21,8 +23,10 @@ export class ExpensesPageComponent implements OnInit {
     private datePipe: DatePipe,
     private summaryService: SummaryService,
     private loadingPopup: LoadingPopupService,
-    private breadcrumb: BreadcrumbService
+    private breadcrumb: BreadcrumbService,
+    private modalService: NgbModal
   ) {}
+
   ngOnInit() {
     this.breadcrumb.nodes = [
       new BreadcrumbItem('All', '/years')
@@ -50,9 +54,12 @@ export class ExpensesPageComponent implements OnInit {
   }
 
   setBreadcrumbNodes() {
-    const interval = this.summary?.interval!;
-    this.addYearBreadcrumbNode(interval);
-    this.addIntervalBreadcrumbNode(interval);
+    const interval = this.summary?.interval;
+
+    if (interval) {
+      this.addYearBreadcrumbNode(interval);
+      this.addIntervalBreadcrumbNode(interval);
+    }
   }
 
   addYearBreadcrumbNode(interval: Interval) {
@@ -67,5 +74,19 @@ export class ExpensesPageComponent implements OnInit {
     const intervalNode = new BreadcrumbItem(`${intervalStart} - ${intervalEnd}`);
     intervalNode.active = true;
     this.breadcrumb.nodes.push(intervalNode);
+  }
+
+  async openIntervalModal() {
+    const intervalModalRef = this.modalService.open(IntervalModalComponent, {
+      centered: true
+    });
+
+    try {
+      const result = await intervalModalRef.result;
+
+      console.log(result);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
