@@ -1,22 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { SelectedInterval } from './SelectedInterval';
 
 @Component({
   selector: 'app-select-interval',
   templateUrl: './select-interval.component.html',
   styleUrls: ['./select-interval.component.scss']
 })
-export class SelectIntervalComponent {
+export class SelectIntervalComponent implements OnInit {
   hoveredDate: NgbDate | null = null;
 
-  startDate: NgbDate;
+  @Input()
+  startDate: NgbDate | null = null;
+
+  @Input()
   finishDate: NgbDate | null = null;
 
+  @Output()
+  change = new EventEmitter<SelectedInterval>();
+
   constructor(
-    calendar: NgbCalendar,
-  ) {
-    this.startDate = calendar.getToday();
-    this.finishDate = calendar.getNext(calendar.getToday(), 'd', 14)
+    private calendar: NgbCalendar,
+  ) {}
+
+  ngOnInit() {
+    if (this.startDate && this.finishDate) {
+      return;
+    }
+
+    this.startDate = this.calendar.getToday();
+    this.finishDate = this.calendar.getNext(this.calendar.getToday(), 'd', 14)
   }
 
   onDateSelection(date: NgbDate) {
@@ -28,6 +41,11 @@ export class SelectIntervalComponent {
       this.finishDate = null;
       this.startDate = date;
     }
+
+    this.change.emit({
+      start: this.startDate,
+      finish: this.finishDate
+    });
   }
 
   isRange(date: NgbDate) {

@@ -19,6 +19,8 @@ import { NgChartsModule } from 'ng2-charts';
 import { IntervalFinishConfirmationModalComponent } from './interval-control-panel/interval-finish-confirmation-modal/interval-finish-confirmation-modal.component';
 import { CreateIntervalModalComponent } from './interval-control-panel/create-interval-modal/create-interval-modal.component';
 import { NgbDatepicker, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { PreviewIntervalDatesComponent } from './interval-control-panel/create-interval-modal/preview-interval-dates/preview-interval-dates.component';
+import { SelectIntervalAlertComponent } from './interval-control-panel/create-interval-modal/select-interval-alert/select-interval-alert.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { NgbDatepicker, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
     ExpensesChartPanelComponent,
     IntervalFinishConfirmationModalComponent,
     CreateIntervalModalComponent,
+    PreviewIntervalDatesComponent,
+    SelectIntervalAlertComponent,
   ],
   imports: [
     CommonModule,

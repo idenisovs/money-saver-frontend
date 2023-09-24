@@ -2,64 +2,44 @@
   <h4 class="modal-title">
     Create interval
   </h4>
-<!--  <button-->
-<!--    type="button"-->
-<!--    class="btn-close"-->
-<!--    aria-describedby="modal-title"-->
-<!--    (click)="modal.dismiss('Cross click')"-->
-<!--  ></button>-->
 </header>
 
 <main class="modal-body">
   <form>
-    <div class="row" *ngIf="startDate && finishDate">
-      <div class="col-5 d-flex align-items-center">
-        <span>
-          Start date:
-        </span>
-        <span>
-          19 May 2023
-        </span>
-      </div>
-      <div class="col-5 d-flex align-items-center">
-        <span>
-          Finish date:
-        </span>
-        <span>
-          19 May 2023
-        </span>
-      </div>
-      <div class="col-2 d-flex align-items-center justify-content-center">
-        <button class="btn btn-sm btn-outline-primary">
-          <span class="material-icons">
-            calendar_month
-          </span>
-        </button>
-      </div>
-    </div>
+    <ng-container *ngIf="stage === CreateIntervalStages.NO_INTERVAL_SELECTED">
+      <app-select-interval-alert (selectInterval)="setStage(CreateIntervalStages.SELECT_INTERVAL)"></app-select-interval-alert>
+    </ng-container>
 
-    <div class="row" *ngIf="!startDate || !finishDate">
-      <div class="col-12 d-flex align-items-center">
-        <div class="alert alert-info m-0 p-3 w-100 d-flex align-items-center justify-content-between" role="alert">
-          Select start and end of interval!
-          <button class="btn btn-sm btn-primary">
-              <span class="material-icons">
-                calendar_month
-              </span>
-          </button>
-        </div>
-      </div>
-    </div>
+    <app-select-interval *ngIf="stage === CreateIntervalStages.SELECT_INTERVAL"
+                         [startDate]="startDate"
+                         [finishDate]="finishDate"
+                         (change)="updateDates($event)"
+    ></app-select-interval>
+
+    <app-preview-interval-dates *ngIf="stage === CreateIntervalStages.SET_ADDITIONAL_DATA"
+                                [startDate]="startDate"
+                                [finishDate]="finishDate"
+                                (selectInterval)="setStage(CreateIntervalStages.SELECT_INTERVAL)"
+    ></app-preview-interval-dates>
   </form>
 </main>
 
 <footer class="modal-footer">
-  <button type="button" class="btn btn-primary">
+  <button *ngIf="stage === CreateIntervalStages.SELECT_INTERVAL"
+          type="button"
+          class="btn btn-outline-primary"
+          [disabled]="!startDate || !finishDate"
+          (click)="setStage(CreateIntervalStages.SET_ADDITIONAL_DATA)"
+  >
+    Next
+  </button>
+  <button *ngIf="stage === CreateIntervalStages.PREVIEW_INTERVAL"
+          type="button"
+          class="btn btn-primary"
+  >
     Save
   </button>
   <button type="button" class="btn btn-danger" (click)="cancel()">
     Cancel
   </button>
-<!--  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>-->
-<!--  <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>-->
 </footer>
