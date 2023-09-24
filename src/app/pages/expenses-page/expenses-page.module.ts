@@ -44,7 +44,7 @@ import { NgbDatepicker, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
     RouterLink,
     NgChartsModule,
     NgbInputDatepicker,
-    NgbDatepicker
+    NgbDatepicker,
   ]
 })
 export class ExpensesPageModule { }

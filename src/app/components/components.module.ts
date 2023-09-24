@@ -10,6 +10,7 @@ import { LoadingPopupModule } from './loading-popup/loading-popup.module';
 import { BorderlessSpinnerComponent } from './borderless-spinner/borderless-spinner.component';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { IntervalModalModule } from './interval-modal/interval-modal.module'
+import { SelectIntervalModule } from './select-interval/select-interval.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { IntervalModalModule } from './interval-modal/interval-modal.module'
 		LoadingPopupModule,
 		BorderlessSpinnerComponent,
     BreadcrumbModule,
-    IntervalModalModule
+    IntervalModalModule,
+    SelectIntervalModule
 	],
   imports: [
     CommonModule,
