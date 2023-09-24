@@ -18,6 +18,7 @@ import { ExpensesChartPanelComponent } from './expenses-chart-panel/expenses-cha
 import { NgChartsModule } from 'ng2-charts';
 import { IntervalFinishConfirmationModalComponent } from './interval-control-panel/interval-finish-confirmation-modal/interval-finish-confirmation-modal.component';
 import { CreateIntervalModalComponent } from './interval-control-panel/create-interval-modal/create-interval-modal.component';
+import { NgbDatepicker, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -35,13 +36,15 @@ import { CreateIntervalModalComponent } from './interval-control-panel/create-in
     IntervalFinishConfirmationModalComponent,
     CreateIntervalModalComponent,
   ],
-	imports: [
-		CommonModule,
-		ReactiveFormsModule,
-		ComponentsModule,
-		FormsModule,
-		RouterLink,
-		NgChartsModule
-	]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ComponentsModule,
+    FormsModule,
+    RouterLink,
+    NgChartsModule,
+    NgbInputDatepicker,
+    NgbDatepicker
+  ]
 })
 export class ExpensesPageModule { }

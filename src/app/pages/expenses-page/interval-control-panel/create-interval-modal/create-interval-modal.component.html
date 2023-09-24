@@ -11,14 +11,53 @@
 </header>
 
 <main class="modal-body">
-  Create interval form
+  <form>
+    <div class="row" *ngIf="startDate && finishDate">
+      <div class="col-5 d-flex align-items-center">
+        <span>
+          Start date:
+        </span>
+        <span>
+          19 May 2023
+        </span>
+      </div>
+      <div class="col-5 d-flex align-items-center">
+        <span>
+          Finish date:
+        </span>
+        <span>
+          19 May 2023
+        </span>
+      </div>
+      <div class="col-2 d-flex align-items-center justify-content-center">
+        <button class="btn btn-sm btn-outline-primary">
+          <span class="material-icons">
+            calendar_month
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="!startDate || !finishDate">
+      <div class="col-12 d-flex align-items-center">
+        <div class="alert alert-info m-0 p-3 w-100 d-flex align-items-center justify-content-between" role="alert">
+          Select start and end of interval!
+          <button class="btn btn-sm btn-primary">
+              <span class="material-icons">
+                calendar_month
+              </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
 </main>
 
 <footer class="modal-footer">
   <button type="button" class="btn btn-primary">
     Save
   </button>
-  <button type="button" class="btn btn-danger">
+  <button type="button" class="btn btn-danger" (click)="cancel()">
     Cancel
   </button>
 <!--  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>-->
