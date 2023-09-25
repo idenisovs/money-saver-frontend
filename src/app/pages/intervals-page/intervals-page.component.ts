@@ -20,7 +20,6 @@ export class IntervalsPageComponent implements OnInit {
     public breadcrumb: BreadcrumbService,
     public route: ActivatedRoute,
     public intervalsService: IntervalsService,
-    public helper: IntervalHelperService
   ) {}
 
   ngOnInit() {

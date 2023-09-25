@@ -1,0 +1,52 @@
+<section class="card me-3 mb-3 ">
+  <header class="card-header d-flex justify-content-between align-items-center">
+      <span>
+        Interval #{{interval.id}}
+      </span>
+    <!--      <a href="#" class="btn btn-sm btn-outline-secondary stretched-link">-->
+    <!--        Open-->
+    <!--      </a>-->
+  </header>
+
+  <main class="card-body p-2">
+    <table class="table table-bordered m-0">
+      <tbody>
+      <tr>
+        <th>
+          End
+        </th>
+        <td class="text-end">
+          {{interval.end|date:'mediumDate'}}
+        </td>
+      </tr>
+
+      <tr>
+        <th>
+          Start
+        </th>
+        <td class="text-end">
+          {{interval.start|date:'mediumDate'}}
+        </td>
+      </tr>
+
+      <tr>
+        <th>
+          Duration
+        </th>
+        <td class="text-end">
+          {{helper.getDuration(interval.start, interval.end)}} days
+        </td>
+      </tr>
+
+      <tr>
+        <th>
+          Sum
+        </th>
+        <td class="text-end">
+          {{interval.sum|currency:'EUR'}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </main>
+</section>
