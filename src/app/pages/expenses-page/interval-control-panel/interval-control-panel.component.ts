@@ -49,6 +49,7 @@ export class IntervalControlPanelComponent implements OnChanges {
 
     try {
       await createIntervalModal.result;
+      this.changes.emit();
     } catch (e) {}
   }
 

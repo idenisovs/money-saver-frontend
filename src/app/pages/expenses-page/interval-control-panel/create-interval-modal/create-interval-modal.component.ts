@@ -4,6 +4,7 @@ import { CreateIntervalStages } from './CreateIntervalStages';
 import { SelectedInterval } from '../../../../components/select-interval/SelectedInterval';
 import { Interval } from '../../../../shared';
 import { IntervalHelperService } from '../interval-helper.service';
+import { IntervalsService } from '../../../../services/intervals.service';
 
 @Component({
   selector: 'app-create-interval-modal',
@@ -15,6 +16,7 @@ export class CreateIntervalModalComponent {
   startDate: NgbDate|null = null;
   finishDate: NgbDate|null = null;
   intervalSum?: number;
+  isRequestRunning = false;
 
   @Input()
   previousInterval?: Interval;
@@ -42,14 +44,15 @@ export class CreateIntervalModalComponent {
       return 0;
     }
 
-    const intervalLength = this.intervals.getIntervalLength(this.startDate, this.finishDate);
+    const intervalLength = this.helper.getIntervalLength(this.startDate, this.finishDate);
 
     return this.intervalSum / intervalLength;
   }
 
   constructor(
     private modal: NgbActiveModal,
-    private intervals: IntervalHelperService
+    private helper: IntervalHelperService,
+    private intervals: IntervalsService
   ) {}
 
   setStage(stage: CreateIntervalStages) {
@@ -63,6 +66,21 @@ export class CreateIntervalModalComponent {
 
   updateSum(sum: number) {
     this.intervalSum = sum;
+  }
+
+  save() {
+    this.isRequestRunning = true;
+
+    const interval = new Interval();
+
+    interval.start = this.helper.getDateFrom(this.startDate);
+    interval.end = this.helper.getDateFrom(this.finishDate);
+    interval.sum = this.intervalSum as number;
+
+    this.intervals.create(interval).subscribe(() => {
+      this.isRequestRunning = false;
+      this.modal.close();
+    })
   }
 
   cancel() {

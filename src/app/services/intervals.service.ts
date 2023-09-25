@@ -9,6 +9,10 @@ import { Interval } from '../shared';
 export class IntervalsService {
   constructor(private http: HttpClient) { }
 
+  create(interval: Interval) {
+    return this.http.post('/api/intervals', interval);
+  }
+
   finish(interval: Interval) {
     interval.latest = false;
 
