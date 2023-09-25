@@ -41,7 +41,6 @@ export class CreateIntervalModalComponent {
   ) {}
 
   setStage(stage: CreateIntervalStages) {
-    console.log(stage);
     this.stage = stage;
   }
 

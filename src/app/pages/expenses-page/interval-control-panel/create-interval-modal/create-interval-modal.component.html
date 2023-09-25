@@ -22,13 +22,16 @@
       [startDate]="startDate"
       [finishDate]="finishDate"
       (selectInterval)="setStage(CreateIntervalStages.SELECT_INTERVAL)"
-    ></app-preview-interval-dates>
+    />
 
-    <app-set-additional-data-interval (changes)="updateSum($event)" />
+    <app-set-additional-data-interval
+      [sum]="intervalSum"
+      (changes)="updateSum($event)" />
   </ng-container>
 
   <ng-container *ngIf="stage === CreateIntervalStages.PREVIEW_INTERVAL">
-    Preview Interval
+    <div>Preview Interval</div>
+    <div>{{intervalSum}}</div>
   </ng-container>
 
 </main>

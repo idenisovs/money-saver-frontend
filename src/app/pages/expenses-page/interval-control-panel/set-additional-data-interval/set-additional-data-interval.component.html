@@ -9,13 +9,11 @@
          class="form-control"
          placeholder="0.0"
          required
-         (input)="handleSumChanges($event)"
+         [(ngModel)]="sum"
+         (ngModelChange)="changes.emit($event)"
   >
 </div>
 
-<div id="interval-sum-help"
-     class="form-text"
-     *ngIf="isWrongValue"
->
+<div id="interval-sum-help" class="form-text" *ngIf="IsSumInvalid">
   <span class="text-danger">* Must be a number!</span>
 </div>

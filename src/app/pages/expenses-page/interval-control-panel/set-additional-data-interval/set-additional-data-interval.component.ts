@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-set-additional-data-interval',
@@ -6,17 +6,17 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./set-additional-data-interval.component.scss']
 })
 export class SetAdditionalDataIntervalComponent {
-  isWrongValue = false;
+  @Input()
+  sum?: number;
+
+  get IsSumInvalid(): boolean {
+    if (!this.sum) {
+      return false;
+    }
+
+    return isNaN(this.sum);
+  }
 
   @Output()
   changes = new EventEmitter<number>();
-
-  handleSumChanges(e: Event) {
-    const value = (e.target as HTMLInputElement).value;
-    const sum = Number(value);
-
-    this.isWrongValue = isNaN(sum);
-
-    this.changes.emit(sum);
-  }
 }
