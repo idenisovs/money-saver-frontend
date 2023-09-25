@@ -5,24 +5,41 @@
 </header>
 
 <main class="modal-body">
-  <form>
-    <ng-container *ngIf="stage === CreateIntervalStages.NO_INTERVAL_SELECTED">
-      <app-select-interval-alert (selectInterval)="setStage(CreateIntervalStages.SELECT_INTERVAL)"></app-select-interval-alert>
-    </ng-container>
+  <ng-container *ngIf="stage === CreateIntervalStages.NO_INTERVAL_SELECTED">
+    <app-select-interval-alert (selectInterval)="setStage(CreateIntervalStages.SELECT_INTERVAL)"></app-select-interval-alert>
+  </ng-container>
 
-    <app-select-interval *ngIf="stage === CreateIntervalStages.SELECT_INTERVAL"
-                         [startDate]="startDate"
-                         [finishDate]="finishDate"
-                         [minDate]="PreviousIntervalEnd"
-                         (change)="updateDates($event)"
-    ></app-select-interval>
+  <app-select-interval *ngIf="stage === CreateIntervalStages.SELECT_INTERVAL"
+                       [startDate]="startDate"
+                       [finishDate]="finishDate"
+                       [minDate]="PreviousIntervalEnd"
+                       (change)="updateDates($event)"
+  ></app-select-interval>
 
-    <app-preview-interval-dates *ngIf="stage === CreateIntervalStages.SET_ADDITIONAL_DATA"
-                                [startDate]="startDate"
-                                [finishDate]="finishDate"
-                                (selectInterval)="setStage(CreateIntervalStages.SELECT_INTERVAL)"
-    ></app-preview-interval-dates>
-  </form>
+  <app-preview-interval-dates *ngIf="stage === CreateIntervalStages.SET_ADDITIONAL_DATA"
+                              [startDate]="startDate"
+                              [finishDate]="finishDate"
+                              (selectInterval)="setStage(CreateIntervalStages.SELECT_INTERVAL)"
+  ></app-preview-interval-dates>
+
+  <ng-container *ngIf="stage === CreateIntervalStages.SET_ADDITIONAL_DATA">
+    <label for="interval-sum" class="form-label">
+      Sum:
+    </label>
+    <div class="input-group">
+      <span class="input-group-text">€</span>
+      <input id="interval-sum"
+             type="text"
+             class="form-control"
+             placeholder="0.0"
+             required
+             [(ngModel)]="intervalSum"
+      >
+    </div>
+    <div id="interval-sum-help" class="form-text" *ngIf="intervalSum && isNaN(intervalSum)">
+      <span class="text-danger">* Must be a number!</span>
+    </div>
+  </ng-container>
 </main>
 
 <footer class="modal-footer d-flex justify-content-between">
@@ -35,6 +52,15 @@
     >
       Back
     </button>
+
+    <button *ngIf="stage === CreateIntervalStages.PREVIEW_INTERVAL"
+            type="button"
+            class="btn btn-outline-primary"
+            [disabled]="!startDate || !finishDate"
+            (click)="setStage(CreateIntervalStages.SET_ADDITIONAL_DATA)"
+    >
+      Back
+    </button>
   </span>
 
   <span>
@@ -43,6 +69,15 @@
             class="btn btn-outline-primary"
             [disabled]="!startDate || !finishDate"
             (click)="setStage(CreateIntervalStages.SET_ADDITIONAL_DATA)"
+    >
+      Next
+    </button>
+
+    <button *ngIf="stage === CreateIntervalStages.SET_ADDITIONAL_DATA"
+            type="button"
+            class="btn btn-outline-primary"
+            [disabled]="!intervalSum || isNaN(intervalSum)"
+            (click)="setStage(CreateIntervalStages.PREVIEW_INTERVAL)"
     >
       Next
     </button>

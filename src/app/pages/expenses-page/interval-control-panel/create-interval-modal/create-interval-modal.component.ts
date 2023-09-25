@@ -13,6 +13,7 @@ export class CreateIntervalModalComponent {
   stage = CreateIntervalStages.NO_INTERVAL_SELECTED;
   startDate: NgbDate|null = null;
   finishDate: NgbDate|null = null;
+  intervalSum?: number;
 
   @Input()
   previousInterval?: Interval;
@@ -49,4 +50,5 @@ export class CreateIntervalModalComponent {
   }
 
   protected readonly CreateIntervalStages = CreateIntervalStages;
+  protected readonly isNaN = isNaN;
 }
