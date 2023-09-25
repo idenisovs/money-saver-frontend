@@ -16,6 +16,9 @@ export class SelectIntervalComponent implements OnInit {
   @Input()
   finishDate: NgbDate | null = null;
 
+  @Input()
+  minDate = new NgbDate(2012, 1, 1)
+
   @Output()
   change = new EventEmitter<SelectedInterval>();
 

@@ -13,6 +13,7 @@
     <app-select-interval *ngIf="stage === CreateIntervalStages.SELECT_INTERVAL"
                          [startDate]="startDate"
                          [finishDate]="finishDate"
+                         [minDate]="PreviousIntervalEnd"
                          (change)="updateDates($event)"
     ></app-select-interval>
 

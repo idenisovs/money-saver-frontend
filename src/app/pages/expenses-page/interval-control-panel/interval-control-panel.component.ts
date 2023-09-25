@@ -43,6 +43,10 @@ export class IntervalControlPanelComponent implements OnChanges {
       centered: true,
     });
 
+    if (this.interval) {
+      (createIntervalModal.componentInstance as CreateIntervalModalComponent).previousInterval = this.interval;
+    }
+
     try {
       await createIntervalModal.result;
     } catch (e) {}

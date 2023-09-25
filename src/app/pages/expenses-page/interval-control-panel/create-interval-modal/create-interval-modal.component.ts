@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { CreateIntervalStages } from './CreateIntervalStages';
 import { SelectedInterval } from '../../../../components/select-interval/SelectedInterval';
+import { Interval } from '../../../../shared';
 
 @Component({
   selector: 'app-create-interval-modal',
@@ -12,6 +13,23 @@ export class CreateIntervalModalComponent {
   stage = CreateIntervalStages.NO_INTERVAL_SELECTED;
   startDate: NgbDate|null = null;
   finishDate: NgbDate|null = null;
+
+  @Input()
+  previousInterval?: Interval;
+
+  get PreviousIntervalEnd(): NgbDate {
+    if (!this.previousInterval) {
+      return new NgbDate(2012, 1, 1);
+    }
+
+    const finishDate = this.previousInterval.end;
+
+    return new NgbDate(
+      finishDate.getFullYear(),
+      finishDate.getMonth() + 1,
+      finishDate.getDate()
+    );
+  }
 
   constructor(
     private modal: NgbActiveModal
