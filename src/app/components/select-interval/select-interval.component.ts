@@ -32,7 +32,9 @@ export class SelectIntervalComponent implements OnInit {
     }
 
     this.startDate = this.calendar.getToday();
-    this.finishDate = this.calendar.getNext(this.calendar.getToday(), 'd', 14)
+    this.finishDate = this.calendar.getNext(this.calendar.getToday(), 'd', 14);
+
+    this.notifyDateChanges();
   }
 
   onDateSelection(date: NgbDate) {
@@ -45,6 +47,10 @@ export class SelectIntervalComponent implements OnInit {
       this.startDate = date;
     }
 
+    this.notifyDateChanges();
+  }
+
+  notifyDateChanges() {
     this.change.emit({
       start: this.startDate,
       finish: this.finishDate
