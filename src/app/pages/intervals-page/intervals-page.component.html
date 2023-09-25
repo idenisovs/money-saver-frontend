@@ -5,9 +5,14 @@
 </app-spinner>
 
 <div class="d-flex flex-row flex-wrap">
-  <section class="card me-3 mb-3" *ngFor="let interval of intervals">
-    <header class="card-header">
-      Interval #{{interval.id}}
+  <section class="card me-3 mb-3 " *ngFor="let interval of intervals">
+    <header class="card-header d-flex justify-content-between align-items-center">
+      <span>
+        Interval #{{interval.id}}
+      </span>
+<!--      <a href="#" class="btn btn-sm btn-outline-secondary stretched-link">-->
+<!--        Open-->
+<!--      </a>-->
     </header>
 
     <main class="card-body p-2">
