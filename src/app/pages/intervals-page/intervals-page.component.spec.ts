@@ -6,12 +6,10 @@ describe('IntervalsPageComponent', () => {
   let component: IntervalsPageComponent;
   let fixture: ComponentFixture<IntervalsPageComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ IntervalsPageComponent ]
-    })
-    .compileComponents();
-
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [IntervalsPageComponent]
+    });
     fixture = TestBed.createComponent(IntervalsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
