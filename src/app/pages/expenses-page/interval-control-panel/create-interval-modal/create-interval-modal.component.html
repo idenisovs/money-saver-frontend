@@ -25,22 +25,37 @@
   </form>
 </main>
 
-<footer class="modal-footer">
-  <button *ngIf="stage === CreateIntervalStages.SELECT_INTERVAL"
-          type="button"
-          class="btn btn-outline-primary"
-          [disabled]="!startDate || !finishDate"
-          (click)="setStage(CreateIntervalStages.SET_ADDITIONAL_DATA)"
-  >
-    Next
-  </button>
-  <button *ngIf="stage === CreateIntervalStages.PREVIEW_INTERVAL"
-          type="button"
-          class="btn btn-primary"
-  >
-    Save
-  </button>
-  <button type="button" class="btn btn-danger" (click)="cancel()">
-    Cancel
-  </button>
+<footer class="modal-footer d-flex justify-content-between">
+  <span>
+    <button *ngIf="stage === CreateIntervalStages.SET_ADDITIONAL_DATA"
+            type="button"
+            class="btn btn-outline-primary"
+            [disabled]="!startDate || !finishDate"
+            (click)="setStage(CreateIntervalStages.SELECT_INTERVAL)"
+    >
+      Back
+    </button>
+  </span>
+
+  <span>
+    <button *ngIf="stage === CreateIntervalStages.SELECT_INTERVAL"
+            type="button"
+            class="btn btn-outline-primary"
+            [disabled]="!startDate || !finishDate"
+            (click)="setStage(CreateIntervalStages.SET_ADDITIONAL_DATA)"
+    >
+      Next
+    </button>
+
+    <button *ngIf="stage === CreateIntervalStages.PREVIEW_INTERVAL"
+            type="button"
+            class="btn btn-primary"
+    >
+      Save
+    </button>
+
+    <button type="button" class="btn btn-danger ms-2" (click)="cancel()">
+      Cancel
+    </button>
+  </span>
 </footer>
