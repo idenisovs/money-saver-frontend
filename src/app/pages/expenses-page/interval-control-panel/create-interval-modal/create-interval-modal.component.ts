@@ -32,11 +32,16 @@ export class CreateIntervalModalComponent {
     );
   }
 
+  get IsPreviewDisabled() {
+    return !this.intervalSum || isNaN(this.intervalSum);
+  }
+
   constructor(
     private modal: NgbActiveModal
   ) {}
 
   setStage(stage: CreateIntervalStages) {
+    console.log(stage);
     this.stage = stage;
   }
 
@@ -45,10 +50,13 @@ export class CreateIntervalModalComponent {
     this.finishDate = selectedDates.finish;
   }
 
+  updateSum(sum: number) {
+    this.intervalSum = sum;
+  }
+
   cancel() {
     this.modal.dismiss('cancel');
   }
 
   protected readonly CreateIntervalStages = CreateIntervalStages;
-  protected readonly isNaN = isNaN;
 }
