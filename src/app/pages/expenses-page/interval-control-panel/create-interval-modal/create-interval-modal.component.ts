@@ -3,6 +3,7 @@ import { NgbActiveModal, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { CreateIntervalStages } from './CreateIntervalStages';
 import { SelectedInterval } from '../../../../components/select-interval/SelectedInterval';
 import { Interval } from '../../../../shared';
+import { IntervalHelperService } from '../interval-helper.service';
 
 @Component({
   selector: 'app-create-interval-modal',
@@ -36,8 +37,19 @@ export class CreateIntervalModalComponent {
     return !this.intervalSum || isNaN(this.intervalSum);
   }
 
+  get DailyBalance() {
+    if (!this.startDate || !this.finishDate || !this.intervalSum) {
+      return 0;
+    }
+
+    const intervalLength = this.intervals.getIntervalLength(this.startDate, this.finishDate);
+
+    return this.intervalSum / intervalLength;
+  }
+
   constructor(
-    private modal: NgbActiveModal
+    private modal: NgbActiveModal,
+    private intervals: IntervalHelperService
   ) {}
 
   setStage(stage: CreateIntervalStages) {

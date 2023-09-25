@@ -21,7 +21,6 @@
     <app-preview-interval-dates
       [startDate]="startDate"
       [finishDate]="finishDate"
-      (selectInterval)="setStage(CreateIntervalStages.SELECT_INTERVAL)"
     />
 
     <app-set-additional-data-interval
@@ -30,10 +29,27 @@
   </ng-container>
 
   <ng-container *ngIf="stage === CreateIntervalStages.PREVIEW_INTERVAL">
-    <div>Preview Interval</div>
-    <div>{{intervalSum}}</div>
+    <app-preview-interval-dates
+      [startDate]="startDate"
+      [finishDate]="finishDate"
+    />
+    <div class="row mb-1">
+      <div class="col-4">
+        Interval sum
+      </div>
+      <div class="col-8 text-end">
+        {{intervalSum|currency:'EUR'}}
+      </div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-4">
+        Daily balance
+      </div>
+      <div class="col-8 text-end">
+        {{DailyBalance|currency:'EUR'}}
+      </div>
+    </div>
   </ng-container>
-
 </main>
 
 <footer class="modal-footer d-flex justify-content-between">
