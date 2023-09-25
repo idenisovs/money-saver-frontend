@@ -16,7 +16,11 @@ export class IntervalHelperService {
   getIntervalLength(dateFrom: NgbDate, dateTill: NgbDate): number {
     const from = this.getDateFrom(dateFrom);
     const till = this.getDateFrom(dateTill, true);
-    const dT = till.getTime() - from.getTime();
+    return this.getDuration(from, till);
+  }
+
+  getDuration(dateFrom: Date, dateTill: Date): number {
+    const dT = dateTill.getTime() - dateFrom.getTime();
     return Math.ceil(dT / DAY);
   }
 
