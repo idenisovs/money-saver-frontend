@@ -3,7 +3,7 @@
 <section class="d-flex flex-row flex-wrap">
   <section class="card me-2 mb-2" *ngFor="let year of years">
     <div class="card-body">
-      <a [routerLink]="[year]">
+      <a [routerLink]="[year]" class="stretched-link">
         {{year}}
       </a>
     </div>
