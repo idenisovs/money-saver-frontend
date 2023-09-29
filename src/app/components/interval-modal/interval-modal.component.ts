@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms'
 import { Interval } from '../../shared'
 import { DateRange } from './DateRange'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IntervalsService } from '../../services/intervals.service';
 
 @Component({
   selector: 'app-interval-modal',
@@ -15,7 +17,11 @@ export class IntervalModalComponent {
   })
   sumValidationError = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private modal: NgbActiveModal,
+    private intervals: IntervalsService
+  ) {}
 
   handleDatepickerChange(intervalDates: DateRange) {
     this.interval.start = intervalDates.from;
@@ -29,6 +35,12 @@ export class IntervalModalComponent {
       this.sumValidationError = true;
       return;
     }
+
+    this.interval.sum = sum;
+
+    this.intervals.create(this.interval).subscribe((response) => {
+      this.modal.close(response);
+    });
   }
 
 }

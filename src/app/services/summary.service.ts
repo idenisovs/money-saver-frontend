@@ -12,8 +12,6 @@ export class SummaryService {
   get(intervalId?: number): Observable<Summary|null> {
     const endpoint = ['/api/summary/expenses', intervalId].join('/');
 
-    console.log('endpoint =', endpoint);
-
     return this.http.get<Summary|null>(endpoint).pipe(
       map((response) => {
         if (response) {

@@ -11,7 +11,7 @@ export class IntervalsService {
   constructor(private http: HttpClient) { }
 
   create(interval: Interval) {
-    return this.http.post('/api/intervals', interval);
+    return this.http.post<Interval>('/api/intervals', interval);
   }
 
   finish(interval: Interval) {

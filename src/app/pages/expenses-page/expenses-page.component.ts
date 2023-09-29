@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { switchMap } from 'rxjs';
 
@@ -27,7 +27,8 @@ export class ExpensesPageComponent implements OnInit {
     private loadingPopup: LoadingPopupService,
     private breadcrumb: BreadcrumbService,
     private modalService: NgbModal,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -42,7 +43,6 @@ export class ExpensesPageComponent implements OnInit {
   }
 
   requestExpensesSummary() {
-    console.log('requesting expenses summary')
     this.isSummaryLoading = true;
 
     this.loadingPopup.open({
@@ -53,8 +53,6 @@ export class ExpensesPageComponent implements OnInit {
     this.route.params.pipe(
       switchMap((params) => {
         const intervalId = params['interval_id'];
-
-        console.log('interval_id =', intervalId);
 
         return this.summaryService.get(intervalId)
       })
@@ -98,9 +96,11 @@ export class ExpensesPageComponent implements OnInit {
     });
 
     try {
-      const result = await intervalModalRef.result;
+      const result = await intervalModalRef.result as Interval|null;
 
-      console.log(result);
+      if (result) {
+        await this.router.navigate(['expenses', result.id])
+      }
     } catch (e) {
       console.log(e);
     }
