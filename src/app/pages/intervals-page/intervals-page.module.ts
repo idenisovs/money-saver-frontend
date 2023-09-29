@@ -4,6 +4,7 @@ import { IntervalsPageComponent } from './intervals-page.component';
 import { BreadcrumbModule } from '../../components/breadcrumb/breadcrumb.module';
 import { ComponentsModule } from '../../components/components.module';
 import { IntervalCardComponent } from './interval-card/interval-card.component';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { IntervalCardComponent } from './interval-card/interval-card.component';
   imports: [
     CommonModule,
     BreadcrumbModule,
-    ComponentsModule
+    ComponentsModule,
+    RouterLink
   ]
 })
 export class IntervalsPageModule { }

@@ -4,7 +4,6 @@ import { BreadcrumbItem } from '../../components/breadcrumb/BreadcrumbItem';
 import { ActivatedRoute } from '@angular/router';
 import { IntervalsService } from '../../services/intervals.service';
 import { Interval } from '../../shared';
-import { IntervalHelperService } from '../expenses-page/interval-control-panel/interval-helper.service';
 
 @Component({
   selector: 'app-intervals-page',

@@ -20,6 +20,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'expenses/:intervalId',
+    component: ExpensesPageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'years',
     pathMatch: 'full',
     component: YearsPageComponent,
