@@ -28,4 +28,8 @@ export class IntervalsService {
       map((intervals: Interval[]) => intervals.map(item => new Interval(item)))
     )
   }
+
+  getAccountableYears() {
+    return this.http.get<number[]>('/api/intervals/years');
+  }
 }
