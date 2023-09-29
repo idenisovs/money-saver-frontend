@@ -9,8 +9,12 @@ import { Summary } from '../shared';
 export class SummaryService {
   constructor(private http: HttpClient) {}
 
-  get(): Observable<Summary|null> {
-    return this.http.get<Summary|null>('/api/summary/expenses').pipe(
+  get(intervalId?: number): Observable<Summary|null> {
+    const endpoint = ['/api/summary/expenses', intervalId].join('/');
+
+    console.log('endpoint =', endpoint);
+
+    return this.http.get<Summary|null>(endpoint).pipe(
       map((response) => {
         if (response) {
           return new Summary(response);

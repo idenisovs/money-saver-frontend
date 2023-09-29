@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { switchMap } from 'rxjs';
 
 import { Interval, Summary } from '../../shared';
 import { SummaryService } from '../../services/summary.service';
 import { LoadingPopupService } from '../../components/loading-popup/loading-popup.service';
 import { BreadcrumbService } from '../../components/breadcrumb/breadcrumb.service';
 import { BreadcrumbItem } from '../../components/breadcrumb/BreadcrumbItem';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { IntervalModalComponent } from '../../components/interval-modal/interval-modal.component'
 
 @Component({
@@ -24,17 +26,23 @@ export class ExpensesPageComponent implements OnInit {
     private summaryService: SummaryService,
     private loadingPopup: LoadingPopupService,
     private breadcrumb: BreadcrumbService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.breadcrumb.nodes = [
-      new BreadcrumbItem('All', '/years')
-    ];
+    this.setupBreadcrumb();
     this.requestExpensesSummary();
   }
 
+  setupBreadcrumb() {
+    this.breadcrumb.nodes = [
+      new BreadcrumbItem('All', '/years')
+    ];
+  }
+
   requestExpensesSummary() {
+    console.log('requesting expenses summary')
     this.isSummaryLoading = true;
 
     this.loadingPopup.open({
@@ -42,7 +50,15 @@ export class ExpensesPageComponent implements OnInit {
       message: 'Requesting summary...'
     });
 
-    this.summaryService.get().subscribe((summary: Summary|null) => {
+    this.route.params.pipe(
+      switchMap((params) => {
+        const intervalId = params['interval_id'];
+
+        console.log('interval_id =', intervalId);
+
+        return this.summaryService.get(intervalId)
+      })
+    ).subscribe((summary: Summary|null) => {
       this.loadingPopup.close();
       this.isSummaryLoading = false;
       this.summary = summary;
@@ -50,7 +66,7 @@ export class ExpensesPageComponent implements OnInit {
       if (this.breadcrumb.nodes.length < 2) {
         this.setBreadcrumbNodes();
       }
-    });
+    })
   }
 
   setBreadcrumbNodes() {

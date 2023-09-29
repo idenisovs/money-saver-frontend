@@ -20,7 +20,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'expenses/:intervalId',
+    path: 'expenses/:interval_id',
     component: ExpensesPageComponent,
     canActivate: [AuthGuard]
   },
