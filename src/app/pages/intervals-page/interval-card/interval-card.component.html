@@ -1,9 +1,10 @@
-<section class="card me-3 mb-3 ">
+<section class="card me-3 mb-3" [ngClass]="{ 'border-success': interval.latest }">
   <header class="card-header d-flex justify-content-between align-items-center">
-      <span>
+      <span class="fw-bold">
         Interval #{{IID}}
       </span>
-      <a routerLink="/expenses/{{interval.id}}" class="btn btn-sm btn-outline-secondary stretched-link">
+      <a routerLink="/expenses/{{interval.id}}"
+         class="btn btn-sm btn-outline-primary stretched-link">
         Open
       </a>
   </header>
