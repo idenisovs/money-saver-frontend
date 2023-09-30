@@ -11,6 +11,17 @@ export class IntervalCardComponent {
   @Input()
   interval!: Interval;
 
+  @Input()
+  idx?: number;
+
+  get IID(): number {
+    if (this.idx) {
+      return this.idx;
+    }
+
+    return this.interval.id as number;
+  }
+
   constructor(
     public helper: IntervalHelperService
   ) {}
