@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "build:dev": "ng build --output-path ../backend/target/web --configuration development",
+    "build:prod": "ng build",
     "watch:dev": "npm run build:dev -- --watch"
   },
   "private": true,

@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   isRequestRunning = false;
 
   constructor(
-    private auth: AuthService
+    public auth: AuthService
   ) {}
 
   ngOnInit() {
