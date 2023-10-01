@@ -7,7 +7,12 @@
 </td>
 
 <td *ngIf="IsEditMode" class="w-100">
-  <input type="text" class="form-control" [id]="'payment' + payment.id" [(ngModel)]="editableValue" />
+  <input type="text"
+         class="form-control"
+         [id]="'payment' + payment.id"
+         placeholder="0.0"
+         [(ngModel)]="editableValue"
+  />
 </td>
 
 <td class="align-middle text-end text-nowrap">

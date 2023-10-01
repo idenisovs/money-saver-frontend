@@ -19,7 +19,7 @@ export class ExpensesEditRowComponent implements OnInit {
 
   isEditMode = false;
 
-  editableValue?: string;
+  editableValue = '';
 
   get IsEditMode(): boolean {
     return this.isEditMode;
@@ -38,9 +38,15 @@ export class ExpensesEditRowComponent implements OnInit {
   toggleEditMode() {
     this.isEditMode = !this.isEditMode;
 
-    if (this.isEditMode) {
-      this.editableValue = this.payment!.sum.toFixed(2);
+    if (!this.isEditMode) {
+      return;
     }
+
+    if (!this.payment?.sum) {
+      return;
+    }
+
+    this.editableValue = this.payment.sum.toFixed(2);
   }
 
   remove() {
@@ -52,7 +58,7 @@ export class ExpensesEditRowComponent implements OnInit {
   }
 
   cancel() {
-    delete this.editableValue;
+    this.editableValue = '';
     this.isEditMode = false;
     this.payment.remove = false;
   }
@@ -68,7 +74,7 @@ export class ExpensesEditRowComponent implements OnInit {
 
     this.payment.sum = parseFloat(this.editableValue);
     this.isEditMode = false;
-    delete this.editableValue;
+    this.editableValue = '';
   }
 
   getPaymentViewStyle() {

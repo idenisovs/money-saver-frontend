@@ -11,7 +11,9 @@
       Loading expenses...
     </app-borderless-spinner>
 
-    <table class="table table-borderless table-expenses-edit m-0" *ngIf="expenses.length; else noExpensesAlert">
+    <table class="table table-borderless table-expenses-edit m-0"
+           *ngIf="expenses.length; else noExpensesAlert"
+    >
       <tbody>
       <tr app-expenses-edit-row
           *ngFor="let record of expenses"
@@ -31,7 +33,11 @@
 
   <footer class="modal-footer justify-content-between">
     <div>
-      <button type="button" class="btn btn-outline-primary" [disabled]="isExpensesSaving" (click)="add()">
+      <button type="button"
+              class="btn btn-outline-primary"
+              [disabled]="isExpensesSaving"
+              (click)="add()"
+      >
         <i class="material-icons">add</i> Add
       </button>
     </div>
