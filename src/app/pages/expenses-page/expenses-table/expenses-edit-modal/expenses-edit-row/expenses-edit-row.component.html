@@ -1,8 +1,8 @@
-<th class="align-middle" [ngClass]="getPaymentViewStyle()">
+<th class="align-middle" [ngClass]="PaymentViewStyle">
   {{payment.time|date:'HH:mm'}}
 </th>
 
-<td *ngIf="IsViewMode" class="w-100 align-middle" [ngClass]="getPaymentViewStyle()">
+<td *ngIf="IsViewMode" class="w-100 align-middle" [ngClass]="PaymentViewStyle">
   {{payment.sum|currency:'EUR'}}
 </td>
 
@@ -11,8 +11,12 @@
          class="form-control"
          [id]="'payment' + payment.id"
          placeholder="0.0"
-         [(ngModel)]="editableValue"
+         [value]="payment.sum > 0 ? payment.sum : ''"
+         (input)="updatePaymentValue($event)"
   />
+  <div id="wrongValueInSum" class="form-text text-danger" *ngIf="isWrongValue">
+    Should be a number!
+  </div>
 </td>
 
 <td class="align-middle text-end text-nowrap">
@@ -25,7 +29,7 @@
 
   <app-expenses-row-edit-controls *ngIf="IsEditMode"
                                   [payment]="payment"
-                                  [disabled]="disabled"
+                                  [disabled]="disabled || isWrongValue"
                                   (accept)="acceptChanges()"
                                   (decline)="cancel()" />
 </td>

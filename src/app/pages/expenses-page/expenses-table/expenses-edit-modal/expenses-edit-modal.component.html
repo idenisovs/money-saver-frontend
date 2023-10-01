@@ -3,7 +3,11 @@
     <h4 class="modal-title">
       {{dailyExpensesOverview.date|date}}
     </h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    <button type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click')"
+    ></button>
   </header>
 
   <main class="modal-body py-1">
@@ -43,12 +47,24 @@
     </div>
 
     <div>
-      <button type="button" class="btn btn-outline-primary me-2" [disabled]="isExpensesSaving" (click)="save()">
+      <button type="button"
+              class="btn btn-outline-primary me-2"
+              [disabled]="isExpensesSaving"
+              (click)="save()"
+      >
         {{ isExpensesSaving ? 'Saving...' : 'Save' }}
-        <span *ngIf="isExpensesSaving" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span *ngIf="isExpensesSaving"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+        ></span>
       </button>
 
-      <button type="button" class="btn btn-outline-dark" [disabled]="isExpensesSaving" (click)="modal.close(false)">
+      <button type="button"
+              class="btn btn-outline-dark"
+              [disabled]="isExpensesSaving"
+              (click)="modal.close(false)"
+      >
         Cancel
       </button>
     </div>

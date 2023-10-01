@@ -52,7 +52,9 @@ export class ExpensesEditModalComponent implements OnInit {
   save() {
     this.isExpensesSaving = true;
 
-    this.expensesService.save(this.expenses).subscribe(() => {
+    const recordsToSave = this.expenses.filter((record) => record.sum > 0);
+
+    this.expensesService.save(recordsToSave).subscribe(() => {
       this.messages.info('Changes is saved!');
       this.isExpensesSaving = false;
       this.modal.close(true);
