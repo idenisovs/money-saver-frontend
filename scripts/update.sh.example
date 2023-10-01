@@ -1,0 +1,13 @@
+#!/bin/bash
+
+USER=
+HOST=
+SOURCE=
+TARGET=
+
+echo 'Building sources' &&
+ng build &&
+echo -e '\nCleanup' &&
+ssh $USER@$HOST "rm -frv $TARGET/*" &&
+echo -e '\nUploading files' &&
+scp -r $SOURCE "$USER@$HOST:$TARGET"

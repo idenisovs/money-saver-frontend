@@ -4,7 +4,8 @@
   "scripts": {
     "build:dev": "ng build --output-path ../backend/target/web --configuration development",
     "build:prod": "ng build",
-    "watch:dev": "npm run build:dev -- --watch"
+    "watch:dev": "npm run build:dev -- --watch",
+    "deploy": "./scripts/update.sh"
   },
   "private": true,
   "dependencies": {
