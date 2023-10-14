@@ -4,7 +4,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
 import { ExpensesEditModalComponent } from './expenses-edit-modal/expenses-edit-modal.component';
 import { DailyExpensesOverview } from '../../../shared';
-import { getDateStr } from '../../../shared/utils';
+import { getDateStr, isWeekend } from '../../../shared/utils';
 
 @Component({
   selector: 'app-expenses-table',
@@ -25,12 +25,16 @@ export class ExpensesTableComponent {
     const today = getDateStr(new Date());
     const expensesDate = getDateStr(dailyExpensesOverview.date);
 
-    if (expensesDate < today) {
-      return 'table-success';
-    }
-
     if (expensesDate === today) {
       return 'table-info';
+    }
+
+    if (isWeekend(dailyExpensesOverview.date)) {
+      return 'table-primary';
+    }
+
+    if (expensesDate < today) {
+      return 'table-success';
     }
 
     return 'table-light';
@@ -57,4 +61,6 @@ export class ExpensesTableComponent {
       return e;
     }
   }
+
+
 }

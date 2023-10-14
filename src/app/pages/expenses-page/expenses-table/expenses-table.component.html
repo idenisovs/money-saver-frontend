@@ -23,9 +23,17 @@
   </thead>
 
   <tbody>
-  <tr *ngFor="let record of expenses" [ngClass]="getRowStyle(record)" (click)="openExpensesModal(record)">
-    <th scope="row">
-      {{record.date|date:'dd.MM.YYYY.'}}
+  <tr *ngFor="let record of expenses"
+      [ngClass]="getRowStyle(record)"
+      (click)="openExpensesModal(record)"
+  >
+    <th scope="row" class="d-flex justify-content-between align-items-center">
+      <div>
+        {{record.date|date:'dd.MM.YYYY.'}}
+      </div>
+      <div class="badge bg-primary">
+        {{record.date|date:'E'}}
+      </div>
     </th>
     <td>
       {{record.expenses|currency:'EUR'}}
