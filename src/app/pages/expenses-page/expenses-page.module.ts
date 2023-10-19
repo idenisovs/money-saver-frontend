@@ -22,6 +22,7 @@ import { NgbDatepicker, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { PreviewIntervalDatesComponent } from './interval-control-panel/create-interval-modal/preview-interval-dates/preview-interval-dates.component';
 import { SelectIntervalAlertComponent } from './interval-control-panel/create-interval-modal/select-interval-alert/select-interval-alert.component';
 import { SetAdditionalDataIntervalComponent } from './interval-control-panel/set-additional-data-interval/set-additional-data-interval.component';
+import { EditIntervalModalComponent } from './interval-control-panel/edit-interval-modal/edit-interval-modal.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { SetAdditionalDataIntervalComponent } from './interval-control-panel/set
     PreviewIntervalDatesComponent,
     SelectIntervalAlertComponent,
     SetAdditionalDataIntervalComponent,
+    EditIntervalModalComponent,
   ],
   imports: [
     CommonModule,

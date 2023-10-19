@@ -2,13 +2,10 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Interval } from '../../../shared';
-import {
-  IntervalFinishConfirmationModalComponent
-} from './interval-finish-confirmation-modal/interval-finish-confirmation-modal.component';
 import { LoadingPopupService } from '../../../components/loading-popup/loading-popup.service';
 import { MessagesService } from '../../../components/messages/messages.service';
 import { IntervalsService } from '../../../services/intervals.service';
-import { CreateIntervalModalComponent } from './create-interval-modal/create-interval-modal.component';
+import { EditIntervalModalComponent } from './edit-interval-modal/edit-interval-modal.component';
 
 @Component({
   selector: 'app-interval-control-panel',
@@ -38,43 +35,12 @@ export class IntervalControlPanelComponent implements OnChanges {
     this.isIntervalFinished = interval.end <= today;
   }
 
-  async startNewInterval() {
-    const createIntervalModal = this.modal.open(CreateIntervalModalComponent, {
+  openEditModal() {
+    const editModal = this.modal.open(EditIntervalModalComponent, {
       centered: true,
+      size: 'lg'
     });
 
-    if (this.interval) {
-      (createIntervalModal.componentInstance as CreateIntervalModalComponent).previousInterval = this.interval;
-    }
-
-    try {
-      await createIntervalModal.result;
-      this.changes.emit();
-    } catch (e) {}
-  }
-
-  async displayFinishConfirmation() {
-    const modalRef = this.modal.open(IntervalFinishConfirmationModalComponent);
-
-    const finishConfirmationModal = modalRef.componentInstance as IntervalFinishConfirmationModalComponent;
-
-    finishConfirmationModal.interval = this.interval;
-
-    try {
-      await modalRef.result;
-      this.finishCurrentInterval();
-    } catch (e) {}
-  }
-
-  finishCurrentInterval() {
-    this.loadingPopup.open({
-      message: 'Finishing current interval...'
-    });
-
-    this.intervals.finish(this.interval).subscribe(() => {
-      this.loadingPopup.close();
-      this.messages.info('Interval is finished!');
-      this.changes.emit();
-    });
+    (editModal.componentInstance as EditIntervalModalComponent).interval = this.interval;
   }
 }

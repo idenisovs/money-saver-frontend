@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Interval } from '../shared';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +31,15 @@ export class IntervalsService {
 
   getAccountableYears() {
     return this.http.get<number[]>('/api/intervals/years');
+  }
+
+  getAll(): Observable<Interval[]> {
+    return this.http.get<Interval[]>('/api/intervals');
+  }
+
+  getLatest(): Observable<Interval> {
+    return this.http.get<Interval>('/api/intervals/latest').pipe(
+      map(item => new Interval(item))
+    )
   }
 }

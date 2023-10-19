@@ -3,11 +3,8 @@
     {{interval.start|date}} - {{interval.end|date}}
   </header>
   <main class="card-body">
-    <button type="button" class="btn btn-primary me-2" [disabled]="!isIntervalFinished" (click)="startNewInterval()">
-      Start new interval
-    </button>
-    <button type="button" class="btn btn-primary" [disabled]="isIntervalFinished" (click)="displayFinishConfirmation()">
-      Finish current interval
+    <button class="btn btn-primary" (click)="openEditModal()">
+      Edit current interval
     </button>
   </main>
 </section>
