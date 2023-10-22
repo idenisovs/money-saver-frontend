@@ -4,6 +4,7 @@ import { catchError, Observable, of, ReplaySubject, tap } from 'rxjs';
 
 import { Auth, User } from '../shared';
 import { MessagesService } from '../components/messages/messages.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -23,19 +24,10 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private messages: MessagesService
+    private messages: MessagesService,
+    private router: Router
   ) {
     this.getUserAuth()
-  }
-
-  private getUserAuth() {
-    this.http.get<User|null>('/api/auth').pipe(
-      tap((response) => {
-        this.isAuthenticated = !!response;
-      })
-    ).subscribe((response: User|null) => {
-      this.user.next(response);
-    });
   }
 
   authenticate(credentials: Auth): Observable<User|null> {
@@ -54,5 +46,23 @@ export class AuthService {
         this.isAuthenticated = !!response;
       })
     )
+  }
+
+  logout() {
+    this.http.get('/api/auth/logout').subscribe(async () => {
+      this.isAuthenticated = false;
+      this.user.next(null);
+      await this.router.navigate(['']);
+    });
+  }
+
+  private getUserAuth() {
+    this.http.get<User|null>('/api/auth').pipe(
+      tap((response) => {
+        this.isAuthenticated = !!response;
+      })
+    ).subscribe((response: User|null) => {
+      this.user.next(response);
+    });
   }
 }
