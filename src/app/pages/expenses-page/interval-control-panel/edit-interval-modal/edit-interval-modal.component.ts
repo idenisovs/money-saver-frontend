@@ -117,7 +117,7 @@ export class EditIntervalModalComponent implements OnInit {
     const intervalUpdate = new Interval({
       id: raw.id as number,
       start: this.getNativeDate(raw.startDate as NgbDate),
-      end: this.getNativeDate(raw.endDate as NgbDate),
+      end: this.getNativeDate(raw.endDate as NgbDate, true),
       sum: Number(raw.sum)
     });
 
@@ -155,7 +155,13 @@ export class EditIntervalModalComponent implements OnInit {
     )
   }
 
-  private getNativeDate(date: NgbDate): Date {
-    return new Date(date.year, date.month - 1, date.day);
+  private getNativeDate(date: NgbDate, setWholeDay = false): Date {
+    const nativeDate = new Date(date.year, date.month - 1, date.day);
+
+    if (setWholeDay) {
+      nativeDate.setHours(23, 59, 59, 999)
+    }
+
+    return nativeDate;
   }
 }
