@@ -1,55 +1,57 @@
-<table class="table table-bordered table-hover table-row-pointer">
-  <thead>
-  <tr class="table-primary">
-    <th scope="col">
-      Date
-    </th>
-    <th scope="col">
-      Expenses
-    </th>
-    <th scope="col">
-      Daily Balance
-    </th>
-    <th scope="col">
-      Total Balance
-    </th>
-    <th scope="col">
-      Expected Residuals
-    </th>
-    <th scope="col">
-      Total Residuals
-    </th>
-  </tr>
-  </thead>
+<section class="table-responsive">
+  <table class="table table-bordered table-hover table-row-pointer">
+    <thead>
+    <tr class="table-primary">
+      <th scope="col">
+        Date
+      </th>
+      <th scope="col">
+        Expenses
+      </th>
+      <th scope="col">
+        Daily Balance
+      </th>
+      <th scope="col">
+        Total Balance
+      </th>
+      <th scope="col">
+        Expected Residuals
+      </th>
+      <th scope="col">
+        Total Residuals
+      </th>
+    </tr>
+    </thead>
 
-  <tbody>
-  <tr *ngFor="let record of expenses"
-      [ngClass]="getRowStyle(record)"
-      (click)="openExpensesModal(record)"
-  >
-    <th scope="row" class="d-flex justify-content-between align-items-center">
-      <div>
-        {{record.date|date:'dd.MM.YYYY.'}}
-      </div>
-      <div class="badge bg-primary">
-        {{record.date|date:'E'}}
-      </div>
-    </th>
-    <td>
-      {{record.expenses|currency:'EUR'}}
-    </td>
-    <td>
-      {{record.balance.daily|currency:'EUR'}}
-    </td>
-    <td>
-      {{record.balance.total|currency:'EUR'}}
-    </td>
-    <td>
-      {{record.residual.planned|currency:'EUR'}}
-    </td>
-    <td>
-      {{record.residual.real|currency:'EUR'}}
-    </td>
-  </tr>
-  </tbody>
-</table>
+    <tbody>
+    <tr *ngFor="let record of expenses"
+        [ngClass]="getRowStyle(record)"
+        (click)="openExpensesModal(record)"
+    >
+      <th scope="row" class="d-flex justify-content-between align-items-center">
+        <div>
+          {{record.date|date:'dd.MM.YYYY.'}}
+        </div>
+        <div class="badge bg-primary">
+          {{record.date|date:'E'}}
+        </div>
+      </th>
+      <td>
+        {{record.expenses|currency:'EUR'}}
+      </td>
+      <td>
+        {{record.balance.daily|currency:'EUR'}}
+      </td>
+      <td>
+        {{record.balance.total|currency:'EUR'}}
+      </td>
+      <td>
+        {{record.residual.planned|currency:'EUR'}}
+      </td>
+      <td>
+        {{record.residual.real|currency:'EUR'}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
