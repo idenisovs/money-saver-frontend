@@ -3,8 +3,11 @@
     {{interval.start|date}} - {{interval.end|date}}
   </header>
   <main class="card-body">
-    <button class="btn btn-primary" (click)="openEditModal()">
+    <button class="btn btn-primary me-1" (click)="openEditModal()">
       Edit current interval
+    </button>
+    <button *ngIf="interval.latest" class="btn btn-primary" (click)="openCreateModal()">
+      Create new interval
     </button>
   </main>
 </section>

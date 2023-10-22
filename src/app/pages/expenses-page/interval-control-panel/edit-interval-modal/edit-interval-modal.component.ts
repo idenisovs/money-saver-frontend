@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 import { IntervalsService } from '../../../../services/intervals.service';
 import { Interval } from '../../../../shared';
 import { IntervalHelperService } from '../interval-helper.service';
-import EditIntervalForm from './EditIntervalForm';
 
 @Component({
   selector: 'app-edit-interval-modal',
@@ -16,11 +15,11 @@ export class EditIntervalModalComponent implements OnInit {
   previousInterval?: Interval;
   isRequestRunning = false;
   loadingStage = 'Loading previous interval...';
-  form = this.fb.group<EditIntervalForm>({
+  form = this.fb.group({
     id: 0,
     startDate: this.getNgbDate(new Date()),
     endDate: this.getNgbDate(new Date()),
-    sum: 0
+    sum: [0, [ Validators.required, Validators.min(0) ]]
   });
 
   @Input()

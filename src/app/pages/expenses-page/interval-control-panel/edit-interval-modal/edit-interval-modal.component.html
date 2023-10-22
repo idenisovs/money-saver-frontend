@@ -77,7 +77,7 @@
           <span class="input-group-text">
             €
           </span>
-          <input id="interval-sum" type="text" class="form-control" placeholder="0.0" formControlName="sum" />
+          <input id="interval-sum" type="number" class="form-control" placeholder="0.0" formControlName="sum" />
         </div>
       </div>
     </section>
@@ -108,12 +108,16 @@
     <span *ngIf="IsDatesWrong" class="d-flex align-items-center">
       <i class="material-icons">error</i> Please, check Start and End dates!
     </span>
+
+    <span *ngIf="form.get('sum')?.invalid" class="d-flex align-items-center">
+      <i class="material-icons">error</i> Please, check Sum field!
+    </span>
   </div>
   <div>
     <button
       type="button"
       class="btn btn-outline-primary me-1"
-      [disabled]="IsDatesWrong"
+      [disabled]="IsDatesWrong || form.invalid || form.untouched"
       (click)="save()"
     >
       Save

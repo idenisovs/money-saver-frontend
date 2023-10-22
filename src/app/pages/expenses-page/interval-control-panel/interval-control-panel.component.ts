@@ -7,6 +7,7 @@ import { MessagesService } from '../../../components/messages/messages.service';
 import { IntervalsService } from '../../../services/intervals.service';
 import { EditIntervalModalComponent } from './edit-interval-modal/edit-interval-modal.component';
 import { IntervalHelperService } from './interval-helper.service';
+import { CreateIntervalModalComponent } from './create-interval-modal/create-interval-modal.component';
 
 @Component({
   selector: 'app-interval-control-panel',
@@ -47,6 +48,22 @@ export class IntervalControlPanelComponent implements OnChanges {
     (editModal.componentInstance as EditIntervalModalComponent).interval = this.interval;
 
     const result = await this.helper.getModalResult<Interval>(editModal.result);
+
+    if (result) {
+      this.changes.emit();
+    }
+  }
+
+  async openCreateModal() {
+    const createModal = this.modal.open(CreateIntervalModalComponent, {
+      centered: true,
+      backdrop: 'static',
+      size: 'lg'
+    });
+
+    (createModal.componentInstance as CreateIntervalModalComponent).previousInterval = this.interval;
+
+    const result = await this.helper.getModalResult<Interval>(createModal.result);
 
     if (result) {
       this.changes.emit();
