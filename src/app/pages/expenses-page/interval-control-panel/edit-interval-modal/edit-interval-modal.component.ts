@@ -156,17 +156,11 @@ export class EditIntervalModalComponent implements OnInit {
   }
 
   private getNativeDate(date: NgbDate, setWholeDay = false): Date {
-    console.log('NgbDate');
-    console.log(date);
-
     const nativeDate = new Date(date.year, date.month - 1, date.day);
 
     if (setWholeDay) {
       nativeDate.setHours(23, 59, 59, 999)
     }
-
-    console.log('Native Date');
-    console.log(nativeDate);
 
     return nativeDate;
   }
