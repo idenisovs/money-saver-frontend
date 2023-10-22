@@ -2,12 +2,12 @@
   <app-breadcrumb />
 
   <div class="row">
-    <div class="col-9">
+    <div class="col-12 col-xl-9">
       <app-simple-expenses-input [interval]="summary.interval" (changes)="requestExpensesSummary()"></app-simple-expenses-input>
       <app-expenses-table [expenses]="summary.dailyExpenses" (changes)="requestExpensesSummary()"></app-expenses-table>
     </div>
 
-    <div class="col-3">
+    <div class="col-12 col-xl-3">
       <app-interval-control-panel [interval]="summary.interval" (changes)="requestExpensesSummary()"></app-interval-control-panel>
       <app-interval-summary-panel [totals]="summary.totals"></app-interval-summary-panel>
       <app-expenses-chart-panel [summary]="summary"></app-expenses-chart-panel>
