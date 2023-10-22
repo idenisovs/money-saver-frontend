@@ -5,6 +5,7 @@ import { NgbActiveModal, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { IntervalsService } from '../../../../services/intervals.service';
 import { Interval } from '../../../../shared';
 import { IntervalHelperService } from '../interval-helper.service';
+import EditIntervalForm from './EditIntervalForm';
 
 @Component({
   selector: 'app-edit-interval-modal',
@@ -15,12 +16,7 @@ export class EditIntervalModalComponent implements OnInit {
   previousInterval?: Interval;
   isRequestRunning = false;
   loadingStage = 'Loading previous interval...';
-  form = this.fb.group<{
-    id: number,
-    startDate: NgbDate,
-    endDate: NgbDate,
-    sum: number
-  }>({
+  form = this.fb.group<EditIntervalForm>({
     id: 0,
     startDate: this.getNgbDate(new Date()),
     endDate: this.getNgbDate(new Date()),
@@ -93,14 +89,21 @@ export class EditIntervalModalComponent implements OnInit {
   save() {
     const raw = this.form.getRawValue();
 
-    const update = new Interval({
+    const intervalUpdate = new Interval({
       id: raw.id as number,
       start: this.getNativeDate(raw.startDate as NgbDate),
       end: this.getNativeDate(raw.endDate as NgbDate),
       sum: Number(raw.sum)
     });
 
-    console.log(update)
+    this.isRequestRunning = true;
+    this.loadingStage = 'Updating interval...';
+    delete this.interval;
+
+    this.intervalsService.update(intervalUpdate).subscribe((updatedInterval: Interval) => {
+      this.modal.close(updatedInterval);
+      this.isRequestRunning = false;
+    });
   }
 
   cancel() {
@@ -128,6 +131,6 @@ export class EditIntervalModalComponent implements OnInit {
   }
 
   private getNativeDate(date: NgbDate): Date {
-    return new Date(date.year, date.month, date.day);
+    return new Date(date.year, date.month - 1, date.day);
   }
 }

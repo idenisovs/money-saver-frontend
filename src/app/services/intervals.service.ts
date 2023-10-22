@@ -48,4 +48,10 @@ export class IntervalsService {
       map((item) => item ? new Interval(item) : null)
     );
   }
+
+  update(interval: Interval): Observable<Interval> {
+    return this.http.put<Interval>(`/api/intervals/${interval.id}`, interval).pipe(
+      map((item) => new Interval(item))
+    );
+  }
 }
