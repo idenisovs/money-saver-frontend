@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
-const SEC = 1000;
-const MIN = SEC * 60;
-const HOUR = MIN * 60;
-const DAY = HOUR * 24;
+import { daysDiff } from '../../../shared/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +18,11 @@ export class IntervalHelperService {
     const from = this.getDateFrom(dateFrom);
     const till = this.getDateFrom(dateTill, true);
 
-    return this.getDuration(from, till);
+    return daysDiff(from, till);
   }
 
   getDuration(dateFrom: Date, dateTill: Date): number {
-    const dT = dateTill.getTime() - dateFrom.getTime();
-    return Math.ceil(dT / DAY);
+    return daysDiff(dateFrom, dateTill);
   }
 
   getDateFrom(date: NgbDate|null, isEndOfDay = false) {

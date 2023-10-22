@@ -21,7 +21,7 @@ export class EditIntervalModalComponent implements OnInit {
     startDate: this.getNgbDate(new Date()),
     endDate: this.getNgbDate(new Date()),
     sum: 0
-  })
+  });
 
   @Input()
   interval?: Interval;
@@ -48,7 +48,13 @@ export class EditIntervalModalComponent implements OnInit {
     const startDate = this.form.getRawValue().startDate;
     const endDate = this.form.getRawValue().endDate;
 
-    return this.helper.getIntervalLength(startDate, endDate);
+    const result = this.helper.getIntervalLength(startDate, endDate);
+
+    if (result > 0) {
+      return result;
+    }
+
+    return 0;
   }
 
   get DailyBalance(): number {
@@ -58,7 +64,27 @@ export class EditIntervalModalComponent implements OnInit {
 
     const sum = this.form.getRawValue().sum ?? 0;
 
+    if (this.IntervalLength <= 0) {
+      return 0;
+    }
+
     return sum / this.IntervalLength;
+  }
+
+  get IsDatesWrong(): boolean {
+    const { startDate, endDate } = this.form.value;
+
+    if (!startDate || !endDate) {
+      return true;
+    }
+
+    const start = NgbDate.from(startDate);
+
+    if (!start) {
+      return true;
+    }
+
+    return start.after(endDate);
   }
 
   constructor(

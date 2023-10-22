@@ -54,6 +54,7 @@
             name="dp"
             ngbDatepicker
             formControlName="endDate"
+            [minDate]="PreviousIntervalEnd"
             #endDate="ngbDatepicker"
           />
           <button
@@ -102,11 +103,23 @@
   </form>
 </main>
 
-<footer class="modal-footer d-flex justify-content-end">
-  <button type="button" class="btn btn-outline-primary me-1" (click)="save()">
-    Save
-  </button>
-  <button type="button" class="btn btn-danger" (click)="cancel()">
-    Cancel
-  </button>
+<footer class="modal-footer d-flex align-items-center justify-content-between">
+  <div class="text-danger">
+    <span *ngIf="IsDatesWrong" class="d-flex align-items-center">
+      <i class="material-icons">error</i> Please, check Start and End dates!
+    </span>
+  </div>
+  <div>
+    <button
+      type="button"
+      class="btn btn-outline-primary me-1"
+      [disabled]="IsDatesWrong"
+      (click)="save()"
+    >
+      Save
+    </button>
+    <button type="button" class="btn btn-danger" (click)="cancel()">
+      Cancel
+    </button>
+  </div>
 </footer>
