@@ -13,9 +13,14 @@ export class IntervalHelperService {
 
   constructor() { }
 
-  getIntervalLength(dateFrom: NgbDate, dateTill: NgbDate): number {
+  getIntervalLength(dateFrom: NgbDate|null, dateTill: NgbDate|null): number {
+    if (!dateFrom || !dateTill) {
+      return 0;
+    }
+
     const from = this.getDateFrom(dateFrom);
     const till = this.getDateFrom(dateTill, true);
+
     return this.getDuration(from, till);
   }
 

@@ -4,6 +4,7 @@ import { NgbActiveModal, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 import { IntervalsService } from '../../../../services/intervals.service';
 import { Interval } from '../../../../shared';
+import { IntervalHelperService } from '../interval-helper.service';
 
 @Component({
   selector: 'app-edit-interval-modal',
@@ -29,12 +30,44 @@ export class EditIntervalModalComponent implements OnInit {
   @Input()
   interval?: Interval;
 
-  get MinStartDate(): Date {
-    return new Date();
+  get PreviousIntervalEnd(): NgbDate {
+    if (!this.previousInterval) {
+      return new NgbDate(2012, 1, 1);
+    }
+
+    const finishDate = this.previousInterval.end;
+
+    return new NgbDate(
+      finishDate.getFullYear(),
+      finishDate.getMonth() + 1,
+      finishDate.getDate() + 1
+    );
+  }
+
+  get IntervalLength(): number {
+    if (!this.interval) {
+      return 0;
+    }
+
+    const startDate = this.form.getRawValue().startDate;
+    const endDate = this.form.getRawValue().endDate;
+
+    return this.helper.getIntervalLength(startDate, endDate);
+  }
+
+  get DailyBalance(): number {
+    if (!this.interval) {
+      return 0;
+    }
+
+    const sum = this.form.getRawValue().sum ?? 0;
+
+    return sum / this.IntervalLength;
   }
 
   constructor(
     private intervalsService: IntervalsService,
+    private helper: IntervalHelperService,
     private modal: NgbActiveModal,
     private fb: FormBuilder,
   ) {}

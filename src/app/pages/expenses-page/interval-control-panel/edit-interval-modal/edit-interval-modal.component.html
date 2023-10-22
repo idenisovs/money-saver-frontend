@@ -26,6 +26,7 @@
             name="dp"
             ngbDatepicker
             formControlName="startDate"
+            [minDate]="PreviousIntervalEnd"
             #startDate="ngbDatepicker"
           />
           <button
@@ -66,7 +67,7 @@
       </div>
     </section>
 
-    <section class="row">
+    <section class="row mb-3">
       <div class="col-6">
         <label for="interval-sum" class="form-label fw-bold">
           Sum:
@@ -76,6 +77,25 @@
             €
           </span>
           <input id="interval-sum" type="text" class="form-control" placeholder="0.0" formControlName="sum" />
+        </div>
+      </div>
+    </section>
+
+    <section class="row mb-2">
+      <div class="col-4">
+        <div class="form-label fw-bold">
+          Interval length:
+        </div>
+        <div>
+          {{IntervalLength}} days
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-label fw-bold">
+          Daily balance:
+        </div>
+        <div>
+          {{DailyBalance|currency:'EUR'}}
         </div>
       </div>
     </section>

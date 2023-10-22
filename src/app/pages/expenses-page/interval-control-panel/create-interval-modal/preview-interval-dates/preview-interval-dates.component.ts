@@ -15,10 +15,6 @@ export class PreviewIntervalDatesComponent {
   finishDate: NgbDate|null = null;
 
   get IntervalLength(): number {
-    if (!this.startDate || !this.finishDate) {
-      return 0;
-    }
-
     return this.intervals.getIntervalLength(this.startDate, this.finishDate);
   }
 
