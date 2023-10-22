@@ -44,4 +44,12 @@ export class IntervalHelperService {
 
     return result;
   }
+
+  async getModalResult<T>(modalResultPromise: Promise<any>): Promise<T | null> {
+    try {
+      return await modalResultPromise;
+    } catch (e) {
+      return null
+    }
+  }
 }

@@ -6,6 +6,7 @@ import { LoadingPopupService } from '../../../components/loading-popup/loading-p
 import { MessagesService } from '../../../components/messages/messages.service';
 import { IntervalsService } from '../../../services/intervals.service';
 import { EditIntervalModalComponent } from './edit-interval-modal/edit-interval-modal.component';
+import { IntervalHelperService } from './interval-helper.service';
 
 @Component({
   selector: 'app-interval-control-panel',
@@ -25,7 +26,8 @@ export class IntervalControlPanelComponent implements OnChanges {
     private modal: NgbModal,
     private loadingPopup: LoadingPopupService,
     private messages: MessagesService,
-    private intervals: IntervalsService
+    private intervals: IntervalsService,
+    private helper: IntervalHelperService,
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
@@ -35,12 +37,19 @@ export class IntervalControlPanelComponent implements OnChanges {
     this.isIntervalFinished = interval.end <= today;
   }
 
-  openEditModal() {
+  async openEditModal() {
     const editModal = this.modal.open(EditIntervalModalComponent, {
       centered: true,
+      backdrop: 'static',
       size: 'lg'
     });
 
     (editModal.componentInstance as EditIntervalModalComponent).interval = this.interval;
+
+    const result = await this.helper.getModalResult<Interval>(editModal.result);
+
+    if (result) {
+      this.changes.emit();
+    }
   }
 }
