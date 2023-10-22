@@ -11,9 +11,9 @@ import { Interval } from '../../../../shared';
   styleUrls: ['./edit-interval-modal.component.scss']
 })
 export class EditIntervalModalComponent implements OnInit {
-  latestInterval?: Interval;
+  previousInterval?: Interval;
   isRequestRunning = false;
-  loadingStage = 'Loading latest interval...';
+  loadingStage = 'Loading previous interval...';
   form = this.fb.group<{
     id: number,
     startDate: NgbDate,
@@ -44,11 +44,16 @@ export class EditIntervalModalComponent implements OnInit {
       return;
     }
 
+    this.updateForm(this.interval);
+    this.loadPreviousInterval(this.interval);
+  }
+
+  updateForm(interval: Interval) {
     this.form.patchValue({
-      id: this.interval.id,
-      startDate: this.getNgbDate(this.interval.start),
-      endDate: this.getNgbDate(this.interval.end),
-      sum: this.interval.sum
+      id: interval.id,
+      startDate: this.getNgbDate(interval.start),
+      endDate: this.getNgbDate(interval.end),
+      sum: interval.sum
     });
   }
 
@@ -69,10 +74,22 @@ export class EditIntervalModalComponent implements OnInit {
     this.modal.dismiss();
   }
 
+  private loadPreviousInterval(interval: Interval) {
+    this.isRequestRunning = true;
+
+    this.intervalsService.getPrevious(interval).subscribe((previousInterval: Interval|null) => {
+      if (previousInterval) {
+        this.previousInterval = previousInterval
+      }
+
+      this.isRequestRunning = false;
+    });
+  }
+
   private getNgbDate(date: Date): NgbDate {
     return new NgbDate(
       date.getFullYear(),
-      date.getMonth(),
+      date.getMonth() + 1,
       date.getDate()
     )
   }

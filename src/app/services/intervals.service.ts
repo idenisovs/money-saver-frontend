@@ -40,6 +40,12 @@ export class IntervalsService {
   getLatest(): Observable<Interval> {
     return this.http.get<Interval>('/api/intervals/latest').pipe(
       map(item => new Interval(item))
-    )
+    );
+  }
+
+  getPrevious(interval: Interval): Observable<Interval|null> {
+    return this.http.get<Interval|null>(`/api/intervals/${interval.id}/previous`).pipe(
+      map((item) => item ? new Interval(item) : null)
+    );
   }
 }
