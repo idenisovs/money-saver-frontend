@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { IntervalsPageComponent } from './intervals-page.component';
 import { BreadcrumbModule } from '../../components/breadcrumb/breadcrumb.module';
 import { ComponentsModule } from '../../components/components.module';
 import { IntervalCardComponent } from './interval-card/interval-card.component';
-import { RouterLink } from '@angular/router';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { RouterLink } from '@angular/router';
     CommonModule,
     BreadcrumbModule,
     ComponentsModule,
-    RouterLink
+    RouterLink,
+    PipesModule
   ]
 })
 export class IntervalsPageModule { }
