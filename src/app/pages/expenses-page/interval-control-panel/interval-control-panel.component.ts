@@ -8,6 +8,7 @@ import { IntervalsService } from '../../../services/intervals.service';
 import { EditIntervalModalComponent } from './edit-interval-modal/edit-interval-modal.component';
 import { IntervalHelperService } from './interval-helper.service';
 import { CreateIntervalModalComponent } from './create-interval-modal/create-interval-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-interval-control-panel',
@@ -29,6 +30,7 @@ export class IntervalControlPanelComponent implements OnChanges {
     private messages: MessagesService,
     private intervals: IntervalsService,
     private helper: IntervalHelperService,
+    private router: Router,
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
@@ -66,7 +68,17 @@ export class IntervalControlPanelComponent implements OnChanges {
     const result = await this.helper.getModalResult<Interval>(createModal.result);
 
     if (result) {
-      this.changes.emit();
+      await this.router.navigate(['']);
     }
+  }
+
+  async finalizeInterval() {
+    if (!confirm('Are you sure want to finalize this interval?')) {
+      return;
+    }
+
+    this.intervals.finish(this.interval).subscribe(() => {
+      this.changes.emit();
+    });
   }
 }

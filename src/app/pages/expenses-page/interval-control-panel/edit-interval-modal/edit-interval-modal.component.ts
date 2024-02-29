@@ -19,6 +19,7 @@ export class EditIntervalModalComponent implements OnInit {
     id: 0,
     startDate: this.getNgbDate(new Date()),
     endDate: this.getNgbDate(new Date()),
+    latest: true,
     sum: [0, [ Validators.required, Validators.min(0) ]]
   });
 
@@ -107,6 +108,7 @@ export class EditIntervalModalComponent implements OnInit {
       id: interval.id,
       startDate: this.getNgbDate(interval.start),
       endDate: this.getNgbDate(interval.end),
+      latest: !!this.interval?.latest,
       sum: interval.sum
     });
   }
@@ -118,7 +120,8 @@ export class EditIntervalModalComponent implements OnInit {
       id: raw.id as number,
       start: this.getNativeDate(raw.startDate as NgbDate),
       end: this.getNativeDate(raw.endDate as NgbDate, true),
-      sum: Number(raw.sum)
+      sum: Number(raw.sum),
+      latest: !!raw.latest
     });
 
     this.isRequestRunning = true;
@@ -159,7 +162,7 @@ export class EditIntervalModalComponent implements OnInit {
     const nativeDate = new Date(date.year, date.month - 1, date.day);
 
     if (setWholeDay) {
-      nativeDate.setHours(23, 59, 59, 999)
+      nativeDate.setHours(23, 59, 59, 999);
     }
 
     return nativeDate;

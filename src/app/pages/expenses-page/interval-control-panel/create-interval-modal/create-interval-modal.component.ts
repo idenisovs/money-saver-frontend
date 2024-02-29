@@ -77,9 +77,9 @@ export class CreateIntervalModalComponent {
     interval.end = this.helper.getDateFrom(this.finishDate);
     interval.sum = this.intervalSum as number;
 
-    this.intervals.create(interval).subscribe(() => {
+    this.intervals.create(interval).subscribe((createdInterval) => {
       this.isRequestRunning = false;
-      this.modal.close();
+      this.modal.close(createdInterval);
     })
   }
 
