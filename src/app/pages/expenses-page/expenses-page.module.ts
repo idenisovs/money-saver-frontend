@@ -23,6 +23,7 @@ import { PreviewIntervalDatesComponent } from './interval-control-panel/create-i
 import { SelectIntervalAlertComponent } from './interval-control-panel/create-interval-modal/select-interval-alert/select-interval-alert.component';
 import { SetAdditionalDataIntervalComponent } from './interval-control-panel/set-additional-data-interval/set-additional-data-interval.component';
 import { EditIntervalModalComponent } from './interval-control-panel/edit-interval-modal/edit-interval-modal.component';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { EditIntervalModalComponent } from './interval-control-panel/edit-interv
     NgChartsModule,
     NgbInputDatepicker,
     NgbDatepicker,
+    PipesModule
   ]
 })
 export class ExpensesPageModule { }

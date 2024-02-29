@@ -53,7 +53,7 @@
           Current day:
         </th>
         <td class="text-center">
-          {{totals.currentDay}}
+          {{totals.currentDay|floor}}
         </td>
         <td class="text-center">
           {{totals.currentDayPercents|percent}}
@@ -65,7 +65,7 @@
           Remaining days:
         </th>
         <td class="text-center">
-          {{totals.days - totals.currentDay}}
+          {{totals.days - totals.currentDay|ceil}}
         </td>
         <td class="text-center">
           {{(1 - totals.currentDayPercents)|percent}}
