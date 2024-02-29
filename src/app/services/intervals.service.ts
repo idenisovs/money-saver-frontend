@@ -17,7 +17,7 @@ export class IntervalsService {
   finish(interval: Interval) {
     interval.latest = false;
 
-    return this.http.put(`/api/intervals/:${interval.id}`, interval);
+    return this.http.post(`/api/intervals/:${interval.id}/finish`, interval);
   }
 
   getByYear(year: string) {
