@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { BaseChartDirective } from 'ng2-charts';
 
 import { ExpensesPageComponent } from './expenses-page.component';
 import { NoIntervalsWarningComponent } from './no-intervals-warning/no-intervals-warning.component';
@@ -13,9 +15,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { ExpensesEditRowComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-edit-row.component';
 import { ExpensesRowViewControlsComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-row-view-controls/expenses-row-view-controls.component';
 import { ExpensesRowEditControlsComponent } from './expenses-table/expenses-edit-modal/expenses-edit-row/expenses-row-edit-controls/expenses-row-edit-controls.component';
-import { RouterLink } from '@angular/router';
 import { ExpensesChartPanelComponent } from './expenses-chart-panel/expenses-chart-panel.component';
-import { NgChartsModule } from 'ng2-charts';
 import { IntervalFinishConfirmationModalComponent } from './interval-control-panel/interval-finish-confirmation-modal/interval-finish-confirmation-modal.component';
 import { CreateIntervalModalComponent } from './interval-control-panel/create-interval-modal/create-interval-modal.component';
 import { NgbDatepicker, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
@@ -51,7 +51,7 @@ import { PipesModule } from '../../pipes/pipes.module';
     ComponentsModule,
     FormsModule,
     RouterLink,
-    NgChartsModule,
+    BaseChartDirective,
     NgbInputDatepicker,
     NgbDatepicker,
     PipesModule
