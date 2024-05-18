@@ -24,6 +24,7 @@ import { SelectIntervalAlertComponent } from './interval-control-panel/create-in
 import { SetAdditionalDataIntervalComponent } from './interval-control-panel/set-additional-data-interval/set-additional-data-interval.component';
 import { EditIntervalModalComponent } from './interval-control-panel/edit-interval-modal/edit-interval-modal.component';
 import { PipesModule } from '../../pipes/pipes.module';
+import { ExpensesChartPanelV2Component } from './expenses-chart-panel-v2/expenses-chart-panel-v2.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { PipesModule } from '../../pipes/pipes.module';
     BaseChartDirective,
     NgbInputDatepicker,
     NgbDatepicker,
-    PipesModule
+    PipesModule,
+    ExpensesChartPanelV2Component
   ]
 })
 export class ExpensesPageModule { }
