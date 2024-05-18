@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { BaseChartDirective } from 'ng2-charts';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +30,7 @@ import { IntervalsPageModule } from './pages/intervals-page/intervals-page.modul
     IntervalsPageModule,
     BaseChartDirective,
   ],
-	providers: [],
+	providers: [provideCharts(withDefaultRegisterables())],
 	exports: [],
 	bootstrap: [AppComponent]
 })

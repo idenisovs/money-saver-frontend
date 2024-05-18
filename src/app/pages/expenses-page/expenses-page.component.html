@@ -10,7 +10,7 @@
     <div class="col-12 col-xl-3">
       <app-interval-control-panel [interval]="summary.interval" (changes)="requestExpensesSummary()"></app-interval-control-panel>
       <app-interval-summary-panel [totals]="summary.totals"></app-interval-summary-panel>
-      <app-expenses-chart-panel-v2 [summary]="summary"/>
+      <app-expenses-chart-panel [summary]="summary"/>
     </div>
   </div>
 </ng-container>

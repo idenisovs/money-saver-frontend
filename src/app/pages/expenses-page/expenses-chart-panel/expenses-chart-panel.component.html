@@ -1,12 +1,13 @@
 <section class="card">
   <header class="card-header fw-bold">
-    Burnout chart
+    Burndown
   </header>
   <main class="card-body">
     <canvas baseChart
-            [data]="barChartData"
+            [datasets]="barChartData"
+            [labels]="labels"
             [options]="barChartOptions"
-    >
+            [type]="'line'">
     </canvas>
   </main>
 </section>

@@ -1,61 +1,74 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
-
-import { ChartData, ChartOptions } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartDataset, ChartOptions } from 'chart.js';
 
 import { Summary } from '../../../shared';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-expenses-chart-panel',
+  standalone: true,
+  imports: [BaseChartDirective],
+  providers: [DatePipe],
   templateUrl: './expenses-chart-panel.component.html',
-  styleUrls: ['./expenses-chart-panel.component.scss'],
-  providers: [DatePipe]
+  styleUrl: './expenses-chart-panel.component.scss'
 })
 export class ExpensesChartPanelComponent implements OnInit {
-  @Input()
-  summary = new Summary();
+  labels: string[] = [];
 
-  barChartData: ChartData<'bar'|'line'> = {
-    datasets: [{
-      type: 'line',
-      label: 'Planned',
-      data: [],
-      backgroundColor: 'orange',
-      borderColor: 'orange',
-      pointRadius: 0
-    }, {
-      type: 'bar',
-      label: 'Real',
-      data: [],
-      backgroundColor: '#4285f4',
-      borderColor: '#4285f4'
-    }],
-    labels: []
+  expectedResidualsDataset: ChartDataset = {
+    type: 'line',
+    label: 'Expected',
+    data: [],
+    backgroundColor: 'orange',
+    borderColor: 'orange',
+    pointRadius: 0
   };
 
-  barChartOptions: ChartOptions<'bar'|'line'> = {
+  actualResidualsDataset: ChartDataset = {
+    type: 'bar',
+    label: 'Actual',
+    data: [],
+    backgroundColor: '#4285f4',
+    borderColor: '#4285f4',
+  };
+
+  barChartData: ChartDataset[] = [
+    this.expectedResidualsDataset,
+    this.actualResidualsDataset
+  ];
+
+  barChartOptions: ChartOptions = {
+    responsive: true,
     plugins: {
       legend: {
         display: false
+      },
+      tooltip: {
+        enabled: true,
+        mode: 'index'
       }
     },
     scales: {
       x: {
         display: false
       }
-    }
+    },
   };
+
+  @Input()
+  summary!: Summary;
 
   constructor(private datePipe: DatePipe) {}
 
   ngOnInit() {
     for (let expenses of this.summary.dailyExpenses) {
-      this.barChartData.datasets[0].data.push(expenses.residual.planned);
-      this.barChartData.datasets[1].data.push(expenses.residual.real);
+      this.expectedResidualsDataset.data.push(expenses.residual.planned);
+      this.actualResidualsDataset.data.push(expenses.residual.real);
 
-      const date = this.datePipe.transform(expenses.date, 'dd.MM.yyyy.');
-
-      this.barChartData.labels?.push(date);
+      const date = this.datePipe.transform(expenses.date, 'dd.MM.yyyy.') as string;
+      this.labels.push(date);
     }
   }
 }
+
