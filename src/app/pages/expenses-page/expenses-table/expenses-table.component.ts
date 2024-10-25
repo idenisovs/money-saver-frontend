@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
+import { DateTime } from 'luxon';
 
 import { ExpensesEditModalComponent } from './expenses-edit-modal/expenses-edit-modal.component';
 import { DailyExpensesOverview } from '../../../shared';
-import { getDateStr, isWeekend } from '../../../shared/utils';
-import { DateTime } from 'luxon';
+import { getDateStr } from '../../../shared/utils';
 
 @Component({
   selector: 'app-expenses-table',
