@@ -70,6 +70,6 @@ export class ExpensesEditModalComponent implements OnInit {
   setPaymentDate(payment: Payment) {
     const targetDate = this.dailyExpensesOverview!.date;
 
-    payment.time.setFullYear(targetDate?.getFullYear(), targetDate?.getMonth(), targetDate?.getDate());
+    // payment.time.setFullYear(targetDate?.getFullYear(), targetDate?.getMonth(), targetDate?.getDate());
   }
 }

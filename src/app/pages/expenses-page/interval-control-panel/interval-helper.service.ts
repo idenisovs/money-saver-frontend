@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 import { daysDiff } from '../../../shared/utils';
+import { DateTime } from 'luxon';
 
 @Injectable({
   providedIn: 'root'
@@ -16,29 +17,25 @@ export class IntervalHelperService {
     }
 
     const from = this.getDateFrom(dateFrom);
-    const till = this.getDateFrom(dateTill, true);
+    const till = this.getDateFrom(dateTill);
 
     return daysDiff(from, till);
   }
 
-  getDuration(dateFrom: Date, dateTill: Date): number {
+  getDuration(dateFrom: string, dateTill: string): number {
     return daysDiff(dateFrom, dateTill);
   }
 
-  getDateFrom(date: NgbDate|null, isEndOfDay = false) {
+  getDateFrom(date: NgbDate|null): string {
     if (!date) {
-      return new Date();
+      return DateTime.local().toISODate();
     }
 
-    const result = new Date(date.year, date.month - 1, date.day);
-
-    if (isEndOfDay) {
-      result.setHours(23, 59, 59);
-    } else {
-      result.setHours(0, 0, 0);
-    }
-
-    return result;
+    return DateTime.fromObject({
+      year: date.year,
+      month: date.month,
+      day: date.day
+    }).toISODate() as string;
   }
 
   async getModalResult<T>(modalResultPromise: Promise<any>): Promise<T | null> {

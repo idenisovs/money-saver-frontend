@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Interval, Payment } from '../../../shared';
 import { ExpensesService } from '../../../services/expenses.service';
 import { MessagesService } from '../../../components/messages/messages.service';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-simple-expenses-input',
@@ -50,10 +51,10 @@ export class SimpleExpensesInputComponent implements OnChanges {
       return;
     }
 
-    const today = Date.now();
+    const today = DateTime.local().toISODate();
 
-    const start = this.interval.start.getTime();
-    const end = this.interval.end.getTime();
+    const start = this.interval.start;
+    const end = this.interval.end;
 
     this.isIntervalActive = start <= today && today <= end;
 
