@@ -33,8 +33,18 @@ export class ExpensesChartPanelComponent implements OnInit {
     borderColor: '#4285f4',
   };
 
+  forecastResidualsDataset: ChartDataset = {
+    type: 'line',
+    label: 'Forecast',
+    data: [],
+    backgroundColor: 'yellow',
+    borderColor: 'yellow',
+    pointRadius: 0
+  };
+
   barChartData: ChartDataset[] = [
     this.expectedResidualsDataset,
+    this.forecastResidualsDataset,
     this.actualResidualsDataset
   ];
 
@@ -65,6 +75,7 @@ export class ExpensesChartPanelComponent implements OnInit {
     for (let expenses of this.summary.dailyExpenses) {
       this.expectedResidualsDataset.data.push(expenses.residual.planned);
       this.actualResidualsDataset.data.push(expenses.residual.real);
+      this.forecastResidualsDataset.data.push(expenses.residual.forecast);
 
       const date = this.datePipe.transform(expenses.date, 'dd.MM.yyyy.') as string;
       this.labels.push(date);
