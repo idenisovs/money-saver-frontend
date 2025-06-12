@@ -77,7 +77,7 @@ export class ExpensesPageComponent implements OnInit {
   }
 
   addYearBreadcrumbNode(interval: Interval) {
-    const year = interval.start.getFullYear();
+    const [year] = interval.start.split('-');
     const yearNode = new BreadcrumbItem(year.toString(), `/years/${year}`);
     this.breadcrumb.nodes.push(yearNode);
   }

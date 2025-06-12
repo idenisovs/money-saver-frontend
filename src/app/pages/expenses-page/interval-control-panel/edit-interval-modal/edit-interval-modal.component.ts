@@ -5,6 +5,7 @@ import { NgbActiveModal, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { IntervalsService } from '../../../../services/intervals.service';
 import { Interval } from '../../../../shared';
 import { IntervalHelperService } from '../interval-helper.service';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-edit-interval-modal',
@@ -17,8 +18,8 @@ export class EditIntervalModalComponent implements OnInit {
   loadingStage = 'Loading previous interval...';
   form = this.fb.group({
     id: 0,
-    startDate: this.getNgbDate(new Date()),
-    endDate: this.getNgbDate(new Date()),
+    startDate: this.getNgbDate(),
+    endDate: this.getNgbDate(),
     latest: true,
     sum: [0, [ Validators.required, Validators.min(0) ]]
   });
@@ -31,12 +32,12 @@ export class EditIntervalModalComponent implements OnInit {
       return new NgbDate(2012, 1, 1);
     }
 
-    const finishDate = this.previousInterval.end;
+    const finishDate = DateTime.fromISO(this.previousInterval.end);
 
     return new NgbDate(
-      finishDate.getFullYear(),
-      finishDate.getMonth() + 1,
-      finishDate.getDate() + 1
+      finishDate.year,
+      finishDate.month,
+      finishDate.day
     );
   }
 
@@ -119,7 +120,7 @@ export class EditIntervalModalComponent implements OnInit {
     const intervalUpdate = new Interval({
       id: raw.id as number,
       start: this.getNativeDate(raw.startDate as NgbDate),
-      end: this.getNativeDate(raw.endDate as NgbDate, true),
+      end: this.getNativeDate(raw.endDate as NgbDate),
       sum: Number(raw.sum),
       latest: !!raw.latest
     });
@@ -150,21 +151,21 @@ export class EditIntervalModalComponent implements OnInit {
     });
   }
 
-  private getNgbDate(date: Date): NgbDate {
-    return new NgbDate(
-      date.getFullYear(),
-      date.getMonth() + 1,
-      date.getDate()
-    )
-  }
-
-  private getNativeDate(date: NgbDate, setWholeDay = false): Date {
-    const nativeDate = new Date(date.year, date.month - 1, date.day);
-
-    if (setWholeDay) {
-      nativeDate.setHours(23, 59, 59, 999);
+  private getNgbDate(date?: string): NgbDate {
+    if (!date) {
+      date = DateTime.local().toISODate();
     }
 
-    return nativeDate;
+    const datetime = DateTime.fromISO(date);
+
+    return new NgbDate(datetime.year, datetime.month, datetime.day);
+  }
+
+  private getNativeDate(date: NgbDate): string {
+    return DateTime.fromObject({
+      day: date.day,
+      month: date.month,
+      year: date.year
+    }).toISODate() as string;
   }
 }

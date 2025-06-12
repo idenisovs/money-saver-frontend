@@ -21,11 +21,11 @@ export class PreviewIntervalDatesComponent {
   constructor(private intervals: IntervalHelperService) {
   }
 
-  get StartDate(): Date {
+  get StartDate(): string {
     return this.intervals.getDateFrom(this.startDate);
   }
 
-  get FinishDate(): Date {
+  get FinishDate(): string {
     return this.intervals.getDateFrom(this.finishDate);
   }
 }

@@ -5,6 +5,7 @@ import { SelectedInterval } from '../../../../components/select-interval/Selecte
 import { Interval } from '../../../../shared';
 import { IntervalHelperService } from '../interval-helper.service';
 import { IntervalsService } from '../../../../services/intervals.service';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-create-interval-modal',
@@ -28,10 +29,12 @@ export class CreateIntervalModalComponent {
 
     const finishDate = this.previousInterval.end;
 
+    const datetime = DateTime.fromISO(finishDate);
+
     return new NgbDate(
-      finishDate.getFullYear(),
-      finishDate.getMonth() + 1,
-      finishDate.getDate()
+      datetime.year,
+      datetime.month,
+      datetime.day
     );
   }
 

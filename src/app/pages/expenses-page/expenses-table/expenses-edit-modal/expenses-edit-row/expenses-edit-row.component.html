@@ -1,5 +1,5 @@
 <th class="align-middle" [ngClass]="PaymentViewStyle">
-  {{payment.time|date:'HH:mm'}}
+  {{payment.createdAt|date:'HH:mm'}}
 </th>
 
 <td *ngIf="IsViewMode" class="w-100 align-middle" [ngClass]="PaymentViewStyle">

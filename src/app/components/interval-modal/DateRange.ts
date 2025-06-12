@@ -1,4 +1,4 @@
 export interface DateRange {
-  from: Date;
-  till: Date;
+  from: string;
+  till: string;
 }

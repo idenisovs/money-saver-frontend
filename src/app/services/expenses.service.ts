@@ -15,7 +15,7 @@ export class ExpensesService {
   }
 
   getByDate(dailyExpensesOverview: DailyExpensesOverview) {
-    return this.http.get<Payment[]>(`/api/payments?date=${dailyExpensesOverview.getShortDate()}`)
+    return this.http.get<Payment[]>(`/api/payments?date=${dailyExpensesOverview.date}`)
       .pipe(
         map((expenses: Payment[]) => {
           return expenses.map(payment => new Payment(payment))

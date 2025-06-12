@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DateTime } from 'luxon';
 
 import { ExpensesService } from '../../../../services/expenses.service';
-import { DailyExpensesOverview, Payment } from '../../../../shared';
 import { MessagesService } from '../../../../components/messages/messages.service';
+import { DailyExpensesOverview, Payment } from '../../../../shared';
 
 @Component({
   selector: 'app-expenses-edit-modal',
@@ -68,8 +69,10 @@ export class ExpensesEditModalComponent implements OnInit {
   }
 
   setPaymentDate(payment: Payment) {
-    const targetDate = this.dailyExpensesOverview!.date;
-
-    payment.time.setFullYear(targetDate?.getFullYear(), targetDate?.getMonth(), targetDate?.getDate());
+    if (this.dailyExpensesOverview?.date) {
+      payment.date = this.dailyExpensesOverview.date
+    } else {
+      payment.date = DateTime.local().toISODate();
+    }
   }
 }

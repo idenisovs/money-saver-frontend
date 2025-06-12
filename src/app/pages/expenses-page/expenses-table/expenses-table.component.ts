@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
+import { DateTime } from 'luxon';
 
 import { ExpensesEditModalComponent } from './expenses-edit-modal/expenses-edit-modal.component';
 import { DailyExpensesOverview } from '../../../shared';
-import { getDateStr, isWeekend } from '../../../shared/utils';
+import { getDateStr } from '../../../shared/utils';
 
 @Component({
   selector: 'app-expenses-table',
@@ -23,13 +24,13 @@ export class ExpensesTableComponent {
 
   public getRowStyle(dailyExpensesOverview: DailyExpensesOverview) {
     const today = getDateStr(new Date());
-    const expensesDate = getDateStr(dailyExpensesOverview.date);
+    const expensesDate = dailyExpensesOverview.date;
 
     if (expensesDate === today) {
       return 'table-info';
     }
 
-    if (isWeekend(dailyExpensesOverview.date)) {
+    if (this.isWeekend(dailyExpensesOverview.date)) {
       return 'table-primary';
     }
 
@@ -62,5 +63,7 @@ export class ExpensesTableComponent {
     }
   }
 
-
+  private isWeekend(date: string): boolean {
+    return DateTime.fromISO(date).isWeekend;
+  }
 }
