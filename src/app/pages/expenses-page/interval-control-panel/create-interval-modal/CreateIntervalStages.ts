@@ -1,6 +1,0 @@
-export enum CreateIntervalStages {
-  NO_INTERVAL_SELECTED,
-  SELECT_INTERVAL,
-  SET_ADDITIONAL_DATA,
-  PREVIEW_INTERVAL
-}
