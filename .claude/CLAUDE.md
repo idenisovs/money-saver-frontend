@@ -53,3 +53,4 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
+- Reuse the request/response types from `src/app/shared/` (e.g. `User`, `Auth`) instead of redefining equivalent interfaces locally. This directory is a git submodule shared with the backend, so it is the source of truth for API payload shapes.
