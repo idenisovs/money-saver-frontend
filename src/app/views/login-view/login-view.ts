@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Auth } from '../../shared';
 
 type LoginForm = FormGroup<{
     username: FormControl<string>;
@@ -26,7 +27,7 @@ export class LoginView {
             return;
         }
 
-        const credentials = this.loginForm.getRawValue();
+        const credentials: Auth = this.loginForm.getRawValue();
         // TODO: hook up authentication using `credentials`.
         console.log(credentials)
     }
