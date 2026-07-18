@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Auth, User } from '../shared';
+import { Credentials, User } from '../shared';
 
 @Injectable({
     providedIn: 'root',
@@ -14,7 +14,7 @@ export class AuthApi {
         return this.http.get<User | null>('/api/auth');
     }
 
-    login(credentials: Auth): Observable<User> {
+    login(credentials: Credentials): Observable<User> {
         return this.http.post<User>('/api/auth', credentials);
     }
 }
