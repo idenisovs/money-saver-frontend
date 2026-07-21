@@ -1,0 +1,13 @@
+<form [formGroup]="intervalForm" (ngSubmit)="create()">
+    <div class="modal-header">
+        <h5 class="modal-title">New interval</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+        <input type="text" ngbDatepicker />
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="intervalForm.invalid || isLoading()">Create</button>
+    </div>
+</form>

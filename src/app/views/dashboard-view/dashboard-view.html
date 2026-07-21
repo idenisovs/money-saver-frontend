@@ -7,7 +7,7 @@
         </div>
     } @else if (summary() == null) {
         <div class="alert alert-info">
-            There is no intervals yet! Please, create one!
+            You don't have any intervals yet. Create one to start tracking your budget. <button type="button" class="btn btn-sm btn-outline-primary" (click)="openCreateIntervalModal()">Create interval</button>
         </div>
     } @else {
         <p>Display summary layout!</p>
