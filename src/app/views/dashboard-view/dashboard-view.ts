@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 
+import { SummaryApi } from '@api/summary-api';
 import { Navbar } from '@components/navbar/navbar';
 
 @Component({
@@ -9,4 +11,8 @@ import { Navbar } from '@components/navbar/navbar';
   styleUrl: './dashboard-view.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardView {}
+export class DashboardView {
+  private readonly summaryApi = inject(SummaryApi);
+
+  protected readonly summary = toSignal(this.summaryApi.getExpensesSummary());
+}

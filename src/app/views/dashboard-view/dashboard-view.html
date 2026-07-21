@@ -1,5 +1,9 @@
 <app-navbar />
 
 <div class="container mt-4">
-  <p>dashboard-view works!</p>
+  @if (summary(); as summary) {
+    <p>Total expenses: {{ summary.totals.expenses }}</p>
+  } @else {
+    <p>Loading...</p>
+  }
 </div>
