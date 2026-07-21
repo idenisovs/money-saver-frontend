@@ -1,9 +1,15 @@
-<app-navbar />
+<app-navbar/>
 
 <div class="container mt-4">
-  @if (summary(); as summary) {
-    <p>Total expenses: {{ summary.totals.expenses }}</p>
-  } @else {
-    <p>Loading...</p>
-  }
+    @if (typeof summary() === 'undefined') {
+        <div class="alert alert-info">
+            Loading...
+        </div>
+    } @else if (summary() == null) {
+        <div class="alert alert-info">
+            There is no intervals yet! Please, create one!
+        </div>
+    } @else {
+        <p>Display summary layout!</p>
+    }
 </div>
