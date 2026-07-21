@@ -17,4 +17,8 @@ export class AuthApi {
     login(credentials: Credentials): Observable<User> {
         return this.http.post<User>('/api/auth', credentials);
     }
+
+    logout(): Observable<void> {
+        return this.http.get<void>('/api/auth/logout');
+    }
 }
