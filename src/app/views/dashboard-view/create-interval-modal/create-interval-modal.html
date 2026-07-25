@@ -1,13 +1,70 @@
-<form [formGroup]="intervalForm" (ngSubmit)="create()">
+<form (ngSubmit)="create()">
     <div class="modal-header">
         <h5 class="modal-title">New interval</h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
     </div>
     <div class="modal-body">
-        <input type="text" ngbDatepicker />
+        <div class="mb-3">
+            <label class="form-label" id="interval-range-label">Interval</label>
+
+            <div class="dp-hidden position-absolute">
+                <input
+                    ngbDatepicker
+                    #datepicker="ngbDatepicker"
+                    autoClose="outside"
+                    tabindex="-1"
+                    aria-labelledby="interval-range-label"
+                    [displayMonths]="2"
+                    [dayTemplate]="dayTemplate"
+                    outsideDays="hidden"
+                    [startDate]="fromDate()!"
+                    (dateSelect)="onDateSelection($event)"
+                />
+            </div>
+
+            <div class="input-group">
+                <input
+                    #dpFromDate
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    aria-label="Interval start date"
+                    [value]="formatter.format(fromDate())"
+                    (input)="onFromInput(dpFromDate.value)"
+                />
+                <input
+                    #dpToDate
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    aria-label="Interval end date"
+                    [value]="formatter.format(toDate())"
+                    (input)="onToInput(dpToDate.value)"
+                />
+                <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    aria-label="Toggle interval datepicker"
+                    (click)="datepicker.toggle()"
+                >📅</button>
+            </div>
+
+            <ng-template #dayTemplate let-date let-focused="focused">
+                <span
+                    class="custom-day"
+                    [class.focused]="focused"
+                    [class.range]="isRange(date)"
+                    [class.faded]="isHovered(date) || isInside(date)"
+                    (mouseenter)="hoveredDate.set(date)"
+                    (mouseleave)="hoveredDate.set(null)"
+                >{{ date.day }}</span>
+            </ng-template>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="interval-sum">Sum</label>
+            <input id="interval-sum" type="number" step="0.01" class="form-control" [formField]="intervalForm.sum" />
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss()">Cancel</button>
-        <button type="submit" class="btn btn-primary" [disabled]="intervalForm.invalid || isLoading()">Create</button>
+        <button type="submit" class="btn btn-primary" [disabled]="intervalForm().invalid() || isLoading()">Create</button>
     </div>
 </form>
