@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { form, FormField, min, required } from '@angular/forms/signals';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
@@ -49,61 +49,53 @@ export class CreateIntervalModal {
         min(path.sum, 0.01);
     });
 
-    protected readonly fromDate = signal<NgbDate | null>(this.calendar.getToday());
+    protected readonly fromDate = signal<NgbDate | null>(null);
     protected readonly toDate = signal<NgbDate | null>(null);
     protected readonly hoveredDate = signal<NgbDate | null>(null);
 
     protected readonly isLoading = signal(false);
     protected readonly error = signal<string | null>(null);
 
-    protected onDateSelection(date: NgbDate): void {
+    /**
+     * Keeps the signal form's `start`/`end` fields in sync with the datepicker
+     * selection, whichever way the dates change (calendar click or typing).
+     */
+    private readonly syncForm = effect(() => {
         const from = this.fromDate();
+        const to = this.toDate() ?? from;
 
-        if (!from || this.toDate()) {
+        this.intervalForm.start().value.set(from ? this.toDateStr(from) : '');
+        this.intervalForm.end().value.set(to ? this.toDateStr(to) : '');
+    });
+
+    onDateSelection(date: NgbDate) {
+        if (!this.fromDate() && !this.toDate()) {
             this.fromDate.set(date);
-            this.toDate.set(null);
-        } else if (date.after(from)) {
+        } else if (this.fromDate() && !this.toDate() && date && date.after(this.fromDate())) {
             this.toDate.set(date);
         } else {
-            this.fromDate.set(date);
             this.toDate.set(null);
+            this.fromDate.set(date);
         }
-
-        this.syncForm();
     }
 
-    protected onFromInput(input: string): void {
-        this.fromDate.set(this.validateInput(this.fromDate(), input));
-        this.syncForm();
+    isRange(date: NgbDate) {
+        return (
+            date.equals(this.fromDate()) ||
+            (this.toDate && date.equals(this.toDate())) ||
+            this.isInside(date) ||
+            this.isHovered(date)
+        );
     }
 
-    protected onToInput(input: string): void {
-        this.toDate.set(this.validateInput(this.toDate(), input));
-        this.syncForm();
+    isHovered(date: NgbDate) {
+        return (
+            this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate()) && date.before(this.hoveredDate())
+        );
     }
 
-    private validateInput(current: NgbDate | null, input: string): NgbDate | null {
-        const parsed = NgbDate.from(this.formatter.parse(input));
-        return parsed && this.calendar.isValid(parsed) ? parsed : current;
-    }
-
-    protected isHovered(date: NgbDate): boolean {
-        const from = this.fromDate();
-        const hovered = this.hoveredDate();
-        return !!from && !this.toDate() && !!hovered && date.after(from) && date.before(hovered);
-    }
-
-    protected isInside(date: NgbDate): boolean {
-        const from = this.fromDate();
-        const to = this.toDate();
-        return !!to && !!from && date.after(from) && date.before(to);
-    }
-
-    protected isRange(date: NgbDate): boolean {
-        return date.equals(this.fromDate())
-            || date.equals(this.toDate())
-            || this.isInside(date)
-            || this.isHovered(date);
+    isInside(date: NgbDate) {
+        return this.toDate && date.after(this.fromDate()) && date.before(this.toDate());
     }
 
     protected create(): void {
@@ -131,12 +123,14 @@ export class CreateIntervalModal {
         });
     }
 
-    private syncForm(): void {
-        const from = this.fromDate();
-        const to = this.toDate() ?? from;
+    validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+        const parsed = this.formatter.parse(input);
 
-        this.intervalForm.start().value.set(from ? this.toDateStr(from) : '');
-        this.intervalForm.end().value.set(to ? this.toDateStr(to) : '');
+        if (parsed && this.calendar.isValid(NgbDate.from(parsed))) {
+            return NgbDate.from(parsed);
+        } else {
+            return currentValue;
+        }
     }
 
     private toDateStr(date: NgbDate): string {
