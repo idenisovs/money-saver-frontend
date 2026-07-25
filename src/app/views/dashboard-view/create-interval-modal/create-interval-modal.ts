@@ -2,18 +2,13 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } 
 import { form, FormField, min, required } from '@angular/forms/signals';
 import { CurrencyPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import {
-    NgbActiveModal,
-    NgbCalendar,
-    NgbDate,
-    NgbDateParserFormatter,
-    NgbInputDatepicker,
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { catchError, EMPTY, finalize } from 'rxjs';
 
 import { Interval } from '@shared';
 import { daysDiff, getDateStr } from '@shared/utils';
 import { IntervalsApi } from '@api/intervals-api';
+import { IntervalDatepicker } from '@components/interval-datepicker/interval-datepicker';
 import { FormsModule } from '@angular/forms';
 
 type CreateIntervalModel = {
@@ -24,15 +19,13 @@ type CreateIntervalModel = {
 
 @Component({
     selector: 'app-create-interval-modal',
-    imports: [ FormField, NgbInputDatepicker, FormsModule, CurrencyPipe ],
+    imports: [ FormField, CurrencyPipe, IntervalDatepicker, FormsModule ],
     templateUrl: './create-interval-modal.html',
     styleUrl: './create-interval-modal.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateIntervalModal {
     private readonly intervalsApi = inject(IntervalsApi);
-    private readonly calendar = inject(NgbCalendar);
-    protected readonly formatter = inject(NgbDateParserFormatter);
     protected readonly activeModal = inject(NgbActiveModal);
 
     private readonly defaults = new Interval();
@@ -52,7 +45,6 @@ export class CreateIntervalModal {
 
     protected readonly fromDate = signal<NgbDate | null>(null);
     protected readonly toDate = signal<NgbDate | null>(null);
-    protected readonly hoveredDate = signal<NgbDate | null>(null);
 
     protected readonly isLoading = signal(false);
     protected readonly error = signal<string | null>(null);
@@ -101,36 +93,6 @@ export class CreateIntervalModal {
         this.intervalForm.end().value.set(to ? this.toDateStr(to) : '');
     });
 
-    onDateSelection(date: NgbDate) {
-        if (!this.fromDate() && !this.toDate()) {
-            this.fromDate.set(date);
-        } else if (this.fromDate() && !this.toDate() && date && date.after(this.fromDate())) {
-            this.toDate.set(date);
-        } else {
-            this.toDate.set(null);
-            this.fromDate.set(date);
-        }
-    }
-
-    isRange(date: NgbDate) {
-        return (
-            date.equals(this.fromDate()) ||
-            (this.toDate && date.equals(this.toDate())) ||
-            this.isInside(date) ||
-            this.isHovered(date)
-        );
-    }
-
-    isHovered(date: NgbDate) {
-        return (
-            this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate()) && date.before(this.hoveredDate())
-        );
-    }
-
-    isInside(date: NgbDate) {
-        return this.toDate && date.after(this.fromDate()) && date.before(this.toDate());
-    }
-
     protected create(): void {
         if (this.intervalForm().invalid() || this.isLoading()) {
             return;
@@ -154,16 +116,6 @@ export class CreateIntervalModal {
         ).subscribe((created) => {
             this.activeModal.close(created);
         });
-    }
-
-    validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-        const parsed = this.formatter.parse(input);
-
-        if (parsed && this.calendar.isValid(NgbDate.from(parsed))) {
-            return NgbDate.from(parsed);
-        } else {
-            return currentValue;
-        }
     }
 
     private toDateStr(date: NgbDate): string {
