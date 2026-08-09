@@ -10,8 +10,8 @@ import { Summary } from '@shared';
 export class SummaryApi {
     private readonly http = inject(HttpClient);
 
-    getExpensesSummary(intervalId?: number): Observable<Summary> {
+    getExpensesSummary(intervalId?: number): Observable<Summary | null> {
         const url = intervalId ? `/api/summary/expenses/${intervalId}` : '/api/summary/expenses';
-        return this.http.get<Summary>(url);
+        return this.http.get<Summary | null>(url);
     }
 }
