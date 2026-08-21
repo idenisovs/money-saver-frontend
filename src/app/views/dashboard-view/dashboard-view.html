@@ -16,36 +16,60 @@
             No expenses recorded for this interval.
         </div>
     } @else {
-        <div class="table-responsive">
-            <table class="table table-striped table-hover align-middle">
-                <caption class="visually-hidden">
-                    Daily expenses from {{ data.interval.start }} to {{ data.interval.end }}
-                </caption>
-                <thead>
-                    <tr>
-                        <th scope="col" class="text-nowrap">Date</th>
-                        <th scope="col" class="text-end">Expenses</th>
-                        <th scope="col" class="text-end">Planned residual</th>
-                        <th scope="col" class="text-end">Actual residual</th>
-                        <th scope="col" class="text-end">Forecast residual</th>
-                        <th scope="col" class="text-end">Daily balance</th>
-                        <th scope="col" class="text-end">Total balance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (day of data.dailyExpenses; track day.date) {
+        <div class="row">
+            <div class="col-8">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <caption class="visually-hidden">
+                            Daily expenses from {{ data.interval.start }} to {{ data.interval.end }}
+                        </caption>
+                        <thead>
                         <tr>
-                            <th scope="row" class="text-nowrap">{{ day.date }}</th>
-                            <td class="text-end">{{ day.expenses | currency:'EUR' }}</td>
-                            <td class="text-end">{{ day.residual.planned | currency:'EUR' }}</td>
-                            <td class="text-end">{{ day.residual.real | currency:'EUR' }}</td>
-                            <td class="text-end">{{ day.residual.forecast | currency:'EUR' }}</td>
-                            <td class="text-end">{{ day.balance.daily | currency:'EUR' }}</td>
-                            <td class="text-end">{{ day.balance.total | currency:'EUR' }}</td>
+                            <th scope="col" class="text-nowrap">Date</th>
+                            <th scope="col" class="text-end">Expenses</th>
+                            <th scope="col" class="text-end">Planned residual</th>
+                            <th scope="col" class="text-end">Actual residual</th>
+                            <th scope="col" class="text-end">Forecast residual</th>
+                            <th scope="col" class="text-end">Daily balance</th>
+                            <th scope="col" class="text-end">Total balance</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            @for (day of data.dailyExpenses; track day.date) {
+                                <tr>
+                                    <th scope="row" class="text-nowrap">{{ day.date }}</th>
+                                    <td class="text-end">{{ day.expenses | currency:'EUR' }}</td>
+                                    <td class="text-end">{{ day.residual.planned | currency:'EUR' }}</td>
+                                    <td class="text-end">{{ day.residual.real | currency:'EUR' }}</td>
+                                    <td class="text-end">{{ day.residual.forecast | currency:'EUR' }}</td>
+                                    <td class="text-end">{{ day.balance.daily | currency:'EUR' }}</td>
+                                    <td class="text-end">{{ day.balance.total | currency:'EUR' }}</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        Intervals
+                    </div>
+                    <div class="card-body">
+                        intervals section
+                    </div>
+                </div>
+
+                <div class="card mt-2">
+                    <div class="card-header">
+                        Summary
+                    </div>
+                    <div class="card-body">
+                        Summary section
+                    </div>
+                </div>
+            </div>
         </div>
+
     }
 </div>
