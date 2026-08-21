@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,7 +10,7 @@ import { CreateIntervalModal } from './create-interval-modal/create-interval-mod
 
 @Component({
     selector: 'app-dashboard-view',
-    imports: [ Navbar ],
+    imports: [ CurrencyPipe, Navbar ],
     templateUrl: './dashboard-view.html',
     styleUrl: './dashboard-view.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
